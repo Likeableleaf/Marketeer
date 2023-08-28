@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9166577552811081232}
-  - component: {fileID: 8387533232086412411}
+  - component: {fileID: -8211728889802395948}
   m_Layer: 0
   m_Name: Shopper
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8387533232086412411
+--- !u!114 &-8211728889802395948
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,7 +42,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3514986204619744021}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0beb39bc7dde63d43b7c44bcd9b31f1e, type: 3}
+  m_Script: {fileID: 11500000, guid: c43434f5f52cf584a926f878b3c76fbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &7672451498726903968
