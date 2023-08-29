@@ -40,6 +40,6 @@ public class scr_PauseMenu : MonoBehaviour {
     // Return to Main Menu
     public void QuitGame () {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("scn_MainMenu");
+        SceneManager.LoadScene("MainMenu");
     }
 }
