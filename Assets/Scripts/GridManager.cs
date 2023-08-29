@@ -37,6 +37,7 @@ public class GridManager : MonoBehaviour
 
     public void AdvanceTurns()
     {
+        PrintGameGrid();
         //First, Update all of the Grid Positions and their times
         //Remove Empty Grid Positions from the Dictionary
         List<Vector3> positionsToRemove = new List<Vector3>();
@@ -52,7 +53,7 @@ public class GridManager : MonoBehaviour
                 }
                 if (turn != -10 && turn != -5)
                 {
-                    // Turn key becomes negative, remove it
+                    // Remove old key
                     GameGrid[position].Remove(turn);
                 }
             }
@@ -77,6 +78,7 @@ public class GridManager : MonoBehaviour
     {
         // Add the object to the GameGrid dictionary using its position as the key
         AddObjectAt(position, turnNumber, obj.gameObject);
+        AddObjectAt(position, -5, obj.gameObject);
         turnQueue.Enqueue(obj);
     }
 
@@ -89,9 +91,12 @@ public class GridManager : MonoBehaviour
         GameGrid[position][turnNumber] = obj;
     }
 
-    public void ClearAt(Vector3 position)
+    public void RemoveDecidingFlag(Vector3 position)
     {
-        GameGrid.Remove(position);
+        if (GameGrid.ContainsKey(position))
+        {
+            GameGrid[position].Remove(-5);
+        }
     }
 
     private void PrintGameGrid()

@@ -13,7 +13,6 @@ public class MovingGridObject : GridObject
     private bool moving = false;
     private float startTime;
     private Vector3 startPosition;
-    private bool startedPath = false;
 
 
     // Start is called before the first frame update
@@ -65,11 +64,6 @@ public class MovingGridObject : GridObject
     {
         if (path != null && path.Count > 0)
         {
-            if(!startedPath)
-            {
-                startedPath = true;
-                gridManager.ClearAt(transform.position);
-            }
             nextStep = path.Pop();
             startTime = Time.time;
             startPosition = transform.position;
@@ -88,8 +82,11 @@ public class MovingGridObject : GridObject
             );
 
             //targetPosition = new Vector3(4.5f, 0, 4.5f);
-            startedPath = false;
             path = AStarPathFromTo(transform.position, targetPosition);
+            if(path != null)
+            {
+                gridManager.RemoveDecidingFlag(transform.position);
+            }
         }
     }
 }

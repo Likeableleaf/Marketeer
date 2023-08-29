@@ -39,7 +39,7 @@ public class GridObject : MonoBehaviour
     //AStar! You know this one, I hope.
     public Stack<Vector3> AStarPathFromTo(Vector3 start, Vector3 end) 
     {
-        if(!IsValidGridPosition(start) || !IsValidGridPosition(end))
+        if(!IsValidGridPosition(start) || !IsValidGridPosition(end) || start == end)
         {
             Debug.Log("Invalid starting or ending position");
             return null;
@@ -118,7 +118,7 @@ public class GridObject : MonoBehaviour
             {
                 //If the tile is the final tile for this
                 //Only one gridobject can claim a tile as their final at a time, others must wait
-                if (TileToCheck == currTilePos)
+                if (TileToCheck == endTile.GetPosition())
                 {
                     return false;
                 }
@@ -127,7 +127,6 @@ public class GridObject : MonoBehaviour
                 {
                     return false;
                 }
-                return false;
             }
         }
 
