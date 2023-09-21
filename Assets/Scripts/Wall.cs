@@ -5,10 +5,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Shelf : Wall
+public class Wall : GridObject
 {
-    public GameObject[] ShelfVariants;
-    public GameObject CurrentShelfObject;
+    public bool Walkable = false;
 
     // Start is called before the first frame update
     protected new void Start()
@@ -20,5 +19,15 @@ public class Shelf : Wall
     protected new void Update()
     {
         base.Update();
+    }
+
+    protected override void AddSelfToGrid()
+    {
+        if (!Walkable) 
+        {
+            // Add the object to the GridManager's GameGrid
+            gridManager.AddObjectAt(transform.position, -10, gameObject);
+            GridPositon = transform.position;
+        }
     }
 }

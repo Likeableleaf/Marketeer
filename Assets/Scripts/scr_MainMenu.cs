@@ -8,7 +8,7 @@ public class scr_MainMenu : MonoBehaviour
     // Starts game
     public void Play()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Store");
     }
 
     // Exits game

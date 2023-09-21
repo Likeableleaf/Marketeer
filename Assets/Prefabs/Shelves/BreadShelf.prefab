@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77e067964a801604a865b2e5dd9b1bf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Walkable: 0
   ShelfVariants:
   - {fileID: 919132149155446097, guid: 0e895a57e53082540af573b16a9415cb, type: 3}
   CurrentShelfObject: {fileID: 1211792880060270914}
