@@ -5209,8 +5209,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -7320,7 +7320,8 @@ PrefabInstance:
       propertyPath: targetPosition.z
       value: 2.5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7381564315943085117, guid: 20e7d3140766bdd42b0aea6af9244069, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 20e7d3140766bdd42b0aea6af9244069, type: 3}
 --- !u!1 &1454608585
 GameObject:
