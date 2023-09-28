@@ -76,9 +76,9 @@ public class MovingGridObject : GridObject
                 transform.position = nextStep;
             }
             targetPosition = new Vector3(
-                Random.Range(-5, 5) + 0.5f,
+                Random.Range(-9, 9) + 0.5f,
                 0,
-                Random.Range(-5, 5) + 0.5f
+                Random.Range(-9, 9) + 0.5f
             );
 
             //targetPosition = new Vector3(4.5f, 0, 4.5f);
