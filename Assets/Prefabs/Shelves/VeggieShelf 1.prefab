@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Walkable: 0
+  Offsets: []
   ShelfVariants:
   - {fileID: 2045171917721622097}
   - {fileID: 8333355652884317396}
@@ -58,6 +59,7 @@ MonoBehaviour:
   - {fileID: 7376468950945289662}
   CurrentShelfObject: {fileID: 2045171917721622097}
   capacity: 0
+  groceryType: 5
 --- !u!1001 &609462615826383171
 PrefabInstance:
   m_ObjectHideFlags: 0

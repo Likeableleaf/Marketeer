@@ -46,6 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Walkable: 0
+  WallAtOffsets:
+  - {x: 0, y: 0, z: 0.5}
+  - {x: 0, y: 0, z: -0.5}
 --- !u!1001 &1995567194489940465
 PrefabInstance:
   m_ObjectHideFlags: 0

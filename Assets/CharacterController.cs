@@ -9,13 +9,13 @@ public class CharacterController : GridObject
 
 
     // Start is called before the first frame update
-    void Start()
+    new void Start()
     {
 
     }
 
     // Update is called once per frame
-    void Update()
+    new void Update()
     {
         Vector3 newPosition;
         Vector3 currentPosition = transform.position;

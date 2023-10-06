@@ -10,15 +10,23 @@ public class Shelf : Wall
     public GameObject[] ShelfVariants;
     public GameObject CurrentShelfObject;
     public int capacity = 0;
+    public GroceryType groceryType;
+    public Vector3 InFrontOfShelfPos;
 
     // Start is called before the first frame update
     protected new void Start()    {
         base.Start();
-    }
 
-    // Update is called once per frame
-    protected new void Update()    {
-        base.Update();
+        //Adds self to the groceryDictionary
+        gridManager.groceryDictionary[groceryType].Add(this);
+
+        //Sets the position of the InFrontOfShelfPos
+        InFrontOfShelfPos = new Vector3 (0, 0, 1f);
+        // Get the Y rotation of the shelf.
+        float yRotation = transform.rotation.eulerAngles.y;
+        // Rotate the offset by the Y rotation of the Shelf and add the shelf position
+        // Round it to be usable
+        InFrontOfShelfPos = RoundVector3(transform.position + Quaternion.Euler(0, yRotation, 0) * InFrontOfShelfPos, 1);
     }
 
     public void FillShelf() {

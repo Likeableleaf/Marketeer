@@ -45,9 +45,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77e067964a801604a865b2e5dd9b1bf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Walkable: 0
+  Offsets: []
   ShelfVariants:
   - {fileID: 919132149155446097, guid: 79f12edebb99f204c8f11377d5b8615b, type: 3}
   CurrentShelfObject: {fileID: 6938573283650051561}
+  capacity: 0
+  groceryType: 3
 --- !u!1001 &7821532585803587768
 PrefabInstance:
   m_ObjectHideFlags: 0

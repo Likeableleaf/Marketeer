@@ -5,14 +5,24 @@ using UnityEngine.Events;
 
 public class GridManager : MonoBehaviour
 {
-    //Events
-    //public UnityEvent m_Turn;
-
+    //Grid System Variables
     public Dictionary<Vector3, Dictionary<int, GameObject>> GameGrid = new();
     public float turnInterval = 1f;
-
     private Queue<GridObject> turnQueue = new();
     private float timeSinceLastTurn = 0.0f;
+
+    //Grocery System Variables
+    public Dictionary<GroceryType, List<Shelf>> groceryDictionary = new();
+    public GameObject[] Registers;
+
+    private void Awake()
+    {
+        //Create the empty lists for the dictionary
+        foreach (GroceryType type in System.Enum.GetValues(typeof(GroceryType)))
+        {
+            groceryDictionary[type] = new List<Shelf>();
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +47,7 @@ public class GridManager : MonoBehaviour
 
     public void AdvanceTurns()
     {
-        PrintGameGrid();
+        //PrintGameGrid();
         //First, Update all of the Grid Positions and their times
         //Remove Empty Grid Positions from the Dictionary
         List<Vector3> positionsToRemove = new List<Vector3>();
@@ -113,4 +123,14 @@ public class GridManager : MonoBehaviour
 
         Debug.Log(logMessage);
     }
+}
+
+public enum GroceryType
+{
+    Beans,
+    Bread,
+    Eggs,
+    Meat,
+    Milk,
+    Veggies
 }
