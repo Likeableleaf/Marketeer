@@ -93,11 +93,18 @@ public class Shopper : MovingGridObject
     private void InactiveAction()
     {
         //Literally just do nothing
+        //break;
     }
 
     private void EnteringAction()
     {
         //TODO
+
+        //Generate list of potential targets
+        List<Vector3> potentialTargets = GeneratePotentialTargets();
+
+        //Try to form a path in the potential targets, doing the first one that results in a valid path
+        GeneratePathFromTargets(potentialTargets);
     }
 
     private void ShoppingAction()
@@ -120,16 +127,34 @@ public class Shopper : MovingGridObject
     private void CheckingOutAction()
     {
         //TODO
+
+        //Generate list of potential targets
+        List<Vector3> potentialTargets = GeneratePotentialTargets();
+
+        //Try to form a path in the potential targets, doing the first one that results in a valid path
+        GeneratePathFromTargets(potentialTargets);
     }
 
     private void ExitingAction()
     {
         //TODO
+
+        //Generate list of potential targets
+        List<Vector3> potentialTargets = GeneratePotentialTargets();
+
+        //Try to form a path in the potential targets, doing the first one that results in a valid path
+        GeneratePathFromTargets(potentialTargets);
     }
 
     private void WalkingAwayAction()
     {
         //TODO
+
+        //Generate list of potential targets
+        List<Vector3> potentialTargets = GeneratePotentialTargets();
+
+        //Try to form a path in the potential targets, doing the first one that results in a valid path
+        GeneratePathFromTargets(potentialTargets);
     }
 
     //Path Generation
@@ -227,11 +252,12 @@ public class Shopper : MovingGridObject
         return null;
     }
 
+    // Return front door positions
     private List<Vector3> GenerateEnteringTargets()
     {
         List<Vector3> EnteringTargets = new();
-        //TODO
-        //Make targets the spots in front of the front door
+       
+        EnteringTargets.Add(new Vector3(-0.5f, 0.0f, -7.5f));
 
         return EnteringTargets;
     }
@@ -256,29 +282,33 @@ public class Shopper : MovingGridObject
         return ShoppingTargets;
     }
 
+    // Return positions in front of the registers 
     private List<Vector3> GenerateCheckingOutTargets()
     {
         List<Vector3> CheckingOutTargets = new();
-        //TODO
-        //This should be the positions immediately in front of a register
+
+        CheckingOutTargets.Add(new Vector3(3.5f, 0f, -4.5f));
+        CheckingOutTargets.Add(new Vector3(5.5f, 0f, -3.5f));
 
         return CheckingOutTargets;
     }
 
+    // Return exit door position
     private List<Vector3> GenerateExitingTargets()
     {
         List<Vector3> ExitingTargets = new();
-        //TODO
-        //Targets should be immediately behind an exit door
+        
+        ExitingTargets.Add(new Vector3(0.5f, 0.0f, -7.5f));
 
         return ExitingTargets;
     }
 
+    // Return offscreen positions
     private List<Vector3> GenerateWalkingAwayTargets()
     {
         List<Vector3> WalkingAwayTargets = new();
-        //TODO
-        //Targets should be justttt offscreen
+        
+        WalkingAwayTargets.Add(new Vector3(2.5f, 0.0f, -10.5f));
 
         return WalkingAwayTargets;
     }
