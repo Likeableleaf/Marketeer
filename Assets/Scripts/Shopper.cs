@@ -53,8 +53,8 @@ public class Shopper : MovingGridObject
             startPosition = transform.position;
             moving = true;
         }
-        //Otherwise, generate next path
-        else
+        //If no path left, perform action
+        if (path == null || path.Count <= 0)
         {
             //Set this' position to the nextStep if it isnt the default
             if (nextStep != new Vector3(0, 0, 0))
@@ -159,7 +159,7 @@ public class Shopper : MovingGridObject
             PathTile potFinalTile = AStarPathFromTo(transform.position, target);
             //If the path works unwrap it and set it as the path
             //Then return true as we were successful
-            if (potFinalTile != null)
+            if (potFinalTile != null && potFinalTile.GetPosition() != transform.position)
             {
                 path = UnwrapPath(potFinalTile);
                 gridManager.RemoveDecidingFlag(transform.position);
