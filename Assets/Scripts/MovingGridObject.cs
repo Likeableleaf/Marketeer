@@ -21,6 +21,9 @@ public class MovingGridObject : GridObject
     {
         base.Start();
 
+        //If not on grid, move to closest grid spot
+        transform.position = IsValidGridPosition(transform.position) ? transform.position : ClosestGridPos(transform.position); 
+
         //Set the moveTime to the time a Turn is
         moveTime = gridManager.turnInterval;
     }
@@ -214,10 +217,34 @@ public class MovingGridObject : GridObject
         }
     }
 
-    private bool IsValidGridPosition(Vector3 position)
+    protected bool IsValidGridPosition(Vector3 position)
     {
         return (Math.Abs(position.x) % 1 - 0.5 == 0) &&
                (Math.Abs(position.z) % 1 - 0.5 == 0);
+    }
+
+    protected static Vector3 ClosestGridPos(Vector3 origPos)
+    {
+        // Round the x and z components to the nearest whole number
+        float newX = Mathf.Round(origPos.x - 0.5f);
+        float newZ = Mathf.Round(origPos.z - 0.5f);
+
+        return new Vector3(newX + 0.5f, 0f, newZ + 0.5f);
+    }
+
+    protected static List<T> ShuffleList<T>(List<T> list)
+    {
+        List<T> shuffledList = new List<T>(list);
+        int n = shuffledList.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = UnityEngine.Random.Range(0, n + 1);
+            T value = shuffledList[k];
+            shuffledList[k] = shuffledList[n];
+            shuffledList[n] = value;
+        }
+        return shuffledList;
     }
 
     private bool AreDiagonal(Vector3 position1, Vector3 position2)

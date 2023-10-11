@@ -15,11 +15,15 @@ public class Shopper : MovingGridObject
     //Moved the list of StoreShelves and Register to GridManager
     private List<GroceryType> ShoppingList = new();
     private int ShoppingListSize;
+    private ShopperState state;
 
     // Start is called before the first frame update
     new void Start()
     {
         base.Start();
+
+        //Default state for now
+        state = ShopperState.Shopping;
 
         // Decide How many Items to Shop for
         ShoppingListSize = Random.Range(minShoppingListSize, maxShoppingListSize+1);
@@ -32,39 +36,11 @@ public class Shopper : MovingGridObject
         }
     }
 
-    // Update is called once per frame
-    new void Update()
-    {
-        base.Update();
-
-        //Leaving this here just to say
-        //DONT USE UPDATE FOR GRIDOBJECTS
-        //Only use Turn
-
-    }
-
     public override void Turn()
     {
         base.Turn();
 
         StartTurnMovement();
-        /*
-        // Decide if finished 
-        if (ShoppingList.Count > 0)
-        {
-            // Go to First item in List
-            CurrentTarget = ShoppingList[0];
-
-            // Delete Item from List
-            ShoppingList.Remove(CurrentTarget);
-        }
-        else
-        {
-            // Go to Register
-            CurrentTarget = Register;
-        }
-        */
-        // Move to CurrentTarget
     }
 
     public void StartTurnMovement()
@@ -86,50 +62,77 @@ public class Shopper : MovingGridObject
                 transform.position = nextStep;
             }
 
-            //Now, check if character needs to perform an action here
-            //First, check if at just outside front door (assuming trying to enter the building)
-            if (false)
+            //Path may be generated within the actions
+            //State changes will only happen here
+            switch (state)
             {
-                //TODO
+                case ShopperState.Inactive:
+                    InactiveAction();
+                    break;
+                case ShopperState.Entering:
+                    EnteringAction();
+                    break;
+                case ShopperState.Shopping:
+                    ShoppingAction();
+                    break;
+                case ShopperState.CheckingOut:
+                    CheckingOutAction();
+                    break;
+                case ShopperState.Exiting:
+                    ExitingAction();
+                    break;
+                case ShopperState.WalkingAway:
+                    WalkingAwayAction();
+                    break;
             }
-
-            //Second, check if in front of a shelf of a needed product
-            else if (false) 
-            {
-                //TODO
-            }
-
-            //Third, check if in front of a register
-            else if (false)
-            {
-                //TODO
-            }
-
-            //Fourth, check if in at just inside front door (assuming trying to exit the building)
-            else if (false)
-            {
-                //TODO
-            }
-
-            //Fifth, check if outside of level (assuming finished shopper experience)
-            else if (false)
-            {
-                //TODO
-            }
-
-            //Otherwise, do nothing special and 
-
-            //For fun, ig
-            //Likely to fail lol
-            //GenerateRandomPath();
-
-            //Generate list of potential targets
-            List<Vector3> potentialTargets = GeneratePotentialTargets();
-
-            //Try to form a path in the potential targets, doing the first one that results in a valid path
-            GeneratePathFromTargets(potentialTargets);
         }
     }
+
+    //ShopperState Actions
+
+    private void InactiveAction()
+    {
+        //Literally just do nothing
+    }
+
+    private void EnteringAction()
+    {
+        //TODO
+    }
+
+    private void ShoppingAction()
+    {
+        //TODO
+
+        //For now, just create path
+
+        //For fun, ig
+        //Likely to fail lol
+        //GenerateRandomPath();
+
+        //Generate list of potential targets
+        List<Vector3> potentialTargets = GeneratePotentialTargets();
+
+        //Try to form a path in the potential targets, doing the first one that results in a valid path
+        GeneratePathFromTargets(potentialTargets);
+    }
+
+    private void CheckingOutAction()
+    {
+        //TODO
+    }
+
+    private void ExitingAction()
+    {
+        //TODO
+    }
+
+    private void WalkingAwayAction()
+    {
+        //TODO
+    }
+
+    //Path Generation
 
     private void GenerateRandomPath() 
     {
@@ -148,71 +151,9 @@ public class Shopper : MovingGridObject
         }
     }
 
-    private List<Vector3> GeneratePotentialTargets()
-    {
-        var potTargets = new List<Vector3>();
-
-        //First, check if need to move into the store
-        if (false)
-        {
-            //TODO
-        }
-
-        //Second, check if need to grab groceries
-        else if (ShoppingList.Count > 0)
-        {
-            //Randomize the shopping List order
-            int n = ShoppingList.Count;
-            while (n > 1)
-            {
-                n--;
-                int k = UnityEngine.Random.Range(0, n + 1);
-                GroceryType value = ShoppingList[k];
-                ShoppingList[k] = ShoppingList[n];
-                ShoppingList[n] = value;
-            }
-            //Add the accessible spot of each shelf
-            foreach(var grocery in ShoppingList)
-            {
-                foreach(var shelf in gridManager.groceryDictionary[grocery])
-                {
-                    potTargets.Add(shelf.InFrontOfShelfPos);
-                }
-            }
-        }
-
-        //Third, check if need to go checkout
-        else if (false)
-        {
-            //TODO
-        }
-
-        //Fourth, check if need to exit the store
-        else
-        {
-            //TODO
-        }
-
-        //Fifth, add the adjacent tiles just so that the shopper isn't standing sitll if stuck
-
-        //Calculate the eight adjacent positions
-        Vector3 position = transform.position;
-        potTargets.Add(position + new Vector3(1, 0, 1));
-        potTargets.Add(position + new Vector3(1, 0, 0));
-        potTargets.Add(position + new Vector3(1, 0, -1));
-        potTargets.Add(position + new Vector3(0, 0, 1));
-        potTargets.Add(position + new Vector3(0, 0, -1));
-        potTargets.Add(position + new Vector3(-1, 0, 1));
-        potTargets.Add(position + new Vector3(-1, 0, 0));
-        potTargets.Add(position + new Vector3(-1, 0, -1));
-
-        //Return the List
-        return potTargets;
-    }
-
     private bool GeneratePathFromTargets(List<Vector3> targets)
     {
-        foreach(var target in targets)
+        foreach (var target in targets)
         {
             //Try to generate a path to the tile
             PathTile potFinalTile = AStarPathFromTo(transform.position, target);
@@ -229,4 +170,126 @@ public class Shopper : MovingGridObject
         //Completely blocked, just stand still
         return false;
     }
+
+    private List<Vector3> GeneratePotentialTargets()
+    {
+        var potTargets = new List<Vector3>();
+
+        switch (state)
+        {
+            case ShopperState.Inactive:
+                potTargets.AddRange(GenerateInactiveTargets());
+                break;
+            case ShopperState.Entering:
+                potTargets.AddRange(GenerateEnteringTargets());
+                break;
+            case ShopperState.Shopping:
+                potTargets.AddRange(GenerateShoppingTargets());
+                break;
+            case ShopperState.CheckingOut:
+                potTargets.AddRange(GenerateCheckingOutTargets());
+                break;
+            case ShopperState.Exiting:
+                potTargets.AddRange(GenerateExitingTargets());
+                break;
+            case ShopperState.WalkingAway:
+                potTargets.AddRange(GenerateWalkingAwayTargets());
+                break;
+        }
+
+        //Add Adjacent tiles just so that the shopper isn't standing still if stuck
+
+        //Calculate the eight adjacent positions
+        Vector3 position = transform.position;
+        List<Vector3> adjacentPositions = new List<Vector3>()
+        {
+            position + new Vector3(1, 0, 1),
+            position + new Vector3(1, 0, 0),
+            position + new Vector3(1, 0, -1),
+            position + new Vector3(0, 0, 1),
+            position + new Vector3(0, 0, -1),
+            position + new Vector3(-1, 0, 1),
+            position + new Vector3(-1, 0, 0),
+            position + new Vector3(-1, 0, -1)
+        };
+
+        //Shuffle the adjacent positions and add them to potTargets
+        potTargets.AddRange(ShuffleList(adjacentPositions));
+
+        //Return the List
+        return potTargets;
+    }
+
+    private List<Vector3> GenerateInactiveTargets()
+    {
+        //This should never get reached or called
+        Debug.LogWarning("Unreachable Method GenerateInactiveTargets reached");
+        return null;
+    }
+
+    private List<Vector3> GenerateEnteringTargets()
+    {
+        List<Vector3> EnteringTargets = new();
+        //TODO
+        //Make targets the spots in front of the front door
+
+        return EnteringTargets;
+    }
+
+    private List<Vector3> GenerateShoppingTargets()
+    {
+        List<Vector3> ShoppingTargets = new();
+        //Shopping targets are the positions in front of needed materials
+
+        //Randomize the shopping List order
+        ShoppingList = ShuffleList(ShoppingList);
+
+        //Add the accessible spot of each shelf
+        foreach (var grocery in ShoppingList)
+        {
+            foreach (var shelf in gridManager.groceryDictionary[grocery])
+            {
+                ShoppingTargets.Add(shelf.InFrontOfShelfPos);
+            }
+        }
+
+        return ShoppingTargets;
+    }
+
+    private List<Vector3> GenerateCheckingOutTargets()
+    {
+        List<Vector3> CheckingOutTargets = new();
+        //TODO
+        //This should be the positions immediately in front of a register
+
+        return CheckingOutTargets;
+    }
+
+    private List<Vector3> GenerateExitingTargets()
+    {
+        List<Vector3> ExitingTargets = new();
+        //TODO
+        //Targets should be immediately behind an exit door
+
+        return ExitingTargets;
+    }
+
+    private List<Vector3> GenerateWalkingAwayTargets()
+    {
+        List<Vector3> WalkingAwayTargets = new();
+        //TODO
+        //Targets should be justttt offscreen
+
+        return WalkingAwayTargets;
+    }
+}
+
+public enum ShopperState
+{
+    Inactive, //Doing Nothing
+    Entering, //Walking towards and entering the building
+    Shopping, //Grabbing different items from list
+    CheckingOut, //Heading to and using the register
+    Exiting, //Walking to and exiting the building
+    WalkingAway //Walking out of view
 }
