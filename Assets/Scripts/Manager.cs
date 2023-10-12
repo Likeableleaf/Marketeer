@@ -7,11 +7,12 @@ using UnityEngine.UIElements;
 public class Manager : MovingGridObject {
     // Variable Cache
     public GameObject CurrentTarget;
-    
-    [SerializeField]private ManagerState state;
-    private Vector3 OfficeDoorPos = new Vector3(7.5f, 0.0f, 5.5f);
-    [SerializeField]private float timer1 = -0.5f;
-    private float timer2 = -0.5f;
+    [SerializeField] private ManagerState state;
+    [SerializeField] private int turntimer1 = -5;
+    [SerializeField] private int turntimer2 = -5;
+    [SerializeField] Vector3 OfficeDoorPos; //= new Vector3(7.5f, 0.0f, 5.5f);
+    [SerializeField] Vector3 OfficeChairPos; //= new Vector3(9.5f, 0.0f, 7.5f);
+
     private int actionNum = 0;
 
     // Start is called before the first frame update
@@ -103,23 +104,23 @@ public class Manager : MovingGridObject {
     // Idle movement in Office
     private void DoingOfficeThingsAction() {
         // Timer for switching actions
-        if (timer2 == -0.5f) {
-            timer2 = UnityEngine.Random.Range(0.5f, 1f);
-        } else if (timer2 <= 0.0f) {
+        if (turntimer2 == -5) {
+            turntimer2 = UnityEngine.Random.Range(1, 5);
+        } else if (turntimer2 <= 0f) {
             actionNum = 0;
             //actionNum = UnityEngine.Random.Range(0, 0);
         }
 
         // Manage timer for Duration of stay
-        if (timer1 == -0.5f) {
-            timer1 = UnityEngine.Random.Range(1f, 3f);
-        } else if (timer1 <= 0.0f) {
-            timer1 = -0.5f;
-            timer2 = -0.5f;
+        if (turntimer1 == -5) {
+            turntimer1 = UnityEngine.Random.Range(5, 25);
+        } else if (turntimer1 <= 0) {
+            turntimer1 = -5;
+            turntimer2 = -5;
             state = ManagerState.ExitingOffice;
         } else {
-            timer1 -= Time.deltaTime * 150f;
-            timer2 -= Time.deltaTime * 150f;
+            turntimer1 -= 1;
+            turntimer2 -= 1;
         }
         
         // Idle Actions to do
@@ -178,13 +179,13 @@ public class Manager : MovingGridObject {
         */
 
         // Manage timer for Duration of Patrol
-        if (timer1 == -0.5f) {
-            timer1 = UnityEngine.Random.Range(3f, 6f);
-        } else if (timer1 <= 0.0f) {
+        if (turntimer1 == -5) {
+            turntimer1 = UnityEngine.Random.Range(10, 30);
+        } else if (turntimer1 <= 0) {
             state = ManagerState.EnteringOffice;
-            timer1 = -0.5f;
+            turntimer1 = -5;
         } else {
-            timer1 -= Time.deltaTime * 150f;
+            turntimer1 -= 1;
         }
 
         //Generate list of potential targets
@@ -201,10 +202,10 @@ public class Manager : MovingGridObject {
     //Target + Path Generation
 
     private void GenerateRandomPath() {
-        targetPosition = new Vector3(
+        Vector3 targetPosition = new Vector3(
             UnityEngine.Random.Range(-9, 9) + 0.5f,
             0,
-            UnityEngine.Random.Range(-9, 4) + 0.5f
+            UnityEngine.Random.Range(-7, 4) + 0.5f
         );
 
         PathTile LastTileInPath = AStarPathFromTo(transform.position, targetPosition);
@@ -305,12 +306,12 @@ public class Manager : MovingGridObject {
     // Section Bugged Methinks
     // Return Random Office Positions
     private Vector3 GenerateDoingOfficeThingsTarget() {
-        Vector3 DoingOfficeThingsTarget = new Vector3(9.5f, 0.0f, 8.5f);
+        Vector3 DoingOfficeThingsTarget = new Vector3(9.5f, 0.0f, 7.5f);;
         
         // Postions based on preset
         switch(actionNum) {
             case 0: 
-            DoingOfficeThingsTarget = new Vector3(9.5f, 0.0f, 8.5f);
+            DoingOfficeThingsTarget = OfficeChairPos;
             break;
             // ToDo
         }

@@ -13851,6 +13851,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 773457671}
     m_Modifications:
+    - target: {fileID: 2388299598673385217, guid: 19ff8e43414cd134a956aef1b0a69999, type: 3}
+      propertyPath: OfficeDoorPos.x
+      value: 7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2388299598673385217, guid: 19ff8e43414cd134a956aef1b0a69999, type: 3}
+      propertyPath: OfficeDoorPos.z
+      value: 5.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2388299598673385217, guid: 19ff8e43414cd134a956aef1b0a69999, type: 3}
+      propertyPath: OfficeChairPos.x
+      value: 9.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2388299598673385217, guid: 19ff8e43414cd134a956aef1b0a69999, type: 3}
+      propertyPath: OfficeChairPos.z
+      value: 7.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4150576356384478100, guid: 19ff8e43414cd134a956aef1b0a69999, type: 3}
       propertyPath: m_Name
       value: Manager
