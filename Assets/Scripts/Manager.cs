@@ -8,11 +8,18 @@ public class Manager : MovingGridObject {
     // Variable Cache
     public GameObject CurrentTarget;
     
-    private ManagerState state;
+    [SerializeField]private ManagerState state;
+    private Vector3 OfficeDoorPos = new Vector3(7.5f, 0.0f, 5.5f);
+    [SerializeField]private float timer1 = -0.5f;
+    private float timer2 = -0.5f;
+    private int actionNum = 0;
 
     // Start is called before the first frame update
     new void Start() {
         base.Start();
+
+        //Default state
+        state = ManagerState.PatrolStore;
         
     }
 
@@ -66,13 +73,27 @@ public class Manager : MovingGridObject {
     
     // Do Nothing
     private void InactiveAction() {
-        
+        // Seriously... Nothing... ...?
     }
 
     // Goto Office
     private void EnteringOfficeAction() {
+        // "Observe" for empty shelves
+        //ToDO 
 
-        //Generate list of potential targets
+        // If finds emplty shelf ChasePlayer
+        //ToDo
+        /*if(-_-) {
+            state = ManagerState.ChasePlayer;
+        }
+        */
+
+        // If path finished 
+        if (transform.position == OfficeDoorPos) {
+            state = ManagerState.DoingOfficeThings;
+        }
+
+        // Retrieve Office Door Location
         List<Vector3> potentialTargets = GeneratePotentialTargets();
 
         //Try to form a path in the potential targets, doing the first one that results in a valid path
@@ -81,6 +102,32 @@ public class Manager : MovingGridObject {
 
     // Idle movement in Office
     private void DoingOfficeThingsAction() {
+        // Timer for switching actions
+        if (timer2 == -0.5f) {
+            timer2 = UnityEngine.Random.Range(0.5f, 1f);
+        } else if (timer2 <= 0.0f) {
+            actionNum = 0;
+            //actionNum = UnityEngine.Random.Range(0, 0);
+        }
+
+        // Manage timer for Duration of stay
+        if (timer1 == -0.5f) {
+            timer1 = UnityEngine.Random.Range(1f, 3f);
+        } else if (timer1 <= 0.0f) {
+            timer1 = -0.5f;
+            timer2 = -0.5f;
+            state = ManagerState.ExitingOffice;
+        } else {
+            timer1 -= Time.deltaTime * 150f;
+            timer2 -= Time.deltaTime * 150f;
+        }
+        
+        // Idle Actions to do
+        /*switch(actionNum) {
+            case 0:
+                //ToDo
+                break;
+        }*/
         
         //Generate list of potential targets
         List<Vector3> potentialTargets = GeneratePotentialTargets();
@@ -91,7 +138,11 @@ public class Manager : MovingGridObject {
 
     // Goto StoreFloor
     private void ExitingOfficeAction() {
-        
+        // If path finished 
+        if (transform.position == OfficeDoorPos) {
+            state = ManagerState.PatrolStore;
+        }
+
         //Generate list of potential targets
         List<Vector3> potentialTargets = GeneratePotentialTargets();
 
@@ -101,6 +152,11 @@ public class Manager : MovingGridObject {
 
     // Chase Player
     private void ChasePlayerAction() {
+        // As long as AggroTimer is active?
+        // Todo
+
+        // When AgroTimer Done
+        // state = ManagerState.PatrolStore; or state = ManagerState.EnteringOffice;?
         
         //Generate list of potential targets
         List<Vector3> potentialTargets = GeneratePotentialTargets();
@@ -111,16 +167,52 @@ public class Manager : MovingGridObject {
 
     // Wander and moniter the Store
     private void PatrolStoreAction() {
+        // "Observe" for empty shelves
+        //ToDO 
+
+        // If finds emplty shelf ChasePlayer
+        //ToDo
+        /*if(-_-) {
+            state = ManagerState.ChasePlayer;
+        }
+        */
+
+        // Manage timer for Duration of Patrol
+        if (timer1 == -0.5f) {
+            timer1 = UnityEngine.Random.Range(3f, 6f);
+        } else if (timer1 <= 0.0f) {
+            state = ManagerState.EnteringOffice;
+            timer1 = -0.5f;
+        } else {
+            timer1 -= Time.deltaTime * 150f;
+        }
 
         //Generate list of potential targets
-        List<Vector3> potentialTargets = GeneratePotentialTargets();
+        //List<Vector3> potentialTargets = GeneratePotentialTargets();
 
         //Try to form a path in the potential targets, doing the first one that results in a valid path
-        GeneratePathFromTargets(potentialTargets);
+        //GeneratePathFromTargets(potentialTargets);
+
+        // Temp system for now
+        GenerateRandomPath();
     }
 
 
-    //Target Generation
+    //Target + Path Generation
+
+    private void GenerateRandomPath() {
+        targetPosition = new Vector3(
+            UnityEngine.Random.Range(-9, 9) + 0.5f,
+            0,
+            UnityEngine.Random.Range(-9, 4) + 0.5f
+        );
+
+        PathTile LastTileInPath = AStarPathFromTo(transform.position, targetPosition);
+        if (LastTileInPath != null) {
+            path = UnwrapPath(LastTileInPath);
+            gridManager.RemoveDecidingFlag(transform.position);
+        }
+    }
 
     private bool GeneratePathFromTargets(List<Vector3> targets) {
         foreach (var target in targets) {
@@ -139,6 +231,24 @@ public class Manager : MovingGridObject {
         return false;
     }
 
+    /*private bool GeneratePathFromTarget(Vector3 target) {
+        //Try to generate a path to the tile
+        PathTile potFinalTile = AStarPathFromTo(transform.position, target);
+            
+        //If the path works unwrap it and set it as the path
+        if (potFinalTile != null && potFinalTile.GetPosition() != transform.position) {
+            path = UnwrapPath(potFinalTile);
+            gridManager.RemoveDecidingFlag(transform.position);
+                
+            //Then return true as we were successful
+            return true;
+        }
+
+        //Completely blocked, just stand still
+        return false;
+    }*/
+
+
     private List<Vector3> GeneratePotentialTargets() {
         var potTargets = new List<Vector3>();
 
@@ -147,13 +257,13 @@ public class Manager : MovingGridObject {
                 potTargets.AddRange(GenerateInactiveTargets());
                 break;
             case ManagerState.EnteringOffice:
-                potTargets.AddRange(GenerateOfficeEntranceTarget());
+                potTargets.Add(GenerateOfficeEntranceTarget());
                 break;
             case ManagerState.DoingOfficeThings:
-                potTargets.AddRange(GenerateDoingOfficeThingsTargets());
+                potTargets.Add(GenerateDoingOfficeThingsTarget());
                 break;
             case ManagerState.ExitingOffice:
-                potTargets.AddRange(GenerateOfficeEntranceTarget());
+                potTargets.Add(GenerateOfficeEntranceTarget());
                 break;
             case ManagerState.ChasePlayer:
                 potTargets.AddRange(GenerateChasePlayerTargets());
@@ -192,22 +302,25 @@ public class Manager : MovingGridObject {
         return null;
     }
 
+    // Section Bugged Methinks
     // Return Random Office Positions
-    private List<Vector3> GenerateDoingOfficeThingsTargets() {
-        List<Vector3> DoingOfficeThingsTargets = new();
+    private Vector3 GenerateDoingOfficeThingsTarget() {
+        Vector3 DoingOfficeThingsTarget = new Vector3(9.5f, 0.0f, 8.5f);
         
-        DoingOfficeThingsTargets.Add(new Vector3(0.5f, 0.0f, -7.5f));
-        
-        return DoingOfficeThingsTargets;
+        // Postions based on preset
+        switch(actionNum) {
+            case 0: 
+            DoingOfficeThingsTarget = new Vector3(9.5f, 0.0f, 8.5f);
+            break;
+            // ToDo
+        }
+                
+        return DoingOfficeThingsTarget;
     }
 
     // Return office exit door position
-    private List<Vector3> GenerateOfficeEntranceTarget() {
-        List<Vector3> ExitingOfficeTargets = new();
-        
-        ExitingOfficeTargets.Add(new Vector3(0.5f, 0.0f, -7.5f));
-
-        return ExitingOfficeTargets;
+    private Vector3 GenerateOfficeEntranceTarget() {
+        return OfficeDoorPos;
     }
 
     // Return Player Position
@@ -229,11 +342,11 @@ public class Manager : MovingGridObject {
     }
 
     public enum ManagerState {
-    Inactive, //Doing Nothing
-    EnteringOffice, // Enters office
-    DoingOfficeThings, // Idle animations and movement in Office
-    ExitingOffice, // Exits office
-    ChasePlayer, // Chases after Player
-    PatrolStore, // Walks round the store observing
+        Inactive, //Doing Nothing
+        EnteringOffice, // Enters office
+        DoingOfficeThings, // Idle animations and movement in Office
+        ExitingOffice, // Exits office
+        ChasePlayer, // Chases after Player
+        PatrolStore, // Walks round the store observing
     }
 }
