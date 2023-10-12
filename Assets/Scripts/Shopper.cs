@@ -90,10 +90,10 @@ public class Shopper : MovingGridObject
 
     //ShopperState Actions
 
+    // Do nothing
     private void InactiveAction()
     {
-        //Literally just do nothing
-        //break;
+
     }
 
     private void EnteringAction()
