@@ -39,7 +39,7 @@ public class Manager : MovingGridObject {
             moving = true;
         }
         //If no path left, perform action
-        if (path == null || path.Count <= 0) {
+        if ((path == null || path.Count <= 0) && !moving){
             //Set this' position to the nextStep if it isnt the default
             if (nextStep != new Vector3(0, 0, 0)) {
                 transform.position = nextStep;
