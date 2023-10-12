@@ -29,17 +29,22 @@ public class Shelf : Wall
         InFrontOfShelfPos = RoundVector3(transform.position + Quaternion.Euler(0, yRotation, 0) * InFrontOfShelfPos, 1);
     }
 
-    public void FillShelf() {
+    public void RefillShelf(int amount) {
         ShelfVariants[capacity].SetActive(false);
-        capacity = 0;
+        capacity = Math.Clamp(capacity-amount,0, ShelfVariants.Length-1);
         ShelfVariants[capacity].SetActive(true);
     }
 
-    public void ConsumeItems() {
-        if (capacity < 4) {
+    public void RemoveItem(int amount) {
+        if (HasStock(amount)) {
             ShelfVariants[capacity].SetActive(false);
-            capacity += 1;
+            capacity += amount;
             ShelfVariants[capacity].SetActive(true);
         }        
+    }
+
+    public bool HasStock(int amount)
+    {
+        return capacity + amount < ShelfVariants.Length;
     }
 }

@@ -6,9 +6,7 @@ using Utils;
 
 public class MovingGridObject : GridObject
 {
-    public Vector3 targetPosition;
-    public Stack<Vector3> path;
-
+    protected Stack<Vector3> path;
     protected float moveTime = 1.0f; //Number of turns to move a spot
     protected Vector3 nextStep;
     protected bool moving = false;
@@ -80,7 +78,7 @@ public class MovingGridObject : GridObject
         PathTile endTile = new PathTile(end, 0);
 
         frontier.Enqueue(startTile, startTile.GetGH());
-        for (int i = 0; i < 30; i++)
+        for (int i = 0; i < 100; i++)
         {
             if (frontier.Count == 0)
             {

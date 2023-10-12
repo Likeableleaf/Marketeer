@@ -8,7 +8,10 @@ public class GridManager : MonoBehaviour
     //Grid System Variables
     public Dictionary<Vector3, Dictionary<int, GameObject>> GameGrid = new();
     public float turnInterval = 1f;
+    public int SimultaneousActiveShoppers = 4;
     private Queue<GridObject> turnQueue = new();
+    private List<Shopper> ActiveShoppers = new();
+    private Queue<Shopper> InactiveShoppers = new();
     private float timeSinceLastTurn = 0.0f;
 
     //Grocery System Variables
@@ -76,6 +79,14 @@ public class GridManager : MonoBehaviour
         {
             GameGrid.Remove(positionToRemove);
         }
+        //Then, if there are not enough active Shoppers, activate an inactive one
+        if (SimultaneousActiveShoppers > ActiveShoppers.Count)
+        {
+            Shopper activatedShopper = InactiveShoppers.Dequeue();
+            ActiveShoppers.Add(activatedShopper);
+            activatedShopper.BecomeActive();
+        }
+
         //To make sure Grid Dictionary isn't being modified while read, do each object's turn one at a time
         foreach (var obj in turnQueue)
         {
@@ -101,12 +112,37 @@ public class GridManager : MonoBehaviour
         GameGrid[position][turnNumber] = obj;
     }
 
+    public void AddToInactiveShoppers(Shopper shopper)
+    {
+        InactiveShoppers.Enqueue(shopper);
+    }
+
+    public void RemoveFromActiveShoppers(Shopper shopper)
+    {
+        ActiveShoppers.Remove(shopper);
+    }
+
     public void RemoveDecidingFlag(Vector3 position)
     {
         if (GameGrid.ContainsKey(position))
         {
             GameGrid[position].Remove(-5);
         }
+    }
+
+    public Shelf CheckForSurroundingShelf(Vector3 position)
+    {
+        foreach(var shelfList in groceryDictionary.Values)
+        {
+            foreach (var shelf in shelfList)
+            {
+                if(shelf.InFrontOfShelfPos == position)
+                {
+                    return shelf;
+                }
+            }
+        }
+        return null;
     }
 
     private void PrintGameGrid()

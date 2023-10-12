@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -12,28 +13,25 @@ public class Shopper : MovingGridObject
     public static int minShoppingListSize = 1;
     public static int maxShoppingListSize = 6;
 
+    //Specifc Grid Locations
+    [Header("State Positions")]
+    public Vector3[] StartingPositions;
+    public Vector3[] FrontOfDoorPositions;
+    public Vector3[] RegisterPositions;
+    public Vector3[] BackOfDoorPositions;
+    public Vector3[] OffscreenPositions;
+
     //Moved the list of StoreShelves and Register to GridManager
-    private List<GroceryType> ShoppingList = new();
+    public List<GroceryType> ShoppingList = new();
     private int ShoppingListSize;
-    private ShopperState state;
+    public ShopperState state;
 
     // Start is called before the first frame update
     new void Start()
     {
         base.Start();
 
-        //Default state for now
-        state = ShopperState.Shopping;
-
-        // Decide How many Items to Shop for
-        ShoppingListSize = Random.Range(minShoppingListSize, maxShoppingListSize+1);
-
-        // Decide the Items to Shop for
-        for (int i = 0; i < ShoppingListSize; i++)
-        {
-            //Adds a random grocery to the list (can be duplicates)
-            ShoppingList.Add((GroceryType)Random.Range(0, System.Enum.GetValues(typeof(GroceryType)).Length));
-        }
+        gridManager.AddToInactiveShoppers(this);
     }
 
     public override void Turn()
@@ -41,6 +39,20 @@ public class Shopper : MovingGridObject
         base.Turn();
 
         StartTurnMovement();
+    }
+
+    public void BecomeActive()
+    {
+        // Decide How many Items to Shop for
+        ShoppingListSize = Random.Range(minShoppingListSize, maxShoppingListSize + 1);
+        // Decide the Items to Shop for
+        for (int i = 0; i < ShoppingListSize; i++)
+        {
+            //Adds a random grocery to the list (can be duplicates)
+            ShoppingList.Add((GroceryType)Random.Range(0, System.Enum.GetValues(typeof(GroceryType)).Length));
+        }
+
+        state = ShopperState.Entering;
     }
 
     public void StartTurnMovement()
@@ -93,12 +105,17 @@ public class Shopper : MovingGridObject
     private void InactiveAction()
     {
         //Literally just do nothing
-        //break;
     }
 
     private void EnteringAction()
     {
-        //TODO
+        if (GetEnteringTargets().Contains(transform.position))
+        {
+            //Open Door
+            //Then
+            state = ShopperState.Shopping;
+            return;
+        }
 
         //Generate list of potential targets
         List<Vector3> potentialTargets = GeneratePotentialTargets();
@@ -109,7 +126,22 @@ public class Shopper : MovingGridObject
 
     private void ShoppingAction()
     {
-        //TODO
+        Shelf usingShelf = gridManager.CheckForSurroundingShelf(transform.position);
+        //If found an adjacent shelf and its of a needed item and it has stock
+        if (GetShoppingTargets().Contains(transform.position) && usingShelf && usingShelf.HasStock(1))
+        {
+            //Tell the shelf to reduce its stock
+            usingShelf.RemoveItem(1);
+            //Remove that item from the ShoppingList
+            ShoppingList.Remove(usingShelf.groceryType);
+
+            //If the ShoppingList is now empty go check out
+            if (ShoppingList.Count <= 0)
+            {
+                state = ShopperState.CheckingOut;
+            }
+            return;
+        }
 
         //For now, just create path
 
@@ -126,7 +158,13 @@ public class Shopper : MovingGridObject
 
     private void CheckingOutAction()
     {
-        //TODO
+        if (GetCheckingOutTargets().Contains(transform.position))
+        {
+            //Use Register
+            //Then
+            state = ShopperState.Exiting;
+            return;
+        }
 
         //Generate list of potential targets
         List<Vector3> potentialTargets = GeneratePotentialTargets();
@@ -137,7 +175,13 @@ public class Shopper : MovingGridObject
 
     private void ExitingAction()
     {
-        //TODO
+        if (GetExitingTargets().Contains(transform.position))
+        {
+            //Open Door
+            //Then
+            state = ShopperState.WalkingAway;
+            return;
+        }
 
         //Generate list of potential targets
         List<Vector3> potentialTargets = GeneratePotentialTargets();
@@ -148,7 +192,18 @@ public class Shopper : MovingGridObject
 
     private void WalkingAwayAction()
     {
-        //TODO
+        if (GetWalkingAwayTargets().Contains(transform.position))
+        {
+            //Become Inactive and remove from active list
+            gridManager.RemoveFromActiveShoppers(this);
+            gridManager.AddToInactiveShoppers(this);
+            gridManager.RemoveDecidingFlag(transform.position);
+            transform.position = StartingPositions[Random.Range(0, StartingPositions.Length)];
+            nextStep = transform.position;
+            startPosition = transform.position;
+            state = ShopperState.Inactive;
+            return;
+        }
 
         //Generate list of potential targets
         List<Vector3> potentialTargets = GeneratePotentialTargets();
@@ -161,7 +216,7 @@ public class Shopper : MovingGridObject
 
     private void GenerateRandomPath() 
     {
-        targetPosition = new Vector3(
+        Vector3 targetPosition = new Vector3(
             UnityEngine.Random.Range(-9, 9) + 0.5f,
             0,
             UnityEngine.Random.Range(-9, 9) + 0.5f
@@ -203,28 +258,36 @@ public class Shopper : MovingGridObject
         switch (state)
         {
             case ShopperState.Inactive:
-                potTargets.AddRange(GenerateInactiveTargets());
+                potTargets.AddRange(GetInactiveTargets());
                 break;
             case ShopperState.Entering:
-                potTargets.AddRange(GenerateEnteringTargets());
+                potTargets.AddRange(GetEnteringTargets());
                 break;
             case ShopperState.Shopping:
-                potTargets.AddRange(GenerateShoppingTargets());
+                potTargets.AddRange(GetShoppingTargets());
+                //Add adjacent Tiles too
+                potTargets.AddRange(GenerateAdjacentTargets());
                 break;
             case ShopperState.CheckingOut:
-                potTargets.AddRange(GenerateCheckingOutTargets());
+                potTargets.AddRange(GetCheckingOutTargets());
+                //Add adjacent Tiles too
+                potTargets.AddRange(GenerateAdjacentTargets());
                 break;
             case ShopperState.Exiting:
-                potTargets.AddRange(GenerateExitingTargets());
+                potTargets.AddRange(GetExitingTargets());
+                //Add adjacent Tiles too
+                potTargets.AddRange(GenerateAdjacentTargets());
                 break;
             case ShopperState.WalkingAway:
-                potTargets.AddRange(GenerateWalkingAwayTargets());
+                potTargets.AddRange(GetWalkingAwayTargets());
                 break;
         }
+        //Return the List
+        return potTargets;
+    }
 
-        //Add Adjacent tiles just so that the shopper isn't standing still if stuck
-
-        //Calculate the eight adjacent positions
+    private List<Vector3> GenerateAdjacentTargets()
+    {
         Vector3 position = transform.position;
         List<Vector3> adjacentPositions = new List<Vector3>()
         {
@@ -237,15 +300,10 @@ public class Shopper : MovingGridObject
             position + new Vector3(-1, 0, 0),
             position + new Vector3(-1, 0, -1)
         };
-
-        //Shuffle the adjacent positions and add them to potTargets
-        potTargets.AddRange(ShuffleList(adjacentPositions));
-
-        //Return the List
-        return potTargets;
+        return ShuffleList(adjacentPositions);
     }
 
-    private List<Vector3> GenerateInactiveTargets()
+    private List<Vector3> GetInactiveTargets()
     {
         //This should never get reached or called
         Debug.LogWarning("Unreachable Method GenerateInactiveTargets reached");
@@ -253,16 +311,13 @@ public class Shopper : MovingGridObject
     }
 
     // Return front door positions
-    private List<Vector3> GenerateEnteringTargets()
+    private List<Vector3> GetEnteringTargets()
     {
-        List<Vector3> EnteringTargets = new();
-       
-        EnteringTargets.Add(new Vector3(-0.5f, 0.0f, -7.5f));
-
-        return EnteringTargets;
+        return FrontOfDoorPositions.ToList();
     }
 
-    private List<Vector3> GenerateShoppingTargets()
+    //Return front of shelves positions
+    private List<Vector3> GetShoppingTargets()
     {
         List<Vector3> ShoppingTargets = new();
         //Shopping targets are the positions in front of needed materials
@@ -279,38 +334,25 @@ public class Shopper : MovingGridObject
             }
         }
 
-        return ShoppingTargets;
+        return ShuffleList(ShoppingTargets);
     }
 
     // Return positions in front of the registers 
-    private List<Vector3> GenerateCheckingOutTargets()
+    private List<Vector3> GetCheckingOutTargets()
     {
-        List<Vector3> CheckingOutTargets = new();
-
-        CheckingOutTargets.Add(new Vector3(3.5f, 0f, -4.5f));
-        CheckingOutTargets.Add(new Vector3(5.5f, 0f, -3.5f));
-
-        return CheckingOutTargets;
+        return RegisterPositions.ToList();
     }
 
     // Return exit door position
-    private List<Vector3> GenerateExitingTargets()
+    private List<Vector3> GetExitingTargets()
     {
-        List<Vector3> ExitingTargets = new();
-        
-        ExitingTargets.Add(new Vector3(0.5f, 0.0f, -7.5f));
-
-        return ExitingTargets;
+        return BackOfDoorPositions.ToList();
     }
 
     // Return offscreen positions
-    private List<Vector3> GenerateWalkingAwayTargets()
+    private List<Vector3> GetWalkingAwayTargets()
     {
-        List<Vector3> WalkingAwayTargets = new();
-        
-        WalkingAwayTargets.Add(new Vector3(2.5f, 0.0f, -10.5f));
-
-        return WalkingAwayTargets;
+        return OffscreenPositions.ToList();
     }
 }
 
