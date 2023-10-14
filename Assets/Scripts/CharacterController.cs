@@ -8,7 +8,7 @@ public class CharacterController : GridObject
     private float oldDistance = 9999;
     private GameObject closetsObject = null;
     
-    ArrayList Inventory = new ArrayList();
+    int[] Inventory = new int[6];
 
     // Start is called before the first frame update
     new void Start()
