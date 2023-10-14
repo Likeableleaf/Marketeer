@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Walkable: 0
+  WallAtOffsets: []
 --- !u!1001 &1558058998059609920
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -75,7 +76,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a963d03380f07c64db5f773301b21271, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.06
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a963d03380f07c64db5f773301b21271, type: 3}
       propertyPath: m_LocalPosition.z
@@ -120,3 +121,27 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a963d03380f07c64db5f773301b21271, type: 3}
   m_PrefabInstance: {fileID: 1558058998059609920}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1827968552804323857 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a963d03380f07c64db5f773301b21271, type: 3}
+  m_PrefabInstance: {fileID: 1558058998059609920}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7519639157468185009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1827968552804323857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626a82e82f42f254685ab2fd43efae84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  door: {fileID: 0}
+  door2: {fileID: 0}
+  FrontTrigger: {fileID: 0}
+  BackTrigger: {fileID: 0}
+  DoorVersion: 0
+  startPos: {fileID: 0}
+  endPos: {fileID: 0}
