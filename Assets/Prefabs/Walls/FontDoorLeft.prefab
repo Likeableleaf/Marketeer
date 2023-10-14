@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7934485487327450543}
   - component: {fileID: 5481564014059366111}
   - component: {fileID: 1631395164386788948}
+  - component: {fileID: 7884955881937771717}
   m_Layer: 0
   m_Name: FrontTrigger
   m_TagString: Untagged
@@ -97,6 +98,27 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7884955881937771717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 583280419173175495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626a82e82f42f254685ab2fd43efae84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  door: {fileID: 3872957737133564630}
+  door2: {fileID: 1824137683650243033}
+  FrontTrigger: {fileID: 583280419173175495}
+  BackTrigger: {fileID: 6620376452760099559}
+  DoorVersion: 0
+  startPos: {fileID: 4604383378506553761}
+  startPos2: {fileID: 600159022386792145}
+  endPos: {fileID: 4549099919490725907}
+  endPos2: {fileID: 3098221857027627892}
 --- !u!1 &600159022386792145
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,7 +210,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6324707319139378621}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4604383378506553761
 GameObject:
@@ -219,7 +241,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6324707319139378621}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6620376452760099559
 GameObject:
@@ -233,6 +255,7 @@ GameObject:
   - component: {fileID: 2017658244076388222}
   - component: {fileID: 4904138195457906561}
   - component: {fileID: 65089702592173456}
+  - component: {fileID: 6474521573943861954}
   m_Layer: 0
   m_Name: BackTrigger
   m_TagString: Untagged
@@ -318,6 +341,27 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6474521573943861954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6620376452760099559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626a82e82f42f254685ab2fd43efae84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  door: {fileID: 3872957737133564630}
+  door2: {fileID: 1824137683650243033}
+  FrontTrigger: {fileID: 0}
+  BackTrigger: {fileID: 0}
+  DoorVersion: 0
+  startPos: {fileID: 4604383378506553761}
+  startPos2: {fileID: 600159022386792145}
+  endPos: {fileID: 4549099919490725907}
+  endPos2: {fileID: 3098221857027627892}
 --- !u!1 &7675064921117488054
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,7 +372,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6324707319139378621}
   - component: {fileID: 3039189093956697454}
-  - component: {fileID: 7268880591062121268}
   m_Layer: 0
   m_Name: FontDoorLeft
   m_TagString: Untagged
@@ -349,11 +392,11 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8671827432981685306}
+  - {fileID: 4974666526641208079}
   - {fileID: 4536341049395787884}
   - {fileID: 1304763108628116323}
   - {fileID: 314078777980879335}
   - {fileID: 7674304955406355354}
-  - {fileID: 4974666526641208079}
   - {fileID: 7941025905153856}
   - {fileID: 454888465663436148}
   - {fileID: 1331291033217964449}
@@ -375,27 +418,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Walkable: 0
   WallAtOffsets: []
---- !u!114 &7268880591062121268
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7675064921117488054}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 626a82e82f42f254685ab2fd43efae84, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  door: {fileID: 3872957737133564630}
-  door2: {fileID: 1824137683650243033}
-  FrontTrigger: {fileID: 583280419173175495}
-  BackTrigger: {fileID: 6620376452760099559}
-  DoorVersion: 0
-  startPos: {fileID: 4604383378506553761}
-  startPos2: {fileID: 600159022386792145}
-  endPos: {fileID: 4549099919490725907}
-  endPos2: {fileID: 3098221857027627892}
 --- !u!1001 &1554245856250385544
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -405,7 +427,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: f2b57d1160ed8014cbe32f61f48db50a, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f2b57d1160ed8014cbe32f61f48db50a, type: 3}
       propertyPath: m_LocalScale.y
@@ -476,7 +498,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: f2b57d1160ed8014cbe32f61f48db50a, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f2b57d1160ed8014cbe32f61f48db50a, type: 3}
       propertyPath: m_LocalScale.y
@@ -547,7 +569,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: a963d03380f07c64db5f773301b21271, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a963d03380f07c64db5f773301b21271, type: 3}
       propertyPath: m_LocalScale.x

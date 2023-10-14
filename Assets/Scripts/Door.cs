@@ -7,8 +7,6 @@ public class Door : MonoBehaviour
     // Variable cache
     [SerializeField] private GameObject door;
     [SerializeField] private GameObject door2;
-    [SerializeField] private GameObject FrontTrigger;
-    [SerializeField] private GameObject BackTrigger;
     [SerializeField] private DoorStyle DoorVersion;
     [SerializeField] private GameObject startPos;
     [SerializeField] private GameObject startPos2;
@@ -16,15 +14,17 @@ public class Door : MonoBehaviour
     [SerializeField] private GameObject endPos2;
 
     private void onTriggerEnter(Collider other) {
+
+        Debug.Log("Triggered");
         
         // Play animation based on door version
         switch(DoorVersion) {
             case DoorStyle.SlidingDoor:
                 // Move door
-                door.transform.position = Vector3.Lerp(startPos.transform.position, endPos.transform.position, Time.deltaTime);
+                door.transform.position = Vector3.Lerp(door.transform.position, endPos.transform.position, Time.deltaTime);
 
                 // Move door2
-                door2.transform.position = Vector3.Lerp(startPos2.transform.position, endPos2.transform.position, Time.deltaTime);
+                door2.transform.position = Vector3.Lerp(door2.transform.position, endPos2.transform.position, Time.deltaTime);
                 
                 // Play Door opening sound
 
@@ -50,15 +50,17 @@ public class Door : MonoBehaviour
     }
 
     private void ontTriggerExit(Collider other) {
+
+        Debug.Log("Triggered");
         
         // Play animation based on door version
         switch(DoorVersion) {
             case DoorStyle.SlidingDoor:
                 // On trigger move door to (0.0f, 0.0f, 0.0f)
-                door.transform.position = Vector3.Lerp(endPos.transform.position, startPos.transform.position, Time.deltaTime);
+                door.transform.position = Vector3.Lerp(door.transform.position, startPos.transform.position, Time.deltaTime);
 
                 // Move door2
-                door2.transform.position = Vector3.Lerp(endPos2.transform.position, startPos2.transform.position, Time.deltaTime);
+                door2.transform.position = Vector3.Lerp(door2.transform.position, startPos2.transform.position, Time.deltaTime);
 
                 // Play Door closing sound
 
