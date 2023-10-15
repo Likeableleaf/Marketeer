@@ -90,7 +90,7 @@ public class CharacterController : GridObject
             Dictionary<int, GridObject> TileDictionary = gridManager.GameGrid[TileInFront];
             if (TileDictionary.ContainsKey(-10) && TileDictionary[-10] is Shelf)
             {
-                FillShelf((Shelf)TileDictionary[-10]);
+                FillShelf((Shelf)TileDictionary[-10]);                
             }
         }
         //Otherwise do nothing
@@ -98,6 +98,11 @@ public class CharacterController : GridObject
 
     private void FillShelf(Shelf shelf)
     {
-        Inventory[(int)shelf.groceryType] = shelf.RefillShelf(Inventory[(int)shelf.groceryType]);
+        if (shelf.Backshelf) {
+            // Todo
+            Debug.Log("Triggered");
+        } else {
+            Inventory[(int)shelf.groceryType] = shelf.RefillShelf(Inventory[(int)shelf.groceryType]);
+        }
     }
 }
