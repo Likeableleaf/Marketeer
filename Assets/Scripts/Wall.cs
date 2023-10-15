@@ -18,7 +18,7 @@ public class Wall : GridObject
             if(WallAtOffsets.Count == 0)
             {
                 // Add the object to the GridManager's GameGrid
-                gridManager.AddObjectAt(transform.position, -10, gameObject);
+                gridManager.AddObjectAt(transform.position, -10, this);
             }
             else
             {
@@ -32,7 +32,7 @@ public class Wall : GridObject
 
                     // Add the rotated offset to the Wall's position and use it in gridManager.AddObjectAt.
                     Vector3 finalPosition = transform.position + rotatedOffset;
-                    gridManager.AddObjectAt(finalPosition, -10, gameObject);
+                    gridManager.AddObjectAt(finalPosition, -10, this);
                 }
             }
             GridPositon = transform.position;

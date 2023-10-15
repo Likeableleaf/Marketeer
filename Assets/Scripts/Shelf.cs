@@ -29,10 +29,13 @@ public class Shelf : Wall
         InFrontOfShelfPos = RoundVector3(transform.position + Quaternion.Euler(0, yRotation, 0) * InFrontOfShelfPos, 1);
     }
 
-    public void RefillShelf(int amount) {
+    //Returns excess
+    public int RefillShelf(int amount) {
         ShelfVariants[capacity].SetActive(false);
-        capacity = Math.Clamp(capacity-amount,0, ShelfVariants.Length-1);
+        int excessAmount = -Math.Min(0, capacity - amount);
+        capacity = Math.Clamp(capacity - amount, 0, ShelfVariants.Length - 1);
         ShelfVariants[capacity].SetActive(true);
+        return excessAmount;
     }
 
     public void RemoveItem(int amount) {

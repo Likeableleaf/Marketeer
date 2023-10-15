@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7011861333775372394}
   - component: {fileID: 2388299598673385217}
+  - component: {fileID: 3023500317069493193}
+  - component: {fileID: 7799387642997437089}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -45,6 +47,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b599a4fd7a0e5429a9bb92468539c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentTarget: {fileID: 0}
+  state: 0
+  turntimer1: -5
+  turntimer2: -5
+  OfficeDoorPos: {x: 0, y: 0, z: 0}
+  OfficeChairPos: {x: 0, y: 0, z: 0}
+--- !u!136 &3023500317069493193
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4150576356384478100}
+  m_Material: {fileID: 13400000, guid: 383b341152b57b14dab2a37295f13986, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.25
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &7799387642997437089
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4150576356384478100}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &4290852900199410747
 PrefabInstance:
   m_ObjectHideFlags: 0

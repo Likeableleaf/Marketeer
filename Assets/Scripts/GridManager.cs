@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class GridManager : MonoBehaviour
 {
     //Grid System Variables
-    public Dictionary<Vector3, Dictionary<int, GameObject>> GameGrid = new();
+    public Dictionary<Vector3, Dictionary<int, GridObject>> GameGrid = new();
     public float turnInterval = 1f;
     public int SimultaneousActiveShoppers = 4;
     private Queue<GridObject> turnQueue = new();
@@ -98,16 +98,16 @@ public class GridManager : MonoBehaviour
     public void AddGridObjectToGrid(Vector3 position, int turnNumber, GridObject obj)
     {
         // Add the object to the GameGrid dictionary using its position as the key
-        AddObjectAt(position, turnNumber, obj.gameObject);
-        AddObjectAt(position, -5, obj.gameObject);
+        AddObjectAt(position, turnNumber, obj);
+        AddObjectAt(position, -5, obj);
         turnQueue.Enqueue(obj);
     }
 
-    public void AddObjectAt(Vector3 position, int turnNumber, GameObject obj)
+    public void AddObjectAt(Vector3 position, int turnNumber, GridObject obj)
     {
         if (!GameGrid.ContainsKey(position))
         {
-            GameGrid[position] = new Dictionary<int, GameObject>();
+            GameGrid[position] = new Dictionary<int, GridObject>();
         }
         GameGrid[position][turnNumber] = obj;
     }

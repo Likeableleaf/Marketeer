@@ -119,7 +119,7 @@ public class MovingGridObject : GridObject
     {
         int currTileTime = currTile.GetStartDistance();
         Vector3 currTilePos = currTile.GetPosition();
-        Dictionary<Vector3, Dictionary<int, GameObject>> GameGrid = gridManager.GameGrid;
+        Dictionary<Vector3, Dictionary<int, GridObject>> GameGrid = gridManager.GameGrid;
         //Check if tile already Visited
         if (visitedTiles.Contains(TileToCheck))
         {
@@ -128,7 +128,7 @@ public class MovingGridObject : GridObject
         //Checks related to if the tile will be blocked when we want it
         if (GameGrid.ContainsKey(TileToCheck))
         {
-            Dictionary<int, GameObject> dictToCheck = GameGrid[TileToCheck];
+            Dictionary<int, GridObject> dictToCheck = GameGrid[TileToCheck];
 
             //If the tile will be full the moment we want it
             if (dictToCheck.ContainsKey(currTileTime + 1))
@@ -202,32 +202,17 @@ public class MovingGridObject : GridObject
     {
         Stack<Vector3> orderedPath = new();
         PathTile currPath = pathHolder;
-        gridManager.AddObjectAt(currPath.GetPosition(), -5, gameObject);
+        gridManager.AddObjectAt(currPath.GetPosition(), -5, this);
         while (true)
         {
             orderedPath.Push(currPath.GetPosition());
-            gridManager.AddObjectAt(currPath.GetPosition(), currPath.GetStartDistance(), gameObject);
+            gridManager.AddObjectAt(currPath.GetPosition(), currPath.GetStartDistance(), this);
             currPath = currPath.GetPrevious();
             if (currPath == null)
             {
                 return orderedPath;
             }
         }
-    }
-
-    protected bool IsValidGridPosition(Vector3 position)
-    {
-        return (Math.Abs(position.x) % 1 - 0.5 == 0) &&
-               (Math.Abs(position.z) % 1 - 0.5 == 0);
-    }
-
-    protected static Vector3 ClosestGridPos(Vector3 origPos)
-    {
-        // Round the x and z components to the nearest whole number
-        float newX = Mathf.Round(origPos.x - 0.5f);
-        float newZ = Mathf.Round(origPos.z - 0.5f);
-
-        return new Vector3(newX + 0.5f, 0f, newZ + 0.5f);
     }
 
     protected static List<T> ShuffleList<T>(List<T> list)
