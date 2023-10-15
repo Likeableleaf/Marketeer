@@ -8,24 +8,60 @@ public class Door : MonoBehaviour
     [SerializeField] private GameObject door;
     [SerializeField] private GameObject door2;
     [SerializeField] private DoorStyle DoorVersion;
-    [SerializeField] private GameObject startPos;
-    [SerializeField] private GameObject startPos2;
     [SerializeField] private GameObject endPos;
     [SerializeField] private GameObject endPos2;
 
-    private void onTriggerEnter(Collider other) {
+    [SerializeField] private float delay = 2.0f;
+    [SerializeField] private bool open = false;
+    private Transform startPos;
+    private Transform startPos2;
+    [SerializeField]  private float doorProg = 0f;
+    private float door2Prog = 0f;
 
-        Debug.Log("Triggered");
-        
+    private void Start() {
+        // get the start Positions of the doors
+        startPos = door.transform;
+        if (door2 != null) {
+            startPos2 = door2.transform;
+        }
+    }
+
+    private void Update() {
+        // If delay is up close door
+        if (delay <= 0.0f) {
+            // Close door
+            CloseDoor();
+        } else if (0.0f <= delay && delay <= 2.0f && open) {
+            // Decrease timer
+            delay -= Time.deltaTime;
+        } else if (delay == 3.0f) {
+            // Open Door
+            OpenDoor();
+        } else {
+            // Do nothing
+        }
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        delay = 3.0f;
+    }
+
+    private void OnTriggerExit(Collider other) {
+        delay = 2.0f;        
+    }
+
+    private void OpenDoor() {
         // Play animation based on door version
         switch(DoorVersion) {
             case DoorStyle.SlidingDoor:
                 // Move door
-                door.transform.position = Vector3.Lerp(door.transform.position, endPos.transform.position, Time.deltaTime);
+                doorProg += Time.deltaTime;
+                door.transform.position = Vector3.Lerp(startPos.transform.position, endPos.transform.position, doorProg);
 
                 // Move door2
-                door2.transform.position = Vector3.Lerp(door2.transform.position, endPos2.transform.position, Time.deltaTime);
-                
+                door2Prog += Time.deltaTime;
+                door2.transform.position = Vector3.Lerp(startPos2.transform.position, endPos2.transform.position, door2Prog);
+                 
                 // Play Door opening sound
 
                 break;
@@ -47,20 +83,22 @@ public class Door : MonoBehaviour
 
                 break;
         }
+        if (door.transform.position == endPos.transform.position) {
+            open = true;            
+        }
     }
 
-    private void ontTriggerExit(Collider other) {
-
-        Debug.Log("Triggered");
-        
+    private void CloseDoor() {
+        open = false;
         // Play animation based on door version
         switch(DoorVersion) {
             case DoorStyle.SlidingDoor:
-                // On trigger move door to (0.0f, 0.0f, 0.0f)
-                door.transform.position = Vector3.Lerp(door.transform.position, startPos.transform.position, Time.deltaTime);
+                // Move door
+                doorProg -= Time.deltaTime;
+                door.transform.position = Vector3.Lerp(startPos.transform.position, endPos.transform.position, doorProg);
 
-                // Move door2
-                door2.transform.position = Vector3.Lerp(door2.transform.position, startPos2.transform.position, Time.deltaTime);
+                door2Prog -= Time.deltaTime;
+                door2.transform.position = Vector3.Lerp(startPos2.transform.position, endPos2.transform.position, door2Prog);
 
                 // Play Door closing sound
 
@@ -81,6 +119,9 @@ public class Door : MonoBehaviour
                 // Play Door closing sound
 
                 break;
+        }
+        if (door.transform.position == startPos.transform.position) {
+            delay = 2.0f;
         }
     }
 
