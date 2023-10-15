@@ -66,7 +66,11 @@ public class Door : MonoBehaviour
                 break;
             case DoorStyle.HingedDoor:
                 // On trigger swing door 
-
+                if (doorProg <= 1.0f) {
+                    doorProg += Time.deltaTime;
+                }                
+                door.transform.position = Vector3.Lerp(startPos.transform.position, endPos.transform.position, doorProg);
+                door.transform.rotation = Quaternion.Lerp(startPos.transform.rotation, endPos.transform.rotation, doorProg);
 
                 // Play Door opening sound
 
@@ -107,7 +111,11 @@ public class Door : MonoBehaviour
                 break;
             case DoorStyle.HingedDoor:
                 // On trigger swing door 
-
+                if (doorProg >= 0.0f) {
+                    doorProg -= Time.deltaTime;
+                }
+                door.transform.position = Vector3.Lerp(startPos.transform.position, endPos.transform.position, doorProg);
+                door.transform.rotation = Quaternion.Lerp(startPos.transform.rotation, endPos.transform.rotation, doorProg);
 
                 // Play Door closing sound
 

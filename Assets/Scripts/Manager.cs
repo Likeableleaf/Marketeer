@@ -10,7 +10,8 @@ public class Manager : MovingGridObject {
     [SerializeField] private ManagerState state;
     [SerializeField] private int turntimer1 = -5;
     [SerializeField] private int turntimer2 = -5;
-    [SerializeField] Vector3 OfficeDoorPos; //= new Vector3(7.5f, 0.0f, 5.5f);
+    [SerializeField] Vector3 OfficeDoorExitPos; //= new Vector3(7.5f, 0.0f, 5.5f);
+    [SerializeField] Vector3 OfficeDoorEnterPos; //= new Vector3(7.5f, 0.0f, 4.5f);
     [SerializeField] Vector3 OfficeChairPos; //= new Vector3(9.5f, 0.0f, 7.5f);
 
     private int actionNum = 0;
@@ -21,7 +22,6 @@ public class Manager : MovingGridObject {
 
         //Default state
         state = ManagerState.PatrolStore;
-        
     }
 
     public override void Turn() {
@@ -90,7 +90,7 @@ public class Manager : MovingGridObject {
         */
 
         // If path finished 
-        if (transform.position == OfficeDoorPos) {
+        if (transform.position == OfficeDoorEnterPos) {
             state = ManagerState.DoingOfficeThings;
         }
 
@@ -140,7 +140,7 @@ public class Manager : MovingGridObject {
     // Goto StoreFloor
     private void ExitingOfficeAction() {
         // If path finished 
-        if (transform.position == OfficeDoorPos) {
+        if (transform.position == OfficeDoorExitPos) {
             state = ManagerState.PatrolStore;
         }
 
@@ -264,7 +264,7 @@ public class Manager : MovingGridObject {
                 potTargets.Add(GenerateDoingOfficeThingsTarget());
                 break;
             case ManagerState.ExitingOffice:
-                potTargets.Add(GenerateOfficeEntranceTarget());
+                potTargets.Add(GenerateOfficeExitTarget());
                 break;
             case ManagerState.ChasePlayer:
                 potTargets.AddRange(GenerateChasePlayerTargets());
@@ -319,9 +319,14 @@ public class Manager : MovingGridObject {
         return DoingOfficeThingsTarget;
     }
 
-    // Return office exit door position
+    // Return office enter door position
     private Vector3 GenerateOfficeEntranceTarget() {
-        return OfficeDoorPos;
+        return OfficeDoorEnterPos;
+    }
+
+    // Return office exit door position
+    private Vector3 GenerateOfficeExitTarget() {
+        return OfficeDoorExitPos;
     }
 
     // Return Player Position

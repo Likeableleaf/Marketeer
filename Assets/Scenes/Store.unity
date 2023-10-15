@@ -245,7 +245,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3498670096175207826, guid: a16c70e5c9096ed4980259acff2d9660, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3498670096175207826, guid: a16c70e5c9096ed4980259acff2d9660, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1309,7 +1309,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3498670096175207826, guid: a16c70e5c9096ed4980259acff2d9660, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3498670096175207826, guid: a16c70e5c9096ed4980259acff2d9660, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2838,7 +2838,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3498670096175207826, guid: a16c70e5c9096ed4980259acff2d9660, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3498670096175207826, guid: a16c70e5c9096ed4980259acff2d9660, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4243,7 +4243,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3498670096175207826, guid: a16c70e5c9096ed4980259acff2d9660, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3498670096175207826, guid: a16c70e5c9096ed4980259acff2d9660, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4423,7 +4423,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3498670096175207826, guid: a16c70e5c9096ed4980259acff2d9660, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3498670096175207826, guid: a16c70e5c9096ed4980259acff2d9660, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14262,6 +14262,22 @@ PrefabInstance:
     - target: {fileID: 2388299598673385217, guid: 19ff8e43414cd134a956aef1b0a69999, type: 3}
       propertyPath: OfficeChairPos.z
       value: 7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2388299598673385217, guid: 19ff8e43414cd134a956aef1b0a69999, type: 3}
+      propertyPath: OfficeDoorExitPos.x
+      value: 7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2388299598673385217, guid: 19ff8e43414cd134a956aef1b0a69999, type: 3}
+      propertyPath: OfficeDoorExitPos.z
+      value: 5.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2388299598673385217, guid: 19ff8e43414cd134a956aef1b0a69999, type: 3}
+      propertyPath: OfficeDoorEnterPos.x
+      value: 7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2388299598673385217, guid: 19ff8e43414cd134a956aef1b0a69999, type: 3}
+      propertyPath: OfficeDoorEnterPos.z
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 4150576356384478100, guid: 19ff8e43414cd134a956aef1b0a69999, type: 3}
       propertyPath: m_Name
