@@ -13,18 +13,11 @@ public class Door : MonoBehaviour
 
     [SerializeField] private float delay = 2.0f;
     [SerializeField] private bool open = false;
-    private Transform startPos;
-    private Transform startPos2;
+    [SerializeField] private Transform startPos;
+    [SerializeField] private Transform startPos2;
     [SerializeField]  private float doorProg = 0f;
     private float door2Prog = 0f;
 
-    private void Start() {
-        // get the start Positions of the doors
-        startPos = door.transform;
-        if (door2 != null) {
-            startPos2 = door2.transform;
-        }
-    }
 
     private void Update() {
         // If delay is up close door
@@ -55,11 +48,15 @@ public class Door : MonoBehaviour
         switch(DoorVersion) {
             case DoorStyle.SlidingDoor:
                 // Move door
-                doorProg += Time.deltaTime;
+                if (doorProg <= 1.0f) {
+                    doorProg += Time.deltaTime;
+                }                
                 door.transform.position = Vector3.Lerp(startPos.transform.position, endPos.transform.position, doorProg);
 
                 // Move door2
-                door2Prog += Time.deltaTime;
+                if (door2Prog <= 1.0f) {
+                    door2Prog += Time.deltaTime;
+                }                
                 door2.transform.position = Vector3.Lerp(startPos2.transform.position, endPos2.transform.position, door2Prog);
                  
                 // Play Door opening sound
@@ -94,10 +91,14 @@ public class Door : MonoBehaviour
         switch(DoorVersion) {
             case DoorStyle.SlidingDoor:
                 // Move door
-                doorProg -= Time.deltaTime;
+                if (doorProg >= 0.0f) {
+                    doorProg -= Time.deltaTime;
+                }
                 door.transform.position = Vector3.Lerp(startPos.transform.position, endPos.transform.position, doorProg);
 
-                door2Prog -= Time.deltaTime;
+                if (door2Prog >= 0.0f) {
+                    door2Prog -= Time.deltaTime;
+                }                
                 door2.transform.position = Vector3.Lerp(startPos2.transform.position, endPos2.transform.position, door2Prog);
 
                 // Play Door closing sound

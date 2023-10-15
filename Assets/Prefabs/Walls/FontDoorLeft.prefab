@@ -33,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6324707319139378621}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7934485487327450543
 MeshFilter:
@@ -115,6 +115,42 @@ MonoBehaviour:
   DoorVersion: 0
   endPos: {fileID: 4549099919490725907}
   endPos2: {fileID: 3098221857027627892}
+  delay: 2
+  open: 0
+  startPos: {fileID: 2287100468831690087}
+  startPos2: {fileID: 629267404731162255}
+  doorProg: 0
+--- !u!1 &1624913072943101288
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 629267404731162255}
+  m_Layer: 0
+  m_Name: startPos (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &629267404731162255
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1624913072943101288}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6324707319139378621}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3098221857027627892
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,7 +180,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6324707319139378621}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4549099919490725907
 GameObject:
@@ -175,7 +211,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6324707319139378621}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6620376452760099559
 GameObject:
@@ -210,7 +246,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6324707319139378621}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2017658244076388222
 MeshFilter:
@@ -292,6 +328,42 @@ MonoBehaviour:
   DoorVersion: 0
   endPos: {fileID: 4549099919490725907}
   endPos2: {fileID: 3098221857027627892}
+  delay: 2
+  open: 0
+  startPos: {fileID: 2287100468831690087}
+  startPos2: {fileID: 629267404731162255}
+  doorProg: 0
+--- !u!1 &6962828821334632688
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2287100468831690087}
+  m_Layer: 0
+  m_Name: startPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2287100468831690087
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6962828821334632688}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6324707319139378621}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7675064921117488054
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,7 +396,9 @@ Transform:
   - {fileID: 8671827432981685306}
   - {fileID: 4974666526641208079}
   - {fileID: 4536341049395787884}
+  - {fileID: 2287100468831690087}
   - {fileID: 1304763108628116323}
+  - {fileID: 629267404731162255}
   - {fileID: 314078777980879335}
   - {fileID: 454888465663436148}
   - {fileID: 1331291033217964449}
@@ -355,7 +429,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: f2b57d1160ed8014cbe32f61f48db50a, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f2b57d1160ed8014cbe32f61f48db50a, type: 3}
       propertyPath: m_LocalScale.y
