@@ -9,6 +9,9 @@ public class Shelf : Wall
 {
     public GameObject[] ShelfVariants;
     public GameObject CurrentShelfObject;
+    public GameObject[] ShelfIcons;
+    public Sprite[] icons;
+    public bool Backshelf;
     public int capacity = 0;
     public GroceryType groceryType;
     public Vector3 InFrontOfShelfPos;
@@ -19,6 +22,11 @@ public class Shelf : Wall
 
         //Adds self to the groceryDictionary
         gridManager.groceryDictionary[groceryType].Add(this);
+
+        // Displays Icon if Backshelf
+        if (Backshelf) {
+            IconDisplay(groceryType);
+        }
 
         //Sets the position of the InFrontOfShelfPos
         InFrontOfShelfPos = new Vector3 (0, 0, 1f);
@@ -49,5 +57,36 @@ public class Shelf : Wall
     public bool HasStock(int amount)
     {
         return capacity + amount < ShelfVariants.Length;
+    }
+
+    // Displays different icons depending on groceryType
+    public void IconDisplay (GroceryType groceryType) {
+        int groceryIcon = 0;
+
+        switch (groceryType) {
+                case GroceryType.Beans:
+                    groceryIcon = 0;
+                    break;
+                case GroceryType.Eggs:
+                    groceryIcon = 2;
+                    break;
+                case GroceryType.Meat:
+                    groceryIcon = 3;
+                    break;
+                case GroceryType.Bread:
+                    groceryIcon = 1;
+                    break;
+                case GroceryType.Veggies:
+                    groceryIcon = 5;
+                    break;
+                case GroceryType.Milk:
+                    groceryIcon = 4;
+                    break;
+        }
+
+        foreach (GameObject icon in ShelfIcons) {
+            SpriteRenderer spriteRenderer = icon.GetComponent<SpriteRenderer>();
+            spriteRenderer.sprite = icons[groceryIcon];
+        }
     }
 }
