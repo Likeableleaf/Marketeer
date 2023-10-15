@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7934485487327450543}
   - component: {fileID: 5481564014059366111}
   - component: {fileID: 1631395164386788948}
-  - component: {fileID: 7884955881937771717}
+  - component: {fileID: 5198552511740971554}
   m_Layer: 0
   m_Name: FrontTrigger
   m_TagString: Untagged
@@ -98,7 +98,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7884955881937771717
+--- !u!114 &5198552511740971554
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,19 +107,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 583280419173175495}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 626a82e82f42f254685ab2fd43efae84, type: 3}
+  m_Script: {fileID: 11500000, guid: cdf8df0d971c62941ad73fa191080295, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  door: {fileID: 3872957737133564630}
-  door2: {fileID: 1824137683650243033}
-  DoorVersion: 0
-  endPos: {fileID: 4549099919490725907}
-  endPos2: {fileID: 3098221857027627892}
-  delay: 2
-  open: 0
-  startPos: {fileID: 2287100468831690087}
-  startPos2: {fileID: 629267404731162255}
-  doorProg: 0
+  door: {fileID: 7675064921117488054}
 --- !u!1 &1624913072943101288
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,6 +217,7 @@ GameObject:
   - component: {fileID: 4904138195457906561}
   - component: {fileID: 65089702592173456}
   - component: {fileID: 6474521573943861954}
+  - component: {fileID: 2904093931321485619}
   m_Layer: 0
   m_Name: BackTrigger
   m_TagString: Untagged
@@ -318,7 +310,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6620376452760099559}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 626a82e82f42f254685ab2fd43efae84, type: 3}
   m_Name: 
@@ -333,6 +325,19 @@ MonoBehaviour:
   startPos: {fileID: 2287100468831690087}
   startPos2: {fileID: 629267404731162255}
   doorProg: 0
+--- !u!114 &2904093931321485619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6620376452760099559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdf8df0d971c62941ad73fa191080295, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  door: {fileID: 7675064921117488054}
 --- !u!1 &6962828821334632688
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,6 +379,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6324707319139378621}
   - component: {fileID: 3039189093956697454}
+  - component: {fileID: 4399630189691255240}
   m_Layer: 0
   m_Name: FontDoorLeft
   m_TagString: Untagged
@@ -420,6 +426,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Walkable: 0
   WallAtOffsets: []
+--- !u!114 &4399630189691255240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7675064921117488054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626a82e82f42f254685ab2fd43efae84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  door: {fileID: 3872957737133564630}
+  door2: {fileID: 1824137683650243033}
+  DoorVersion: 0
+  endPos: {fileID: 4549099919490725907}
+  endPos2: {fileID: 3098221857027627892}
+  delay: 2
+  open: 0
+  startPos: {fileID: 2287100468831690087}
+  startPos2: {fileID: 629267404731162255}
+  doorProg: 0
 --- !u!1001 &1554245856250385544
 PrefabInstance:
   m_ObjectHideFlags: 0

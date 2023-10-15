@@ -11,7 +11,7 @@ public class Door : MonoBehaviour
     [SerializeField] private GameObject endPos;
     [SerializeField] private GameObject endPos2;
 
-    [SerializeField] private float delay = 2.0f;
+    [SerializeField] public float delay = 2.0f;
     [SerializeField] private bool open = false;
     [SerializeField] private Transform startPos;
     [SerializeField] private Transform startPos2;
@@ -33,14 +33,6 @@ public class Door : MonoBehaviour
         } else {
             // Do nothing
         }
-    }
-
-    private void OnTriggerEnter(Collider other) {
-        delay = 3.0f;
-    }
-
-    private void OnTriggerExit(Collider other) {
-        delay = 2.0f;        
     }
 
     private void OpenDoor() {
