@@ -70,6 +70,12 @@ public class Manager : MovingGridObject {
         }
     }
 
+    //getter
+    public ManagerState getState()
+    {
+        return state;
+    }
+
     // Actions
     
     // Do Nothing
