@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class Shelf : Wall
@@ -60,33 +61,12 @@ public class Shelf : Wall
     }
 
     // Displays different icons depending on groceryType
-    public void IconDisplay (GroceryType groceryType) {
-        int groceryIcon = 0;
-
-        switch (groceryType) {
-                case GroceryType.Beans:
-                    groceryIcon = 0;
-                    break;
-                case GroceryType.Eggs:
-                    groceryIcon = 2;
-                    break;
-                case GroceryType.Meat:
-                    groceryIcon = 3;
-                    break;
-                case GroceryType.Bread:
-                    groceryIcon = 1;
-                    break;
-                case GroceryType.Veggies:
-                    groceryIcon = 5;
-                    break;
-                case GroceryType.Milk:
-                    groceryIcon = 4;
-                    break;
-        }
-
-        foreach (GameObject icon in ShelfIcons) {
+    public void IconDisplay(GroceryType groceryType)
+    {
+        foreach (GameObject icon in ShelfIcons)
+        {
             SpriteRenderer spriteRenderer = icon.GetComponent<SpriteRenderer>();
-            spriteRenderer.sprite = icons[groceryIcon];
+            spriteRenderer.sprite = icons[(int)groceryType];
         }
     }
 }
