@@ -91,6 +91,8 @@ public class CharacterController : GridObject
             if (TileDictionary.ContainsKey(-10) && TileDictionary[-10] is Shelf)
             {
                 FillShelf((Shelf)TileDictionary[-10]);                
+            } else if (TileDictionary.ContainsKey(-10) && TileDictionary[-10] is BackShelf) {
+                //TODO
             }
         }
         //Otherwise do nothing
@@ -98,11 +100,6 @@ public class CharacterController : GridObject
 
     private void FillShelf(Shelf shelf)
     {
-        if (shelf.Backshelf) {
-            // Todo
-            Debug.Log("Triggered");
-        } else {
-            Inventory[(int)shelf.groceryType] = shelf.RefillShelf(Inventory[(int)shelf.groceryType]);
-        }
+        Inventory[(int)shelf.groceryType] = shelf.RefillShelf(Inventory[(int)shelf.groceryType]);
     }
 }

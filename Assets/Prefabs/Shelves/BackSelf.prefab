@@ -177,7 +177,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3498670096175207826}
-  - component: {fileID: 2280949758930587672}
+  - component: {fileID: 8140474783530014487}
   - component: {fileID: 3789659936212591678}
   - component: {fileID: -1812335433181986222}
   m_Layer: 0
@@ -205,7 +205,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2280949758930587672
+--- !u!114 &8140474783530014487
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -214,13 +214,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8841256610231426820}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77e067964a801604a865b2e5dd9b1bf1, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d3feb3d02459f44eaa1a41ac4d171c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Walkable: 0
   WallAtOffsets: []
-  ShelfVariants: []
-  CurrentShelfObject: {fileID: 0}
   ShelfIcons:
   - {fileID: 4665271752722039774}
   - {fileID: 7401036379856709281}
@@ -231,10 +229,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 09344a86fcb94084a863b8be62f04d15, type: 3}
   - {fileID: 21300000, guid: 8104232bb4d02c24fae968ef59c6f6a8, type: 3}
   - {fileID: 21300000, guid: 76d2b8269d299d4438abafa58f76dd08, type: 3}
-  Backshelf: 1
-  capacity: 0
-  groceryType: 2
-  InFrontOfShelfPos: {x: 0, y: 0, z: 0}
+  groceryType: 0
 --- !u!65 &3789659936212591678
 BoxCollider:
   m_ObjectHideFlags: 0

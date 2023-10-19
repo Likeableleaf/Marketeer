@@ -8,11 +8,9 @@ using UnityEngine;
 
 public class Shelf : Wall
 {
+    // Variable Cache
     public GameObject[] ShelfVariants;
     public GameObject CurrentShelfObject;
-    public GameObject[] ShelfIcons;
-    public Sprite[] icons;
-    public bool Backshelf;
     public int capacity = 0;
     public GroceryType groceryType;
     public Vector3 InFrontOfShelfPos;
@@ -23,11 +21,6 @@ public class Shelf : Wall
 
         //Adds self to the groceryDictionary
         gridManager.groceryDictionary[groceryType].Add(this);
-
-        // Displays Icon if Backshelf
-        if (Backshelf) {
-            IconDisplay(groceryType);
-        }
 
         //Sets the position of the InFrontOfShelfPos
         InFrontOfShelfPos = new Vector3 (0, 0, 1f);
@@ -58,15 +51,5 @@ public class Shelf : Wall
     public bool HasStock(int amount)
     {
         return capacity + amount < ShelfVariants.Length;
-    }
-
-    // Displays different icons depending on groceryType
-    public void IconDisplay(GroceryType groceryType)
-    {
-        foreach (GameObject icon in ShelfIcons)
-        {
-            SpriteRenderer spriteRenderer = icon.GetComponent<SpriteRenderer>();
-            spriteRenderer.sprite = icons[(int)groceryType];
-        }
     }
 }
