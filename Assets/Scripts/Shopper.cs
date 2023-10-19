@@ -20,6 +20,7 @@ public class Shopper : MovingGridObject
     public Vector3[] RegisterPositions;
     public Vector3[] BackOfDoorPositions;
     public Vector3[] OffscreenPositions;
+    public Vector3[] RegisterLinePositions;
 
     //Moved the list of StoreShelves and Register to GridManager
     public List<GroceryType> ShoppingList = new();
@@ -87,6 +88,9 @@ public class Shopper : MovingGridObject
                 case ShopperState.Shopping:
                     ShoppingAction();
                     break;
+                case ShopperState.CheckingOutLine:
+                    CheckingOutLineAction();
+                    break;
                 case ShopperState.CheckingOut:
                     CheckingOutAction();
                     break;
@@ -139,7 +143,7 @@ public class Shopper : MovingGridObject
             //If the ShoppingList is now empty go check out
             if (ShoppingList.Count <= 0)
             {
-                state = ShopperState.CheckingOut;
+                state = ShopperState.CheckingOutLine;
             }
             return;
         }
@@ -157,11 +161,29 @@ public class Shopper : MovingGridObject
         GeneratePathFromTargets(potentialTargets);
     }
 
+    private void CheckingOutLineAction() {
+        if (GetCheckOutLineTargets().Contains(transform.position))
+        {
+            // possibly need a if first spot is full and so on so it works like a line....
+            state = ShopperState.CheckingOut;
+            return;
+        }
+
+        //Generate list of potential targets
+        List<Vector3> potentialTargets = GeneratePotentialTargets();
+
+        //Try to form a path in the potential targets, doing the first one that results in a valid path
+        GeneratePathFromTargets(potentialTargets);
+    }
+
     private void CheckingOutAction()
     {
         if (GetCheckingOutTargets().Contains(transform.position))
         {
             //Use Register
+            /*for (int i = 0; i < ShoppingListSize; i++) {
+                wait _ turns;
+            } */ 
             //Then
             state = ShopperState.Exiting;
             return;
@@ -269,6 +291,9 @@ public class Shopper : MovingGridObject
                 //Add adjacent Tiles too
                 potTargets.AddRange(GenerateAdjacentTargets());
                 break;
+            case ShopperState.CheckingOutLine:
+                potTargets.AddRange(GetCheckOutLineTargets());
+                break;
             case ShopperState.CheckingOut:
                 potTargets.AddRange(GetCheckingOutTargets());
                 //Add adjacent Tiles too
@@ -338,6 +363,10 @@ public class Shopper : MovingGridObject
         return ShuffleList(ShoppingTargets);
     }
 
+    private List<Vector3> GetCheckOutLineTargets() {
+        return RegisterLinePositions.ToList();
+    }
+    
     // Return positions in front of the registers 
     private List<Vector3> GetCheckingOutTargets()
     {
@@ -362,7 +391,8 @@ public enum ShopperState
     Inactive, //Doing Nothing
     Entering, //Walking towards and entering the building
     Shopping, //Grabbing different items from list
-    CheckingOut, //Heading to and using the register
+    CheckingOutLine, //Heading to registers
+    CheckingOut, //Using the register
     Exiting, //Walking to and exiting the building
     WalkingAway //Walking out of view
 }

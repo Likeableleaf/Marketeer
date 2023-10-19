@@ -89,6 +89,8 @@ MonoBehaviour:
   - {x: -23.5, y: 0, z: -6.5}
   - {x: -23.5, y: 0, z: -7.5}
   - {x: -23.5, y: 0, z: -8.5}
+  RegisterLinePositions:
+  - {x: 4.5, y: 0, z: -2.5}
   ShoppingList: 
   state: 0
 --- !u!136 &1368548225551954157
