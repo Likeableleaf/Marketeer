@@ -10,7 +10,7 @@ public class CharacterController : GridObject
     public float moveSpeed = 3f;
     public float turnSpeed = 5f;
     public float radiusOfSatisfaction;
-    public int maxInventorySize = 6;
+    public int maxInventorySize = 16;
     public int[] Inventory = new int[Enum.GetValues(typeof(GroceryType)).Length];
     //Access each index with (int)GroceryType.Type
 
@@ -26,7 +26,7 @@ public class CharacterController : GridObject
         //Set the default amount of each item to the max value
         for (int i = 0; i < Inventory.Length; i++)
         {
-            Inventory[i] = maxInventorySize;
+            Inventory[i] = 0;
         }
     }
 
@@ -88,11 +88,17 @@ public class CharacterController : GridObject
         {
             //Get the dictionary for the tile
             Dictionary<int, GridObject> TileDictionary = gridManager.GameGrid[TileInFront];
-            if (TileDictionary.ContainsKey(-10) && TileDictionary[-10] is Shelf)
+            if (TileDictionary.ContainsKey(-10))
             {
-                FillShelf((Shelf)TileDictionary[-10]);                
-            } else if (TileDictionary.ContainsKey(-10) && TileDictionary[-10] is BackShelf) {
-                //TODO
+                GridObject tileObject = TileDictionary[-10];
+                if (tileObject is Shelf shelf)
+                {
+                    FillShelf(shelf);
+                }
+                else if(tileObject is BackShelf backShelf)
+                {
+                    Inventory[(int)backShelf.groceryType] += backShelf.RefillItem(maxInventorySize, SumInventorySize());
+                }
             }
         }
         //Otherwise do nothing
@@ -101,5 +107,15 @@ public class CharacterController : GridObject
     private void FillShelf(Shelf shelf)
     {
         Inventory[(int)shelf.groceryType] = shelf.RefillShelf(Inventory[(int)shelf.groceryType]);
+    }
+
+    private int SumInventorySize()
+    {
+        int sum = 0;
+        foreach(int item in Inventory)
+        {
+            sum += item;
+        }
+        return sum;
     }
 }
