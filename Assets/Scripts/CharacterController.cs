@@ -98,6 +98,8 @@ public class CharacterController : GridObject
                 else if(tileObject is BackShelf backShelf)
                 {
                     Inventory[(int)backShelf.groceryType] += backShelf.RefillItem(maxInventorySize, SumInventorySize());
+                } else if(tileObject is Dumpster dumpster) {
+                    EmptyInventory();
                 }
             }
         }
@@ -117,5 +119,11 @@ public class CharacterController : GridObject
             sum += item;
         }
         return sum;
+    }
+
+    // Clear out the Inventory List 
+    private void EmptyInventory() {
+        // TODO add negated score per item
+        Inventory = new int[Enum.GetValues(typeof(GroceryType)).Length];
     }
 }
