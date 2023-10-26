@@ -18,61 +18,49 @@ public class CharacterController : GridObject
     private Rigidbody rb;
 
     // Start is called before the first frame update
-    new void Start()
-    {
+    new void Start() {
         // Find the GridManager in the scene
         gridManager = FindObjectOfType<GridManager>();
 
         //Set the default amount of each item to the max value
-        for (int i = 0; i < Inventory.Length; i++)
-        {
+        for (int i = 0; i < Inventory.Length; i++) {
             Inventory[i] = 0;
         }
     }
 
     // Update is called once per frame
-    new void Update()
-    {
+    new void Update() {
         Movement();
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
+        if (Input.GetKeyDown(KeyCode.Space)) {
             Interact();
         }
     }
 
-    private void Movement()
-    {
+    private void Movement() {
         Vector3 moveDirection = Vector3.zero;
-        if (Input.GetKey(KeyCode.W))
-        {
+        if (Input.GetKey(KeyCode.W)) {
             moveDirection += Vector3.forward;
         }
-        if (Input.GetKey(KeyCode.S))
-        {
+        if (Input.GetKey(KeyCode.S)) {
             moveDirection += Vector3.back;
         }
-        if (Input.GetKey(KeyCode.A))
-        {
+        if (Input.GetKey(KeyCode.A)) {
             moveDirection += Vector3.left;
         }
-        if (Input.GetKey(KeyCode.D))
-        {
+        if (Input.GetKey(KeyCode.D)) {
             moveDirection += Vector3.right;
         }
-        if (moveDirection != Vector3.zero)
-        {
+        if (moveDirection != Vector3.zero) {
             Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
         }
 
         // Reset velocity to zero if no input is detected or close enough to 
-        if (moveDirection == Vector3.zero)
-        {
+        if (moveDirection == Vector3.zero) {
             rb.velocity = Vector3.zero;
         }
-        else
-        {
+        else {
             // Normalize moveDirection
             moveDirection.Normalize();
             moveDirection *= moveSpeed;
@@ -80,23 +68,18 @@ public class CharacterController : GridObject
         }
     }
 
-    private void Interact()
-    {
+    private void Interact() {
         //Check if there is a tile in front
         Vector3 TileInFront = GetTileInFront(transform.position, transform.rotation.eulerAngles.y);
-        if (gridManager.GameGrid.ContainsKey(TileInFront))
-        {
+        if (gridManager.GameGrid.ContainsKey(TileInFront)) {
             //Get the dictionary for the tile
             Dictionary<int, GridObject> TileDictionary = gridManager.GameGrid[TileInFront];
-            if (TileDictionary.ContainsKey(-10))
-            {
+            if (TileDictionary.ContainsKey(-10)) {
                 GridObject tileObject = TileDictionary[-10];
-                if (tileObject is Shelf shelf)
-                {
+                if (tileObject is Shelf shelf) {
                     FillShelf(shelf);
                 }
-                else if(tileObject is BackShelf backShelf)
-                {
+                else if(tileObject is BackShelf backShelf) {
                     Inventory[(int)backShelf.groceryType] += backShelf.RefillItem(maxInventorySize, SumInventorySize());
                 } else if(tileObject is Dumpster dumpster) {
                     EmptyInventory();

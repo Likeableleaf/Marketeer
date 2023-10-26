@@ -6,12 +6,12 @@ public class CharacterInterface : MonoBehaviour
 {
     // Variable Cache
     [SerializeField] private CharacterController Player;
-    [SerializeField] private Sprite[] icons;
+    [SerializeField] private GameObject[] InventoryIcons;
 
 
     // Start is called before the first frame update
     void Start() {
-        //TODO, get player
+
     }
 
     // Update is called once per frame
