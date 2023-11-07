@@ -9,9 +9,11 @@ public class CharacterController : GridObject
 {
     public float moveSpeed = 3f;
     public float turnSpeed = 5f;
+    public float turnSpeed3D = 120;
     public float radiusOfSatisfaction;
     public int maxInventorySize = 16;
     public int[] Inventory = new int[Enum.GetValues(typeof(GroceryType)).Length];
+    public bool shiftedTo3D = false;
     //Access each index with (int)GroceryType.Type
 
     [SerializeField]
@@ -39,32 +41,67 @@ public class CharacterController : GridObject
 
     private void Movement() {
         Vector3 moveDirection = Vector3.zero;
-        if (Input.GetKey(KeyCode.W)) {
-            moveDirection += Vector3.forward;
-        }
-        if (Input.GetKey(KeyCode.S)) {
-            moveDirection += Vector3.back;
-        }
-        if (Input.GetKey(KeyCode.A)) {
-            moveDirection += Vector3.left;
-        }
-        if (Input.GetKey(KeyCode.D)) {
-            moveDirection += Vector3.right;
-        }
-        if (moveDirection != Vector3.zero) {
-            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
-        }
+        if (shiftedTo3D)
+        {
+            if (Input.GetKey(KeyCode.W))
+            {
+                moveDirection += transform.forward;
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                moveDirection -= transform.forward;
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                // Rotate counterclockwise
+                transform.Rotate(Vector3.up * -turnSpeed3D * Time.deltaTime);
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                // Rotate clockwise
+                transform.Rotate(Vector3.up * turnSpeed3D * Time.deltaTime);
+            }
 
-        // Reset velocity to zero if no input is detected or close enough to 
-        if (moveDirection == Vector3.zero) {
-            rb.velocity = Vector3.zero;
-        }
-        else {
-            // Normalize moveDirection
             moveDirection.Normalize();
             moveDirection *= moveSpeed;
             rb.velocity = moveDirection;
+        }
+        else 
+        {
+            if (Input.GetKey(KeyCode.W))
+            {
+                moveDirection += Vector3.forward;
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                moveDirection += Vector3.back;
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                moveDirection += Vector3.left;
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                moveDirection += Vector3.right;
+            }
+            if (moveDirection != Vector3.zero)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
+            }
+
+            // Reset velocity to zero if no input is detected or close enough to 
+            if (moveDirection == Vector3.zero)
+            {
+                rb.velocity = Vector3.zero;
+            }
+            else
+            {
+                // Normalize moveDirection
+                moveDirection.Normalize();
+                moveDirection *= moveSpeed;
+                rb.velocity = moveDirection;
+            }
         }
     }
 
@@ -81,8 +118,13 @@ public class CharacterController : GridObject
                 }
                 else if(tileObject is BackShelf backShelf) {
                     Inventory[(int)backShelf.groceryType] += backShelf.RefillItem(maxInventorySize, SumInventorySize());
-                } else if(tileObject is Dumpster dumpster) {
+                } 
+                else if(tileObject is Dumpster) {
                     EmptyInventory();
+                }
+                else if(tileObject is VendingMachine){
+                    gridManager.ShiftDimension();
+                    shiftedTo3D = !shiftedTo3D;
                 }
             }
         }

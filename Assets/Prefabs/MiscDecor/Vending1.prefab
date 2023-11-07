@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2543944884430680884}
-  - component: {fileID: 9159713016202639127}
   - component: {fileID: 3346728245761293248}
   - component: {fileID: 8551728434438470425}
+  - component: {fileID: 7125214699842850453}
   m_Layer: 0
   m_Name: Vending1
   m_TagString: Untagged
@@ -35,20 +35,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9159713016202639127
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3177379045403904378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19131a692af54374eafb02c7711b4add, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Walkable: 0
-  WallAtOffsets: []
 --- !u!65 &3346728245761293248
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -78,6 +64,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7125214699842850453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3177379045403904378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a576c6e37de882d40b816ba75f3080ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Walkable: 0
+  WallAtOffsets: []
 --- !u!1001 &6917981834256646821
 PrefabInstance:
   m_ObjectHideFlags: 0

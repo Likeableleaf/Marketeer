@@ -9,6 +9,8 @@ public class GridManager : MonoBehaviour
     public Dictionary<Vector3, Dictionary<int, GridObject>> GameGrid = new();
     public float turnInterval = 1f;
     public int SimultaneousActiveShoppers = 4;
+    public Camera MainCamera;
+    public Camera PlayerCamera;
     private Queue<GridObject> turnQueue = new();
     private List<Shopper> ActiveShoppers = new();
     private Queue<Shopper> InactiveShoppers = new();
@@ -30,7 +32,8 @@ public class GridManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        MainCamera.enabled = true;
+        PlayerCamera.enabled = false;
     }
 
     // Update is called once per frame
@@ -158,6 +161,12 @@ public class GridManager : MonoBehaviour
         }
 
         Debug.Log(logMessage);
+    }
+
+    public void ShiftDimension()
+    {
+        MainCamera.enabled = !MainCamera.enabled;
+        PlayerCamera.enabled = !PlayerCamera.enabled;
     }
 }
 
