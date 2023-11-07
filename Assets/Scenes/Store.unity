@@ -2499,6 +2499,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turnInterval: 0.5
   SimultaneousActiveShoppers: 4
+  MainCamera: {fileID: 963194227}
+  PlayerCamera: {fileID: 472578783}
   Registers:
   - {fileID: 1985185495}
   - {fileID: 526118268}
@@ -3550,6 +3552,11 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3755664236842543169, guid: 5821a2832049f554fbcce14819cb4bab, type: 3}
   m_PrefabInstance: {fileID: 1946450154}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &472578783 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 4837219193482071687, guid: 20e7d3140766bdd42b0aea6af9244069, type: 3}
+  m_PrefabInstance: {fileID: 1578504933}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &487465777
 GameObject:
@@ -7253,7 +7260,6 @@ GameObject:
   m_Component:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
-  - component: {fileID: 963194226}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -7261,14 +7267,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &963194226
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
 --- !u!20 &963194227
 Camera:
   m_ObjectHideFlags: 0
@@ -7297,7 +7295,7 @@ Camera:
   field of view: 60
   orthographic: 1
   orthographic size: 10
-  m_Depth: -1
+  m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
