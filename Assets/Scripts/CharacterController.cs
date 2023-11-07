@@ -10,6 +10,8 @@ public class CharacterController : GridObject
     public float moveSpeed = 3f;
     public float turnSpeed = 5f;
     public float turnSpeed3D = 120;
+    public float horizontalSpeed = 0.2f;
+    public float verticalSpeed = 0.2f;
     public float radiusOfSatisfaction;
     public int maxInventorySize = 16;
     public int[] Inventory = new int[Enum.GetValues(typeof(GroceryType)).Length];
@@ -18,6 +20,7 @@ public class CharacterController : GridObject
 
     [SerializeField]
     private Rigidbody rb;
+    private float y_axis = 0f; 
 
     // Start is called before the first frame update
     new void Start() {
@@ -51,16 +54,20 @@ public class CharacterController : GridObject
             {
                 moveDirection -= transform.forward;
             }
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetKey(KeyCode.A)) 
             {
-                // Rotate counterclockwise
-                transform.Rotate(Vector3.up * -turnSpeed3D * Time.deltaTime);
+                moveDirection -= transform.right;
             }
             if (Input.GetKey(KeyCode.D))
             {
-                // Rotate clockwise
-                transform.Rotate(Vector3.up * turnSpeed3D * Time.deltaTime);
+                moveDirection += transform.right;
             }
+            float horizontal = horizontalSpeed * Input.GetAxis("Horizontal");
+            y_axis += verticalSpeed * Input.GetAxis("Vertical");
+            y_axis = Mathf.Clamp(y_axis, -60, 60);
+
+            transform.Rotate(new Vector3(0, horizontal, 0));
+            gridManager.PlayerCamera.transform.eulerAngles = new Vector3(y_axis, gridManager.PlayerCamera.transform.eulerAngles.y, gridManager.PlayerCamera.transform.eulerAngles.z);
 
             moveDirection.Normalize();
             moveDirection *= moveSpeed;
