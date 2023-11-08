@@ -18,6 +18,10 @@ public class Door : MonoBehaviour
     [SerializeField]  private float doorProg = 0f;
     private float door2Prog = 0f;
 
+    [SerializeField] private AudioClip DoorOpen;
+    [SerializeField] private AudioClip DoorClose;
+    [SerializeField]private AudioSource DoorAudio;
+
 
     private void Update() {
         // If delay is up close door
@@ -50,8 +54,11 @@ public class Door : MonoBehaviour
                     door2Prog += Time.deltaTime;
                 }                
                 door2.transform.position = Vector3.Lerp(startPos2.transform.position, endPos2.transform.position, door2Prog);
-                 
+
                 // Play Door opening sound
+                DoorAudio.Stop();
+                DoorAudio.Play();
+                DoorAudio.PlayOneShot(DoorOpen,0.5f);
 
                 break;
             case DoorStyle.DoubleDoor:
@@ -62,6 +69,9 @@ public class Door : MonoBehaviour
 
 
                 // Play Door opening sound
+                DoorAudio.Stop();
+                DoorAudio.Play();
+                DoorAudio.PlayOneShot(DoorOpen, 0.5f);
 
                 break;
             case DoorStyle.HingedDoor:
@@ -73,6 +83,10 @@ public class Door : MonoBehaviour
                 door.transform.rotation = Quaternion.Lerp(startPos.transform.rotation, endPos.transform.rotation, doorProg);
 
                 // Play Door opening sound
+                DoorAudio.Stop();
+                DoorAudio.Play();
+                DoorAudio.PlayOneShot(DoorOpen, 0.5f);
+                
 
                 break;
         }
@@ -98,6 +112,10 @@ public class Door : MonoBehaviour
                 door2.transform.position = Vector3.Lerp(startPos2.transform.position, endPos2.transform.position, door2Prog);
 
                 // Play Door closing sound
+                DoorAudio.Stop();
+                DoorAudio.Play();
+                DoorAudio.PlayOneShot(DoorClose, 0.5f);
+
 
                 break;
             case DoorStyle.DoubleDoor:
@@ -107,6 +125,10 @@ public class Door : MonoBehaviour
                 // Reflect for door2
 
                 // Play Door closing sound
+                DoorAudio.Stop();
+                DoorAudio.Play();
+                DoorAudio.PlayOneShot(DoorClose, 0.5f);
+               
 
                 break;
             case DoorStyle.HingedDoor:
@@ -118,6 +140,10 @@ public class Door : MonoBehaviour
                 door.transform.rotation = Quaternion.Lerp(startPos.transform.rotation, endPos.transform.rotation, doorProg);
 
                 // Play Door closing sound
+                DoorAudio.Stop();
+                DoorAudio.Play();
+                DoorAudio.PlayOneShot(DoorClose, 0.5f);
+                
 
                 break;
         }

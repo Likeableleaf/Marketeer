@@ -36,6 +36,8 @@ public class Wall : GridObject
                 }
             }
             GridPositon = transform.position;
+
+            //add sound effect of a new customer coming into the store
         }
     }
 }
