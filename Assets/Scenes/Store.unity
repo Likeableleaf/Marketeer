@@ -375,6 +375,14 @@ PrefabInstance:
       propertyPath: Walkable
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4399630189691255240, guid: b67f1aded3e3d1441a49001ad6cb1cf9, type: 3}
+      propertyPath: DoorOpen
+      value: 
+      objectReference: {fileID: 8300000, guid: 3ca747acfc31e56408558b593520dfbf, type: 3}
+    - target: {fileID: 4399630189691255240, guid: b67f1aded3e3d1441a49001ad6cb1cf9, type: 3}
+      propertyPath: DoorClose
+      value: 
+      objectReference: {fileID: 8300000, guid: 79aa9e605a5ff3d4f91d47a9595b0737, type: 3}
     - target: {fileID: 6324707319139378621, guid: b67f1aded3e3d1441a49001ad6cb1cf9, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -4029,6 +4037,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door
       objectReference: {fileID: 0}
+    - target: {fileID: 7442754657289185512, guid: 5f3941d895ae5304a89759db1c8d89e0, type: 3}
+      propertyPath: DoorOpen
+      value: 
+      objectReference: {fileID: 8300000, guid: 3ca747acfc31e56408558b593520dfbf, type: 3}
+    - target: {fileID: 7442754657289185512, guid: 5f3941d895ae5304a89759db1c8d89e0, type: 3}
+      propertyPath: DoorClose
+      value: 
+      objectReference: {fileID: 8300000, guid: 79aa9e605a5ff3d4f91d47a9595b0737, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f3941d895ae5304a89759db1c8d89e0, type: 3}
 --- !u!4 &551329773 stripped
@@ -10528,6 +10544,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door
       objectReference: {fileID: 0}
+    - target: {fileID: 7442754657289185512, guid: 5f3941d895ae5304a89759db1c8d89e0, type: 3}
+      propertyPath: DoorOpen
+      value: 
+      objectReference: {fileID: 8300000, guid: 3ca747acfc31e56408558b593520dfbf, type: 3}
+    - target: {fileID: 7442754657289185512, guid: 5f3941d895ae5304a89759db1c8d89e0, type: 3}
+      propertyPath: DoorClose
+      value: 
+      objectReference: {fileID: 8300000, guid: 79aa9e605a5ff3d4f91d47a9595b0737, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f3941d895ae5304a89759db1c8d89e0, type: 3}
 --- !u!4 &1546912784 stripped
