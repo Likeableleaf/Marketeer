@@ -78,6 +78,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Walkable: 0
   WallAtOffsets: []
+  shiftDimension: 3
 --- !u!1001 &87344477524077973
 PrefabInstance:
   m_ObjectHideFlags: 0

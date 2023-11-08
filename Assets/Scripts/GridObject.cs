@@ -32,6 +32,7 @@ public class GridObject : MonoBehaviour
         gridManager.AddGridObjectToGrid(transform.position, 0, this);
         GridPositon = transform.position;
     }
+    
     protected bool IsValidGridPosition(Vector3 position)
     {
         return (Math.Abs(position.x) % 1 - 0.5 == 0) &&
@@ -55,7 +56,6 @@ public class GridObject : MonoBehaviour
         float nearestYRotation = Mathf.Round(YRotation / 90.0f) * (Mathf.PI / 2);
         return currTile + RoundVector3(new Vector3((float)Math.Sin(nearestYRotation), 0, (float)Math.Cos(nearestYRotation)),1);
     }
-
 
     public static Vector3 RoundVector3(Vector3 vector, int decimalPlaces)
     {

@@ -2497,7 +2497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1634e865ef0d2ea4c9e9ee1746fc1a0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnInterval: 0.5
+  turnInterval: 0.1
   SimultaneousActiveShoppers: 4
   MainCamera: {fileID: 963194227}
   PlayerCamera: {fileID: 472578783}
@@ -10862,6 +10862,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6533158590593922723, guid: 20e7d3140766bdd42b0aea6af9244069, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6533158590593922723, guid: 20e7d3140766bdd42b0aea6af9244069, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6533158590593922723, guid: 20e7d3140766bdd42b0aea6af9244069, type: 3}
+      propertyPath: m_Constraints
+      value: 116
+      objectReference: {fileID: 0}
+    - target: {fileID: 6533158590593922723, guid: 20e7d3140766bdd42b0aea6af9244069, type: 3}
+      propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6533158590593922723, guid: 20e7d3140766bdd42b0aea6af9244069, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20e7d3140766bdd42b0aea6af9244069, type: 3}
 --- !u!1001 &1578836239
@@ -13183,6 +13203,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 773457671}
     m_Modifications:
+    - target: {fileID: 2388299598673385217, guid: 19ff8e43414cd134a956aef1b0a69999, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1296427625}
     - target: {fileID: 2388299598673385217, guid: 19ff8e43414cd134a956aef1b0a69999, type: 3}
       propertyPath: OfficeDoorPos.x
       value: 7.5

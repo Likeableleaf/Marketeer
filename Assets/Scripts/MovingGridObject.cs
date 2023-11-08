@@ -215,6 +215,24 @@ public class MovingGridObject : GridObject
         }
     }
 
+    public Vector3 UnwrapPathFirstStep(PathTile pathHolder)
+    {
+        PathTile currPath = pathHolder;
+        PathTile prevPath = null;
+        while (true)
+        {
+            prevPath = currPath.GetPrevious();
+            
+            if (prevPath.GetPrevious() == null)
+            {
+                gridManager.AddObjectAt(currPath.GetPosition(), currPath.GetStartDistance(), this);
+                gridManager.AddObjectAt(currPath.GetPosition(), -5, this);
+                return currPath.GetPosition();
+            }
+            currPath = prevPath;
+        }
+    }
+
     protected static List<T> ShuffleList<T>(List<T> list)
     {
         List<T> shuffledList = new List<T>(list);

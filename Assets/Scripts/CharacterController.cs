@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
@@ -15,7 +16,7 @@ public class CharacterController : GridObject
     public float radiusOfSatisfaction;
     public int maxInventorySize = 16;
     public int[] Inventory = new int[Enum.GetValues(typeof(GroceryType)).Length];
-    public bool shiftedTo3D = false;
+    public int dimension = 2;
     //Access each index with (int)GroceryType.Type
 
     [SerializeField]
@@ -44,7 +45,7 @@ public class CharacterController : GridObject
 
     private void Movement() {
         Vector3 moveDirection = Vector3.zero;
-        if (shiftedTo3D)
+        if (dimension == 3)
         {
             if (Input.GetKey(KeyCode.W))
             {
@@ -129,9 +130,9 @@ public class CharacterController : GridObject
                 else if(tileObject is Dumpster) {
                     EmptyInventory();
                 }
-                else if(tileObject is VendingMachine){
-                    gridManager.ShiftDimension();
-                    shiftedTo3D = !shiftedTo3D;
+                else if(tileObject is VendingMachine vendingMachine){
+                    gridManager.ShiftDimension(vendingMachine.shiftDimension);
+                    dimension = vendingMachine.shiftDimension;
                 }
             }
         }

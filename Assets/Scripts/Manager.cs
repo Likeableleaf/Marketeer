@@ -1,12 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEngine.GraphicsBuffer;
 
 public class Manager : MovingGridObject {
     // Variable Cache
     public GameObject CurrentTarget;
+    public CharacterController Player;
     [SerializeField] private ManagerState state;
     [SerializeField] private int turntimer1 = -5;
     [SerializeField] private int turntimer2 = -5;
@@ -85,19 +89,11 @@ public class Manager : MovingGridObject {
 
     // Goto Office
     private void EnteringOfficeAction() {
-        // "Observe" for empty shelves
-        //ToDO 
-
-        // If finds emplty shelf ChasePlayer
-        //ToDo
-        /*if(-_-) {
-            state = ManagerState.ChasePlayer;
-        }
-        */
 
         // If path finished 
         if (transform.position == OfficeDoorEnterPos) {
             state = ManagerState.DoingOfficeThings;
+            return;
         }
 
         // Retrieve Office Door Location
@@ -124,6 +120,7 @@ public class Manager : MovingGridObject {
             turntimer1 = -5;
             turntimer2 = -5;
             state = ManagerState.ExitingOffice;
+            return;
         } else {
             turntimer1 -= 1;
             turntimer2 -= 1;
@@ -148,6 +145,7 @@ public class Manager : MovingGridObject {
         // If path finished 
         if (transform.position == OfficeDoorExitPos) {
             state = ManagerState.PatrolStore;
+            return;
         }
 
         //Generate list of potential targets
@@ -159,30 +157,49 @@ public class Manager : MovingGridObject {
 
     // Chase Player
     private void ChasePlayerAction() {
-        // As long as AggroTimer is active?
-        // Todo
+        if(transform.position == ClosestGridPos(Player.transform.position))
+        {
+            Debug.Log("Got the Player");
+            //TODO
+            //Implement played touched animation
+            state = ManagerState.EnteringOffice;
+            turntimer1 = -5;
+            return;
+        }
+
+        // Manage timer for Duration of Aggro
+        if (turntimer1 == -5)
+        {
+            turntimer1 = 30;
+        }
+        else if (turntimer1 <= 0)
+        {
+            state = ManagerState.EnteringOffice;
+            turntimer1 = -5;
+            return;
+        }
+        else
+        {
+            turntimer1 -= 1;
+        }
 
         // When AgroTimer Done
         // state = ManagerState.PatrolStore; or state = ManagerState.EnteringOffice;?
-        
-        //Generate list of potential targets
-        List<Vector3> potentialTargets = GeneratePotentialTargets();
 
-        //Try to form a path in the potential targets, doing the first one that results in a valid path
-        GeneratePathFromTargets(potentialTargets);
+        //Get the first Step to Player
+        GenerateFirstStepToPlayer();
     }
 
     // Wander and moniter the Store
     private void PatrolStoreAction() {
-        // "Observe" for empty shelves
-        //ToDO 
-
-        // If finds emplty shelf ChasePlayer
-        //ToDo
-        /*if(-_-) {
+        Shelf usingShelf = gridManager.CheckForSurroundingShelf(transform.position);
+        //If found an adjacent shelf and its empty
+        if (usingShelf && !usingShelf.HasStock(1))
+        {
             state = ManagerState.ChasePlayer;
+            turntimer1 = -5;
+            return;
         }
-        */
 
         // Manage timer for Duration of Patrol
         if (turntimer1 == -5) {
@@ -190,18 +207,19 @@ public class Manager : MovingGridObject {
         } else if (turntimer1 <= 0) {
             state = ManagerState.EnteringOffice;
             turntimer1 = -5;
+            return;
         } else {
             turntimer1 -= 1;
         }
 
         //Generate list of potential targets
-        //List<Vector3> potentialTargets = GeneratePotentialTargets();
+        List<Vector3> potentialTargets = GeneratePotentialTargets();
 
         //Try to form a path in the potential targets, doing the first one that results in a valid path
-        //GeneratePathFromTargets(potentialTargets);
+        GeneratePathFromTargets(potentialTargets);
 
         // Temp system for now
-        GenerateRandomPath();
+        //GenerateRandomPath();
     }
 
 
@@ -235,6 +253,21 @@ public class Manager : MovingGridObject {
         }
 
         //Completely blocked, just stand still
+        return false;
+    }
+
+    private bool GenerateFirstStepToPlayer()
+    {
+        //Try to generate a path to the tile
+        PathTile potFinalTile = AStarPathFromTo(transform.position, GenerateChasePlayerTarget());
+        //If the path works unwrap it and set it as the path
+        //Then return true as we were successful
+        if (potFinalTile != null && potFinalTile.GetPosition() != transform.position)
+        {
+            path.Push(UnwrapPathFirstStep(potFinalTile));
+            gridManager.RemoveDecidingFlag(transform.position);
+            return true;
+        }
         return false;
     }
 
@@ -272,9 +305,6 @@ public class Manager : MovingGridObject {
             case ManagerState.ExitingOffice:
                 potTargets.Add(GenerateOfficeExitTarget());
                 break;
-            case ManagerState.ChasePlayer:
-                potTargets.AddRange(GenerateChasePlayerTargets());
-                break;
             case ManagerState.PatrolStore:
                 potTargets.AddRange(GeneratePatrolStoreTargets());
                 break;
@@ -301,7 +331,6 @@ public class Manager : MovingGridObject {
         //Return the List
         return potTargets;
     }
-
 
     private List<Vector3> GenerateInactiveTargets() {
         //This should never get reached or called
@@ -336,21 +365,23 @@ public class Manager : MovingGridObject {
     }
 
     // Return Player Position
-    private List<Vector3> GenerateChasePlayerTargets() {
-        List<Vector3> PlayerTargets = new();
-        
-        // PlayerTargets.Add();
-
-        return PlayerTargets;
+    private Vector3 GenerateChasePlayerTarget() {
+        //Target is where the player is
+        return ClosestGridPos(Player.transform.position);
     }
 
     // Return Patrol Targets
     private List<Vector3> GeneratePatrolStoreTargets() {
         List<Vector3> PatrolStoreTargets = new();
-        
-        // PatrolStoreTargets.Add(new Vector3(0.5f, 0.0f, -0.5f));
 
-        return PatrolStoreTargets;
+        //Add a random shelf of each type to be patrolled
+        foreach (GroceryType grocery in Enum.GetValues(typeof(GroceryType)))
+        {
+            int randomIndex = UnityEngine.Random.Range(0, gridManager.groceryDictionary[grocery].Count);
+            PatrolStoreTargets.Add(gridManager.groceryDictionary[grocery][randomIndex].InFrontOfShelfPos);
+        }
+
+        return ShuffleList(PatrolStoreTargets);
     }
 
     public enum ManagerState {

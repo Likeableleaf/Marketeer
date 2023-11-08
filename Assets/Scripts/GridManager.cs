@@ -163,10 +163,19 @@ public class GridManager : MonoBehaviour
         Debug.Log(logMessage);
     }
 
-    public void ShiftDimension()
+    public void ShiftDimension(int dimension)
     {
-        MainCamera.enabled = !MainCamera.enabled;
-        PlayerCamera.enabled = !PlayerCamera.enabled;
+        switch (dimension)
+        {
+            case 2:
+                MainCamera.enabled = true;
+                PlayerCamera.enabled = false;
+                break;
+            case 3:
+                MainCamera.enabled = false;
+                PlayerCamera.enabled = true;
+                break;
+        }
     }
 }
 
