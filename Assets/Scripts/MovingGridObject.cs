@@ -6,8 +6,9 @@ using Utils;
 
 public class MovingGridObject : GridObject
 {
+    public float turnsPerTile = 1; //Number of tiles to walk in a single turn //Max 1
     protected Stack<Vector3> path;
-    protected float moveTime = 1.0f; //Number of turns to move a spot
+    protected float moveTime; //Number of turns to move a spot
     protected Vector3 nextStep;
     protected bool moving = false;
     protected float startTime;
@@ -23,7 +24,7 @@ public class MovingGridObject : GridObject
         transform.position = IsValidGridPosition(transform.position) ? transform.position : ClosestGridPos(transform.position); 
 
         //Set the moveTime to the time a Turn is
-        moveTime = gridManager.turnInterval;
+        moveTime = gridManager.turnInterval/(1/turnsPerTile);
     }
 
     // Update is called once per frame
@@ -74,8 +75,8 @@ public class MovingGridObject : GridObject
         HashSet<Vector3> visitedSet = new();
         PriorityQueue<PathTile, float> frontier = new();
 
-        PathTile startTile = new PathTile(start, 0);
-        PathTile endTile = new PathTile(end, 0);
+        PathTile startTile = new PathTile(start, 0, turnsPerTile);
+        PathTile endTile = new PathTile(end, 0, turnsPerTile);
 
         frontier.Enqueue(startTile, startTile.GetGH());
         for (int i = 0; i < 100; i++)
@@ -107,7 +108,7 @@ public class MovingGridObject : GridObject
                 Vector3 TileToCheck = new Vector3(x, 0, z) + currPosition;
                 if (CheckFrontierValidity(visitedTiles, TileToCheck, currTile, endTile))
                 {
-                    PathTile newTile = new PathTile(TileToCheck, currTile.GetStartDistance() + 1, endTile, currTile);
+                    PathTile newTile = new PathTile(TileToCheck, currTile.GetStartDistance() + turnsPerTile, endTile, currTile, turnsPerTile);
                     localFrontier.Add(new Tuple<PathTile, float>(newTile, newTile.GetGH()));
                 }
             }
@@ -117,7 +118,7 @@ public class MovingGridObject : GridObject
 
     private bool CheckFrontierValidity(HashSet<Vector3> visitedTiles, Vector3 TileToCheck, PathTile currTile, PathTile endTile)
     {
-        int currTileTime = currTile.GetStartDistance();
+        float currTileTime = currTile.GetStartDistance();
         Vector3 currTilePos = currTile.GetPosition();
         Dictionary<Vector3, Dictionary<int, GridObject>> GameGrid = gridManager.GameGrid;
         //Check if tile already Visited
@@ -131,7 +132,7 @@ public class MovingGridObject : GridObject
             Dictionary<int, GridObject> dictToCheck = GameGrid[TileToCheck];
 
             //If the tile will be full the moment we want it
-            if (dictToCheck.ContainsKey(currTileTime + 1))
+            if (dictToCheck.ContainsKey((int)Math.Ceiling(currTileTime + turnsPerTile)))
             {
                 return false;
             }
@@ -162,7 +163,7 @@ public class MovingGridObject : GridObject
         //Check if objects want to pass straight through each other
         if (GameGrid.ContainsKey(currTilePos) && GameGrid.ContainsKey(TileToCheck))
         {
-            if (GameGrid[currTilePos].ContainsKey(currTileTime + 1) && GameGrid[TileToCheck].ContainsKey(currTileTime))
+            if (GameGrid[currTilePos].ContainsKey((int)Math.Ceiling(currTileTime + turnsPerTile)) && GameGrid[TileToCheck].ContainsKey((int)currTileTime))
             {
                 return false;
             }
@@ -176,11 +177,11 @@ public class MovingGridObject : GridObject
             //Check if the two shared adjacent tiles have anything planned to be on them
             if (GameGrid.ContainsKey(adjPos1) && GameGrid.ContainsKey(adjPos2))
             {
-                if (GameGrid[adjPos1].ContainsKey(currTileTime + 1) && GameGrid[adjPos2].ContainsKey(currTileTime))
+                if (GameGrid[adjPos1].ContainsKey((int)Math.Ceiling(currTileTime + turnsPerTile)) && GameGrid[adjPos2].ContainsKey((int)currTileTime))
                 {
                     return false;
                 }
-                if (GameGrid[adjPos1].ContainsKey(currTileTime) && GameGrid[adjPos2].ContainsKey(currTileTime + 1))
+                if (GameGrid[adjPos1].ContainsKey((int)currTileTime) && GameGrid[adjPos2].ContainsKey((int)Math.Ceiling(currTileTime + turnsPerTile)))
                 {
                     return false;
                 }
@@ -205,8 +206,12 @@ public class MovingGridObject : GridObject
         gridManager.AddObjectAt(currPath.GetPosition(), -5, this);
         while (true)
         {
-            orderedPath.Push(currPath.GetPosition());
-            gridManager.AddObjectAt(currPath.GetPosition(), currPath.GetStartDistance(), this);
+            for(int i = 0; i < turnsPerTile; i++) 
+            {
+                orderedPath.Push(currPath.GetPosition());
+                gridManager.AddObjectAt(currPath.GetPosition(), (int)Math.Ceiling(currPath.GetStartDistance())-i, this);
+                if((int)currPath.GetStartDistance() == 0) { break; }
+            }
             currPath = currPath.GetPrevious();
             if (currPath == null)
             {
@@ -225,7 +230,7 @@ public class MovingGridObject : GridObject
             
             if (prevPath.GetPrevious() == null)
             {
-                gridManager.AddObjectAt(currPath.GetPosition(), currPath.GetStartDistance(), this);
+                gridManager.AddObjectAt(currPath.GetPosition(), (int)Math.Ceiling(currPath.GetStartDistance()), this);
                 gridManager.AddObjectAt(currPath.GetPosition(), -5, this);
                 return currPath.GetPosition();
             }
@@ -253,28 +258,40 @@ public class MovingGridObject : GridObject
         Vector3 diff = position1 - position2;
         return Mathf.Abs(diff.x) == 1 && Mathf.Abs(diff.z) == 1;
     }
+
+    void PrintPath()
+    {
+        if (path == null) { return; }
+        foreach (Vector3 point in path)
+        {
+            Debug.Log(point);
+        }
+    }
 }
 
 public class PathTile
 {
     private Vector3 position;
-    private int startDistance;
+    private float startDistance;
     private float ghDistance;
+    private float turnsPerTile;
     private PathTile previousTile;
 
     //Constructors
-    public PathTile(Vector3 inPosition, int inStartDistance)
+    public PathTile(Vector3 inPosition, float inStartDistance, float inTurnsPerTile)
     {
         position = inPosition;
         startDistance = inStartDistance;
         ghDistance = float.MaxValue;
         previousTile = null;
+        turnsPerTile = inTurnsPerTile;
     }
 
-    public PathTile(Vector3 inPosition, int inStartDistance, PathTile inEndTile, PathTile inPreviousTile)
+    public PathTile(Vector3 inPosition, float inStartDistance, PathTile inEndTile, PathTile inPreviousTile, float inTurnsPerTile)
     {
         position = inPosition;
         startDistance = inStartDistance;
+        turnsPerTile = inTurnsPerTile;
         ghDistance = GenerateGH(inEndTile);
         previousTile = inPreviousTile;
     }
@@ -283,13 +300,13 @@ public class PathTile
     private float GenerateGH(PathTile inEnd)
     {
         float manhattanDistance = Math.Abs(position.x - inEnd.GetPosition().x) + Math.Abs(position.z - inEnd.GetPosition().z);
-        return startDistance + manhattanDistance;
+        return startDistance + manhattanDistance * turnsPerTile;
     }
 
     public Vector3 GetPosition() { return position; }
     public float GetGH() { return ghDistance; }
     public PathTile GetPrevious() { return previousTile; }
-    public int GetStartDistance() { return startDistance; }
+    public float GetStartDistance() { return startDistance; }
     public override string ToString()
     {
         string previousPosition = previousTile != null ? previousTile.GetPosition().ToString() : "null";

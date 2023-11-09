@@ -61,9 +61,12 @@ public class Shopper : MovingGridObject
         //If path is valid & still steps in the path left, go to next step
         if (path != null && path.Count > 0)
         {
+            if (nextStep != path.Peek())
+            {
+                startTime = Time.time;
+                startPosition = transform.position;
+            }
             nextStep = path.Pop();
-            startTime = Time.time;
-            startPosition = transform.position;
             moving = true;
         }
         //If no path left, perform action

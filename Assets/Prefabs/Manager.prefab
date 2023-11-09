@@ -47,11 +47,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b599a4fd7a0e5429a9bb92468539c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turnsPerTile: 25
   CurrentTarget: {fileID: 0}
+  Player: {fileID: 0}
   state: 0
   turntimer1: -5
   turntimer2: -5
-  OfficeDoorPos: {x: 0, y: 0, z: 0}
+  OfficeDoorExitPos: {x: 0, y: 0, z: 0}
+  OfficeDoorEnterPos: {x: 0, y: 0, z: 0}
   OfficeChairPos: {x: 0, y: 0, z: 0}
 --- !u!136 &3023500317069493193
 CapsuleCollider:

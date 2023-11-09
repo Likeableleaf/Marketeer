@@ -815,6 +815,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shopper (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 3514986204619744021, guid: d0764114148522346a00dc60dbcd1691, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9166577552811081232, guid: d0764114148522346a00dc60dbcd1691, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -2505,8 +2509,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1634e865ef0d2ea4c9e9ee1746fc1a0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnInterval: 0.1
-  SimultaneousActiveShoppers: 4
+  turnInterval: 0.02
+  SimultaneousActiveShoppers: 1
   MainCamera: {fileID: 963194227}
   PlayerCamera: {fileID: 472578783}
   Registers:
@@ -2930,7 +2934,6 @@ GameObject:
   m_Component:
   - component: {fileID: 350815916}
   - component: {fileID: 350815915}
-  - component: {fileID: 350815914}
   m_Layer: 0
   m_Name: MenuCamera
   m_TagString: Untagged
@@ -2938,14 +2941,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &350815914
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 350815913}
-  m_Enabled: 1
 --- !u!20 &350815915
 Camera:
   m_ObjectHideFlags: 0
@@ -3702,6 +3697,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shopper
       objectReference: {fileID: 0}
+    - target: {fileID: 3514986204619744021, guid: d0764114148522346a00dc60dbcd1691, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3521187500717622542, guid: d0764114148522346a00dc60dbcd1691, type: 3}
       propertyPath: m_IsKinematic
       value: 1
@@ -3709,6 +3708,10 @@ PrefabInstance:
     - target: {fileID: 6195307430182808763, guid: d0764114148522346a00dc60dbcd1691, type: 3}
       propertyPath: state
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6195307430182808763, guid: d0764114148522346a00dc60dbcd1691, type: 3}
+      propertyPath: turnsPerTile
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 9166577552811081232, guid: d0764114148522346a00dc60dbcd1691, type: 3}
       propertyPath: m_RootOrder
@@ -4842,6 +4845,10 @@ PrefabInstance:
     - target: {fileID: 3514986204619744021, guid: d0764114148522346a00dc60dbcd1691, type: 3}
       propertyPath: m_Name
       value: Shopper (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514986204619744021, guid: d0764114148522346a00dc60dbcd1691, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9166577552811081232, guid: d0764114148522346a00dc60dbcd1691, type: 3}
       propertyPath: m_RootOrder
@@ -8022,6 +8029,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shopper (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 3514986204619744021, guid: d0764114148522346a00dc60dbcd1691, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9166577552811081232, guid: d0764114148522346a00dc60dbcd1691, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -9673,6 +9684,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shopper (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 3514986204619744021, guid: d0764114148522346a00dc60dbcd1691, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9166577552811081232, guid: d0764114148522346a00dc60dbcd1691, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -9979,7 +9994,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1179347755528773913, guid: eb417502b3624534481880fd7a133552, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5051308938531001032, guid: eb417502b3624534481880fd7a133552, type: 3}
       propertyPath: m_RootOrder
@@ -13152,6 +13167,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shopper (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3514986204619744021, guid: d0764114148522346a00dc60dbcd1691, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9166577552811081232, guid: d0764114148522346a00dc60dbcd1691, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -13319,6 +13338,14 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 1296427625}
+    - target: {fileID: 2388299598673385217, guid: 19ff8e43414cd134a956aef1b0a69999, type: 3}
+      propertyPath: tilesPerTurn
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2388299598673385217, guid: 19ff8e43414cd134a956aef1b0a69999, type: 3}
+      propertyPath: turnsPerTile
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 2388299598673385217, guid: 19ff8e43414cd134a956aef1b0a69999, type: 3}
       propertyPath: OfficeDoorPos.x
       value: 7.5
@@ -13549,6 +13576,10 @@ PrefabInstance:
     - target: {fileID: 3514986204619744021, guid: d0764114148522346a00dc60dbcd1691, type: 3}
       propertyPath: m_Name
       value: Shopper (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514986204619744021, guid: d0764114148522346a00dc60dbcd1691, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9166577552811081232, guid: d0764114148522346a00dc60dbcd1691, type: 3}
       propertyPath: m_RootOrder
@@ -13853,6 +13884,10 @@ PrefabInstance:
     - target: {fileID: 3514986204619744021, guid: d0764114148522346a00dc60dbcd1691, type: 3}
       propertyPath: m_Name
       value: Shopper (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514986204619744021, guid: d0764114148522346a00dc60dbcd1691, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9166577552811081232, guid: d0764114148522346a00dc60dbcd1691, type: 3}
       propertyPath: m_RootOrder
