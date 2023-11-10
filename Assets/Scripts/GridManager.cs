@@ -20,6 +20,9 @@ public class GridManager : MonoBehaviour
     public Dictionary<GroceryType, List<Shelf>> groceryDictionary = new();
     public GameObject[] Registers;
 
+    //Other Variables
+    [SerializeField] private GameObject ceiling;
+
     private void Awake()
     {
         //Create the empty lists for the dictionary
@@ -170,10 +173,12 @@ public class GridManager : MonoBehaviour
             case 2:
                 MainCamera.enabled = true;
                 PlayerCamera.enabled = false;
+                ceiling.SetActive(false);
                 break;
             case 3:
                 MainCamera.enabled = false;
                 PlayerCamera.enabled = true;
+                ceiling.SetActive(true);
                 break;
         }
     }

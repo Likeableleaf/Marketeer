@@ -67,9 +67,12 @@ public class CharacterController : GridObject
             y_axis += verticalSpeed * Input.GetAxis("Vertical");
             y_axis = Mathf.Clamp(y_axis, -60, 60);
 
-            transform.Rotate(new Vector3(0, horizontal, 0));
-            gridManager.PlayerCamera.transform.eulerAngles = new Vector3(y_axis, gridManager.PlayerCamera.transform.eulerAngles.y, gridManager.PlayerCamera.transform.eulerAngles.z);
-
+            // Check if paused
+            if (Time.timeScale != 0) {
+                transform.Rotate(new Vector3(0, horizontal, 0));
+                gridManager.PlayerCamera.transform.eulerAngles = new Vector3(y_axis, gridManager.PlayerCamera.transform.eulerAngles.y, gridManager.PlayerCamera.transform.eulerAngles.z);
+            }
+            
             moveDirection.Normalize();
             moveDirection *= moveSpeed;
             rb.velocity = moveDirection;
