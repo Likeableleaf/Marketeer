@@ -17,6 +17,7 @@ public class CharacterController : GridObject
     public int maxInventorySize = 16;
     public int[] Inventory = new int[Enum.GetValues(typeof(GroceryType)).Length];
     public int dimension = 2;
+    public bool helpingCustomer = false;
     //Access each index with (int)GroceryType.Type
 
     [SerializeField]

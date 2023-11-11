@@ -48,6 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentTarget: {fileID: 0}
+  Player: {fileID: 0}
+  askHelpChance: 0.2
   StartingPositions:
   - {x: 23.5, y: 0, z: -8.5}
   - {x: 23.5, y: 0, z: -7.5}
@@ -67,6 +69,15 @@ MonoBehaviour:
   FrontOfDoorPositions:
   - {x: -0.5, y: 0, z: -7.5}
   - {x: 0.5, y: 0, z: -7.5}
+  NeedsHelpPositions:
+  - {x: 0.5, y: 0, z: -2.5}
+  - {x: 0.5, y: 0, z: -4.5}
+  - {x: -1.5, y: 0, z: -2.5}
+  - {x: -1.5, y: 0, z: -4.5}
+  - {x: 0.5, y: 0, z: -3.5}
+  - {x: 0.5, y: 0, z: -5.5}
+  - {x: -1.5, y: 0, z: -3.5}
+  - {x: -1.5, y: 0, z: -5.5}
   RegisterPositions:
   - {x: 3.5, y: 0, z: -4.5}
   - {x: 5.5, y: 0, z: -3.5}

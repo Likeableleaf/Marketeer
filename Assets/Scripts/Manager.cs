@@ -10,7 +10,6 @@ using static UnityEngine.GraphicsBuffer;
 public class Manager : MovingGridObject {
     // Variable Cache
     public GameObject CurrentTarget;
-    public CharacterController Player;
     [SerializeField] private ManagerState state;
     [SerializeField] private int turntimer1 = -5;
     [SerializeField] private int turntimer2 = -5;
@@ -157,11 +156,22 @@ public class Manager : MovingGridObject {
 
     // Chase Player
     private void ChasePlayerAction() {
-        if(transform.position == ClosestGridPos(Player.transform.position))
+        if(transform.position == ClosestGridPos(gridManager.Player.transform.position))
         {
             Debug.Log("Got the Player");
-            //TODO
-            //Implement played touched animation
+            //If not helping customer....
+            if(!gridManager.Player.helpingCustomer)
+            {
+                //TODO
+                //Implement strike/firing System
+            }
+            //If helping customer
+            else
+            {
+                //TODO
+                //Maybe animation here for when already helping?
+            }
+            //Either way returns to entering office state
             state = ManagerState.EnteringOffice;
             turntimer1 = -5;
             return;
@@ -182,9 +192,6 @@ public class Manager : MovingGridObject {
         {
             turntimer1 -= 1;
         }
-
-        // When AgroTimer Done
-        // state = ManagerState.PatrolStore; or state = ManagerState.EnteringOffice;?
 
         //Get the first Step to Player
         GenerateFirstStepToPlayer();
@@ -255,39 +262,6 @@ public class Manager : MovingGridObject {
         //Completely blocked, just stand still
         return false;
     }
-
-    private bool GenerateFirstStepToPlayer()
-    {
-        //Try to generate a path to the tile
-        PathTile potFinalTile = AStarPathFromTo(transform.position, GenerateChasePlayerTarget());
-        //If the path works unwrap it and set it as the path
-        //Then return true as we were successful
-        if (potFinalTile != null && potFinalTile.GetPosition() != transform.position)
-        {
-            path.Push(UnwrapPathFirstStep(potFinalTile));
-            gridManager.RemoveDecidingFlag(transform.position);
-            return true;
-        }
-        return false;
-    }
-
-    /*private bool GeneratePathFromTarget(Vector3 target) {
-        //Try to generate a path to the tile
-        PathTile potFinalTile = AStarPathFromTo(transform.position, target);
-            
-        //If the path works unwrap it and set it as the path
-        if (potFinalTile != null && potFinalTile.GetPosition() != transform.position) {
-            path = UnwrapPath(potFinalTile);
-            gridManager.RemoveDecidingFlag(transform.position);
-                
-            //Then return true as we were successful
-            return true;
-        }
-
-        //Completely blocked, just stand still
-        return false;
-    }*/
-
 
     private List<Vector3> GeneratePotentialTargets() {
         var potTargets = new List<Vector3>();
@@ -362,12 +336,6 @@ public class Manager : MovingGridObject {
     // Return office exit door position
     private Vector3 GenerateOfficeExitTarget() {
         return OfficeDoorExitPos;
-    }
-
-    // Return Player Position
-    private Vector3 GenerateChasePlayerTarget() {
-        //Target is where the player is
-        return ClosestGridPos(Player.transform.position);
     }
 
     // Return Patrol Targets
