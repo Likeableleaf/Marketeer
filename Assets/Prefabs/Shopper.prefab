@@ -68,7 +68,7 @@ MonoBehaviour:
   - {x: -0.5, y: 0, z: -7.5}
   - {x: 0.5, y: 0, z: -7.5}
   RegisterPositions:
-  - {x: 3.5, y: 0, z: -4.5}
+  - {x: 3.5, y: 0, z: -3.5}
   - {x: 5.5, y: 0, z: -3.5}
   BackOfDoorPositions:
   - {x: -0.5, y: 0, z: -6.5}
