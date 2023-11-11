@@ -3103,6 +3103,7 @@ MonoBehaviour:
   SimultaneousActiveShoppers: 4
   MainCamera: {fileID: 963194227}
   PlayerCamera: {fileID: 472578783}
+  Player: {fileID: 1296427625}
   Registers:
   - {fileID: 1985185495}
   - {fileID: 526118268}
@@ -17054,6 +17055,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 773457671}
     m_Modifications:
+    - target: {fileID: 1835065905493035826, guid: 20e7d3140766bdd42b0aea6af9244069, type: 3}
+      propertyPath: m_Radius
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 1903596487164457937, guid: 20e7d3140766bdd42b0aea6af9244069, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -21487,6 +21492,10 @@ PrefabInstance:
     - target: {fileID: 3514986204619744021, guid: d0764114148522346a00dc60dbcd1691, type: 3}
       propertyPath: m_Name
       value: Shopper (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6195307430182808763, guid: d0764114148522346a00dc60dbcd1691, type: 3}
+      propertyPath: askHelpChance
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 9166577552811081232, guid: d0764114148522346a00dc60dbcd1691, type: 3}
       propertyPath: m_RootOrder
