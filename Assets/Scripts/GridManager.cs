@@ -11,6 +11,7 @@ public class GridManager : MonoBehaviour
     public int SimultaneousActiveShoppers = 4;
     public Camera MainCamera;
     public Camera PlayerCamera;
+    public CharacterController Player;
     private Queue<GridObject> turnQueue = new();
     private List<Shopper> ActiveShoppers = new();
     private Queue<Shopper> InactiveShoppers = new();

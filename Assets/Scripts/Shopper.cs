@@ -9,14 +9,16 @@ public class Shopper : MovingGridObject
 {
     // Variable Cache
     public GameObject CurrentTarget;
-
+    public CharacterController Player;
     public static int minShoppingListSize = 1;
     public static int maxShoppingListSize = 6;
+    public float askHelpChance = 0.2f;
 
     //Specifc Grid Locations
     [Header("State Positions")]
     public Vector3[] StartingPositions;
     public Vector3[] FrontOfDoorPositions;
+    public Vector3[] NeedsHelpPositions;
     public Vector3[] RegisterPositions;
     public Vector3[] BackOfDoorPositions;
     public Vector3[] OffscreenPositions;
@@ -88,6 +90,12 @@ public class Shopper : MovingGridObject
                 case ShopperState.Shopping:
                     ShoppingAction();
                     break;
+                case ShopperState.NeedsHelp:
+                    NeedsHelpAction();
+                    break;
+                case ShopperState.GettingHelp:
+                    GettingHelpAction();
+                    break;
                 case ShopperState.CheckingOutLine:
                     CheckingOutLineAction();
                     break;
@@ -105,7 +113,7 @@ public class Shopper : MovingGridObject
     }
 
     //ShopperState Actions
-
+    #region Actions
     // Do nothing
     private void InactiveAction()
     {
@@ -116,9 +124,15 @@ public class Shopper : MovingGridObject
     {
         if (GetEnteringTargets().Contains(transform.position))
         {
-            //Open Door
-            //Then
-            state = ShopperState.Shopping;
+            //Chance of immediately asking for help
+            if (Random.value <= askHelpChance)
+            {
+                state = ShopperState.NeedsHelp;
+            }
+            else
+            {
+                state = ShopperState.Shopping;
+            }
             return;
         }
 
@@ -133,7 +147,68 @@ public class Shopper : MovingGridObject
     {
         Shelf usingShelf = gridManager.CheckForSurroundingShelf(transform.position);
         //If found an adjacent shelf and its of a needed item and it has stock
-        if (GetShoppingTargets().Contains(transform.position) && usingShelf && usingShelf.HasStock(1))
+        if (GetShoppingTargets().Contains(transform.position) && usingShelf)
+        {
+            //If the shelf has stock
+            if (usingShelf.HasStock(1))
+            {
+                //Tell the shelf to reduce its stock
+                usingShelf.RemoveItem(1);
+                //Remove that item from the ShoppingList
+                ShoppingList.Remove(usingShelf.groceryType);
+
+                //If the ShoppingList is now empty go check out
+                if (ShoppingList.Count <= 0)
+                {
+                    state = ShopperState.CheckingOutLine;
+                }
+                return;
+            }
+            //Otherwise, take a chance of asking for help
+            else if (Random.value <= askHelpChance)
+            {
+                state = ShopperState.NeedsHelp;
+                return;
+            }
+        }
+
+        //Generate list of potential targets
+        List<Vector3> potentialTargets = GeneratePotentialTargets();
+
+        //Try to form a path in the potential targets, doing the first one that results in a valid path
+        GeneratePathFromTargets(potentialTargets);
+    }
+
+    private void NeedsHelpAction()
+    {
+        //If player touching the shopper and is not already helping another customer
+        if (transform.position == ClosestGridPos(gridManager.Player.transform.position) && !gridManager.Player.helpingCustomer)
+        {
+            //Set the player's helping customer to true
+            gridManager.Player.helpingCustomer = true;
+            //Set the game state to GettinHelp
+            state = ShopperState.GettingHelp;
+            return;
+        }
+
+        //Generate list of potential targets
+        List<Vector3> potentialTargets = GeneratePotentialTargets();
+
+        //If already at a potential target, just stand still
+        if(potentialTargets.Contains(transform.position))
+        {
+            return;
+        }
+
+        //Otherwise, try to form a path in the potential targets, doing the first one that results in a valid path
+        GeneratePathFromTargets(potentialTargets);
+    }
+
+    private void GettingHelpAction()
+    {
+        Shelf usingShelf = gridManager.CheckForSurroundingShelf(transform.position);
+        //If taken to a shelf and it contains the requested item (first in list)
+        if (usingShelf && ShoppingList[0] == usingShelf.groceryType && usingShelf.HasStock(1))
         {
             //Tell the shelf to reduce its stock
             usingShelf.RemoveItem(1);
@@ -145,20 +220,19 @@ public class Shopper : MovingGridObject
             {
                 state = ShopperState.CheckingOutLine;
             }
+            //Otherwise, return to shopping normally
+            else
+            {
+                state = ShopperState.Shopping;
+            }
+            //Let the player help others
+            gridManager.Player.helpingCustomer = false;
             return;
         }
 
-        //For now, just create path
-
-        //For fun, ig
-        //Likely to fail lol
-        //GenerateRandomPath();
-
-        //Generate list of potential targets
-        List<Vector3> potentialTargets = GeneratePotentialTargets();
-
-        //Try to form a path in the potential targets, doing the first one that results in a valid path
-        GeneratePathFromTargets(potentialTargets);
+        //Otherwise, follow the player
+        //Get the first Step to Player
+        GenerateFirstStepToPlayer();
     }
 
     private void CheckingOutLineAction() {
@@ -235,7 +309,10 @@ public class Shopper : MovingGridObject
         GeneratePathFromTargets(potentialTargets);
     }
 
+    #endregion
+    
     //Path Generation
+    #region Path and Target Generation
 
     private void GenerateRandomPath() 
     {
@@ -290,6 +367,13 @@ public class Shopper : MovingGridObject
                 potTargets.AddRange(GetShoppingTargets());
                 //Add adjacent Tiles too
                 potTargets.AddRange(GenerateAdjacentTargets());
+                break;
+            case ShopperState.NeedsHelp:
+                potTargets.AddRange(GetNeedsHelpTargets());
+                break;
+            case ShopperState.GettingHelp:
+                //Should never reach this
+                Debug.Log("Reached GettingHelp in GeneratePotentialTargets");
                 break;
             case ShopperState.CheckingOutLine:
                 potTargets.AddRange(GetCheckOutLineTargets());
@@ -363,6 +447,11 @@ public class Shopper : MovingGridObject
         return ShuffleList(ShoppingTargets);
     }
 
+    private List<Vector3> GetNeedsHelpTargets()
+    {
+        return NeedsHelpPositions.ToList();
+    }
+
     private List<Vector3> GetCheckOutLineTargets() {
         return RegisterLinePositions.ToList();
     }
@@ -384,6 +473,8 @@ public class Shopper : MovingGridObject
     {
         return OffscreenPositions.ToList();
     }
+
+    #endregion
 }
 
 public enum ShopperState
@@ -391,6 +482,8 @@ public enum ShopperState
     Inactive, //Doing Nothing
     Entering, //Walking towards and entering the building
     Shopping, //Grabbing different items from list
+    NeedsHelp, //Needs help from the player
+    GettingHelp, //Getting help from the player
     CheckingOutLine, //Heading to registers
     CheckingOut, //Using the register
     Exiting, //Walking to and exiting the building

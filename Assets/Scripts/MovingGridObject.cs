@@ -248,10 +248,32 @@ public class MovingGridObject : GridObject
         return shuffledList;
     }
 
-    private bool AreDiagonal(Vector3 position1, Vector3 position2)
+    protected bool AreDiagonal(Vector3 position1, Vector3 position2)
     {
         Vector3 diff = position1 - position2;
         return Mathf.Abs(diff.x) == 1 && Mathf.Abs(diff.z) == 1;
+    }
+
+    protected bool GenerateFirstStepToPlayer()
+    {
+        //Try to generate a path to the tile
+        PathTile potFinalTile = AStarPathFromTo(transform.position, GenerateChasePlayerTarget());
+        //If the path works unwrap it and set it as the path
+        //Then return true as we were successful
+        if (potFinalTile != null && potFinalTile.GetPosition() != transform.position)
+        {
+            path.Push(UnwrapPathFirstStep(potFinalTile));
+            gridManager.RemoveDecidingFlag(transform.position);
+            return true;
+        }
+        return false;
+    }
+
+    // Return Player Position
+    protected Vector3 GenerateChasePlayerTarget()
+    {
+        //Target is where the player is
+        return ClosestGridPos(gridManager.Player.transform.position);
     }
 }
 
