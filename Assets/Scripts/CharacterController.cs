@@ -24,7 +24,6 @@ public class CharacterController : GridObject
     public int inventoryRefillAmount = 4;
     public float disposalFee = 0.1f;
     public int[] Inventory = new int[Enum.GetValues(typeof(GroceryType)).Length];
-    public int dimension = 2;
     public bool helpingCustomer = false;
     //Access each index with (int)GroceryType.Type
 
@@ -54,7 +53,7 @@ public class CharacterController : GridObject
 
     private void Movement() {
         Vector3 moveDirection = Vector3.zero;
-        if (dimension == 3)
+        if (GridManager.dimension == 3)
         {
             if (Input.GetKey(KeyCode.W))
             {
@@ -142,19 +141,20 @@ public class CharacterController : GridObject
                 else if(tileObject is Dumpster) {
                     EmptyInventory();
                 }
-                else if(tileObject is VendingMachine vendingMachine && GridManager.IsCashAvailable(vendingMachine.shiftCost) && dimension != vendingMachine.shiftDimension){
+                else if(tileObject is VendingMachine vendingMachine && GridManager.IsCashAvailable(vendingMachine.shiftCost) && GridManager.dimension != vendingMachine.shiftDimension){
                     GridManager.RemoveCash(vendingMachine.shiftCost);
                     gridManager.ShiftDimension(vendingMachine.shiftDimension);
-                    dimension = vendingMachine.shiftDimension;
                 }
             }
         }
         //Otherwise do nothing
     }
 
+    //Inventory Methods
     private void FillShelf(Shelf shelf)
     {
         Inventory[(int)shelf.groceryType] = shelf.RefillShelf(Inventory[(int)shelf.groceryType]);
+        OnInventoryUpdated.Invoke(Inventory);
     }
 
     private int SumInventorySize()

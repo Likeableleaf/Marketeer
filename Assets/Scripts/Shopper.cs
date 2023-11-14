@@ -10,6 +10,8 @@ public class Shopper : MovingGridObject
     // Variable Cache
     public GameObject CurrentTarget;
     public CharacterController Player;
+    public SpriteRenderer HelpItemRendererSide;
+    public SpriteRenderer HelpItemRendererTop;
     public static int minShoppingListSize = 1;
     public static int maxShoppingListSize = 6;
     public float askHelpChance = 0.2f;
@@ -26,10 +28,11 @@ public class Shopper : MovingGridObject
     public Vector3[] OffscreenPositions;
     public Vector3[] RegisterLinePositions;
 
-    //Moved the list of StoreShelves and Register to GridManager
+    //Shopping variables
     public List<GroceryType> ShoppingList = new();
     private int ShoppingListSize;
     public ShopperState state;
+    public Sprite[] HelpItemArray;
 
     // Start is called before the first frame update
     new void Start()
@@ -38,6 +41,8 @@ public class Shopper : MovingGridObject
 
         gridManager.AddToInactiveShoppers(this);
         capCollider = gameObject.GetComponent<CapsuleCollider>();
+        HelpItemRendererSide.enabled = false;
+        HelpItemRendererTop.enabled = false;
     }
 
     public override void Turn()
@@ -184,6 +189,24 @@ public class Shopper : MovingGridObject
 
     private void NeedsHelpAction()
     {
+        //If 1st Person
+        if(GridManager.dimension == 3)
+        {
+            //Ensure the proper bubble is shown
+            HelpItemRendererSide.sprite = HelpItemArray[(int)ShoppingList[0]];
+            //Ensure the needed Item bubble is shown
+            HelpItemRendererSide.enabled = true;
+            HelpItemRendererTop.enabled = false;
+        }
+        //If Top-Down
+        else
+        {
+            //Ensure the proper bubble is shown
+            HelpItemRendererTop.sprite = HelpItemArray[(int)ShoppingList[0]];
+            //Ensure the needed Item bubble is shown
+            HelpItemRendererTop.enabled = true;
+            HelpItemRendererSide.enabled = false;
+        }
         //If player touching the shopper and is not already helping another customer
         if (transform.position == ClosestGridPos(gridManager.Player.transform.position) && !gridManager.Player.helpingCustomer)
         {
@@ -232,6 +255,9 @@ public class Shopper : MovingGridObject
             }
             //Re-enable collision
             capCollider.enabled = true;
+            //Remove the help bubble
+            HelpItemRendererSide.enabled = false;
+            HelpItemRendererTop.enabled = false;
             //Give the Player a tip (Add to Score)
             GridManager.AddCash(tipAmount);
             //Let the player help others

@@ -11,6 +11,9 @@ public class GridManager : MonoBehaviour
     //Score Variables
     private static float Cash;
 
+    //Dimension
+    public static int dimension = 2;
+
     //Grid System Variables
     public Dictionary<Vector3, Dictionary<int, GridObject>> GameGrid = new();
     public float turnInterval = 1f;
@@ -173,9 +176,9 @@ public class GridManager : MonoBehaviour
         Debug.Log(logMessage);
     }
 
-    public void ShiftDimension(int dimension)
+    public void ShiftDimension(int newDimension)
     {
-        switch (dimension)
+        switch (newDimension)
         {
             case 2:
                 MainCamera.enabled = true;
@@ -188,6 +191,7 @@ public class GridManager : MonoBehaviour
                 ceiling.SetActive(true);
                 break;
         }
+        dimension = newDimension;
     }
 
     //Cash Methods
