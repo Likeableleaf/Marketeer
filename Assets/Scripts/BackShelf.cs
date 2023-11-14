@@ -8,7 +8,6 @@ public class BackShelf : Wall
     public GameObject[] ShelfIcons;
     public Sprite[] icons;
     public GroceryType groceryType;
-    public int refillAmount = 4;
     
     // Start is called before the first frame update
     protected new void Start()
@@ -25,10 +24,5 @@ public class BackShelf : Wall
             SpriteRenderer spriteRenderer = icon.GetComponent<SpriteRenderer>();
             spriteRenderer.sprite = icons[(int)groceryType];
         }
-    }
-
-    public int RefillItem(int inventoryMaxSize, int inventorySize)
-    {
-        return Mathf.Min(inventoryMaxSize - inventorySize, refillAmount);
     }
 }

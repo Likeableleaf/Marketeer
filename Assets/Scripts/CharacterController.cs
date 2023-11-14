@@ -3,11 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class CharacterController : GridObject
 {
+    //Event for when Inventory changes
+    [System.Serializable]
+    public class InventoryUpdatedEvent : UnityEvent<int[]> { }
+    public static InventoryUpdatedEvent OnInventoryUpdated = new InventoryUpdatedEvent();
+
     public float moveSpeed = 3f;
     public float turnSpeed = 5f;
     public float turnSpeed3D = 120;
@@ -15,6 +21,8 @@ public class CharacterController : GridObject
     public float verticalSpeed = 0.2f;
     public float radiusOfSatisfaction;
     public int maxInventorySize = 16;
+    public int inventoryRefillAmount = 4;
+    public float disposalFee = 0.1f;
     public int[] Inventory = new int[Enum.GetValues(typeof(GroceryType)).Length];
     public int dimension = 2;
     public bool helpingCustomer = false;
@@ -129,7 +137,7 @@ public class CharacterController : GridObject
                     FillShelf(shelf);
                 }
                 else if(tileObject is BackShelf backShelf) {
-                    Inventory[(int)backShelf.groceryType] += backShelf.RefillItem(maxInventorySize, SumInventorySize());
+                    RefillInventoryItem(backShelf.groceryType);
                 } 
                 else if(tileObject is Dumpster) {
                     EmptyInventory();
@@ -160,8 +168,15 @@ public class CharacterController : GridObject
     }
 
     // Clear out the Inventory List 
-    private void EmptyInventory() {
-        // TODO add negated score per item
+    public void EmptyInventory() {
+        GridManager.RemoveCash(SumInventorySize() * disposalFee);
         Inventory = new int[Enum.GetValues(typeof(GroceryType)).Length];
+        OnInventoryUpdated.Invoke(Inventory);
+    }
+    // Add to an Item of the Inventory
+    public void RefillInventoryItem(GroceryType grocery)
+    {
+        Inventory[(int)grocery] += Mathf.Min(maxInventorySize - SumInventorySize(), inventoryRefillAmount);
+        OnInventoryUpdated.Invoke(Inventory);
     }
 }
