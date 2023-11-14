@@ -13,6 +13,8 @@ public class Shopper : MovingGridObject
     public static int minShoppingListSize = 1;
     public static int maxShoppingListSize = 6;
     public float askHelpChance = 0.2f;
+    public float tipAmount = 3.0f;
+    private CapsuleCollider capCollider;
 
     //Specifc Grid Locations
     [Header("State Positions")]
@@ -35,6 +37,7 @@ public class Shopper : MovingGridObject
         base.Start();
 
         gridManager.AddToInactiveShoppers(this);
+        capCollider = gameObject.GetComponent<CapsuleCollider>();
     }
 
     public override void Turn()
@@ -206,6 +209,8 @@ public class Shopper : MovingGridObject
 
     private void GettingHelpAction()
     {
+        //Ensure collision is disabled when following
+        capCollider.enabled = false;
         Shelf usingShelf = gridManager.CheckForSurroundingShelf(transform.position);
         //If taken to a shelf and it contains the requested item (first in list)
         if (usingShelf && ShoppingList[0] == usingShelf.groceryType && usingShelf.HasStock(1))
@@ -225,6 +230,10 @@ public class Shopper : MovingGridObject
             {
                 state = ShopperState.Shopping;
             }
+            //Re-enable collision
+            capCollider.enabled = true;
+            //Give the Player a tip (Add to Score)
+            GridManager.AddCash(tipAmount);
             //Let the player help others
             gridManager.Player.helpingCustomer = false;
             return;

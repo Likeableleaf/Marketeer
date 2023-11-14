@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class scr_PauseMenu : MonoBehaviour {
+public class GameUIManager : MonoBehaviour {
     // Variables
     [SerializeField] private static bool paused = false;
     [SerializeField] private GameObject obj_pauseMenu;
-    [SerializeField] private GameObject obj_UI;
+    [SerializeField] private InGameUI obj_UI;
 
     // If esc is pressed pause game or resume based on if it is already or not
     void Update() {
@@ -23,7 +23,7 @@ public class scr_PauseMenu : MonoBehaviour {
     // Resume Game
     public void Resume () {
         obj_pauseMenu.SetActive(false);
-        obj_UI.SetActive(true);
+        obj_UI.gameObject.SetActive(true);
         Time.timeScale = 1f;
         paused = false;
         Cursor.visible = false;
@@ -33,7 +33,7 @@ public class scr_PauseMenu : MonoBehaviour {
     // Pause Game
     public void Pause () {
         obj_pauseMenu.SetActive(true);
-        obj_UI.SetActive(false);
+        obj_UI.gameObject.SetActive(false);
         Time.timeScale = 0f;
         paused = true;
         Cursor.visible = true;

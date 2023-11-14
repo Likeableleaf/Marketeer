@@ -5,4 +5,5 @@ using UnityEngine;
 public class VendingMachine : Wall
 {
     public int shiftDimension = 2;
+    public float shiftCost = 3.0f;
 }

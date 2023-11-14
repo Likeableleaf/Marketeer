@@ -134,7 +134,8 @@ public class CharacterController : GridObject
                 else if(tileObject is Dumpster) {
                     EmptyInventory();
                 }
-                else if(tileObject is VendingMachine vendingMachine){
+                else if(tileObject is VendingMachine vendingMachine && GridManager.IsCashAvailable(vendingMachine.shiftCost) && dimension != vendingMachine.shiftDimension){
+                    GridManager.RemoveCash(vendingMachine.shiftCost);
                     gridManager.ShiftDimension(vendingMachine.shiftDimension);
                     dimension = vendingMachine.shiftDimension;
                 }

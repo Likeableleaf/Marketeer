@@ -1,10 +1,16 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class GridManager : MonoBehaviour
 {
+    //Event for when Cash changes
+    [System.Serializable]
+    public class CashUpdatedEvent : UnityEvent<float> { }
+    public static CashUpdatedEvent OnCashUpdated = new CashUpdatedEvent();
+    //Score Variables
+    private static float Cash;
+
     //Grid System Variables
     public Dictionary<Vector3, Dictionary<int, GridObject>> GameGrid = new();
     public float turnInterval = 1f;
@@ -182,6 +188,40 @@ public class GridManager : MonoBehaviour
                 ceiling.SetActive(true);
                 break;
         }
+    }
+
+    //Cash Methods
+    //Set the amount of Cash directly
+    public static void SetCash(float amount)
+    {
+        Cash = amount;
+        OnCashUpdated.Invoke(Cash);
+    }
+    //Add memory to Cash
+    public static void AddCash(float amount)
+    {
+        Cash += amount;
+        OnCashUpdated.Invoke(Cash);
+    }
+    //Remove an amount of Cash
+    public static void RemoveCash(float amount)
+    {
+        Cash -= amount;
+        OnCashUpdated.Invoke(Cash);
+    }
+    //Check if we have the given amount of cash
+    public static bool IsCashAvailable(float amount)
+    {
+        if (Cash >= amount)
+        {
+            return true;
+        }
+        return false;
+    }
+    //Get the amount of Cash
+    public static float GetCash(float amount)
+    {
+        return Cash;
     }
 }
 
