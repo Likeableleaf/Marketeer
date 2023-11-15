@@ -383,7 +383,6 @@ GameObject:
   - component: {fileID: 6324707319139378621}
   - component: {fileID: 3039189093956697454}
   - component: {fileID: 4399630189691255240}
-  - component: {fileID: 2941158166649823417}
   - component: {fileID: 8750991100664157857}
   m_Layer: 0
   m_Name: FontDoorLeft
@@ -429,7 +428,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Walkable: 0
-  WallAtOffsets: []
+  WallAtOffsets:
+  - {x: 0, y: 0, z: -1}
+  - {x: 0, y: 0, z: 2}
 --- !u!114 &4399630189691255240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,22 +456,6 @@ MonoBehaviour:
   DoorOpen: {fileID: 8300000, guid: 3ca747acfc31e56408558b593520dfbf, type: 3}
   DoorClose: {fileID: 8300000, guid: 79aa9e605a5ff3d4f91d47a9595b0737, type: 3}
   DoorAudio: {fileID: 8750991100664157857}
---- !u!114 &2941158166649823417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7675064921117488054}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19131a692af54374eafb02c7711b4add, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Walkable: 0
-  WallAtOffsets:
-  - {x: 0, y: 0, z: 2}
-  - {x: 0, y: 0, z: -1}
 --- !u!82 &8750991100664157857
 AudioSource:
   m_ObjectHideFlags: 0
