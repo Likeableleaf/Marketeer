@@ -2225,7 +2225,6 @@ GameObject:
   - component: {fileID: 2706782743900438924}
   - component: {fileID: 2706782743900438925}
   - component: {fileID: 2706782743900438926}
-  - component: {fileID: 2706782743900438921}
   - component: {fileID: 2706782743900438922}
   m_Layer: 5
   m_Name: UI
@@ -2318,33 +2317,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &2706782743900438921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2706782743900438927}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ba5a5ca749fbee44b25db7976cf396d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player: {fileID: 3190845242642248627, guid: 20e7d3140766bdd42b0aea6af9244069, type: 3}
-  InventoryIcons:
-  - {fileID: 6053798477087103545}
-  - {fileID: 1756305228583431185}
-  - {fileID: 5580990808012123237}
-  - {fileID: 1425479812736423951}
-  - {fileID: 5132703907075899604}
-  - {fileID: 775084711267790858}
-  InventoryDisplay:
-  - {fileID: 7744451959803893247}
-  - {fileID: 8684521634205897225}
-  - {fileID: 3636537080409922281}
-  - {fileID: 3640379934155797422}
-  - {fileID: 8255039529873654026}
-  - {fileID: 8248141104272759405}
 --- !u!114 &2706782743900438922
 MonoBehaviour:
   m_ObjectHideFlags: 0
