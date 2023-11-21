@@ -18568,6 +18568,8 @@ MonoBehaviour:
   - {fileID: 380261509}
   - {fileID: 815962012}
   - {fileID: 2109719175}
+  StrikeCounter: 0
+  strikes: []
 --- !u!1 &1786993074
 GameObject:
   m_ObjectHideFlags: 0
@@ -22960,6 +22962,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -1.1216354
       objectReference: {fileID: 0}
+    - target: {fileID: 695737432132135953, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
+      propertyPath: m_Name
+      value: unStrike1
+      objectReference: {fileID: 0}
+    - target: {fileID: 695737432132135953, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 888288019394358444, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 70
@@ -23128,6 +23138,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4674977001779137817, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
+      propertyPath: m_Name
+      value: unStrike3
+      objectReference: {fileID: 0}
     - target: {fileID: 6149101903213874736, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 70
@@ -23171,6 +23185,10 @@ PrefabInstance:
     - target: {fileID: 7499733069978427203, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7593359946356277089, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
+      propertyPath: m_Name
+      value: unStrike2
       objectReference: {fileID: 0}
     - target: {fileID: 7951574610071426540, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
       propertyPath: m_AnchoredPosition.x

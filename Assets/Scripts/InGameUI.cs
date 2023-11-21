@@ -8,11 +8,14 @@ public class InGameUI : MonoBehaviour
     public TextMeshProUGUI cashText;
     public GameObject[] InventoryIcons;
     public TextMeshProUGUI[] InventoryDisplay;
+    public int StrikeCounter = 0;
+    public Texture2D[] strikes;
 
     void Start()
     {
         GridManager.OnCashUpdated.AddListener(UpdateCashText);
         CharacterController.OnInventoryUpdated.AddListener(UpdateInventoryDisplay);
+        Manager.OnStrikeUpdated.AddListener(UpdateStrikeDisplay);
     }
 
     //Update the Cash Amount
@@ -27,5 +30,14 @@ public class InGameUI : MonoBehaviour
         {
             InventoryDisplay[i].text = PlayerInventory[i].ToString();
         }
+    }
+
+    private void UpdateStrikeDisplay(int count)
+    {
+        if(count == 1)
+        {
+           // strikes[0]
+        }
+        //TODO: implement the update to display for number of stikes
     }
 }

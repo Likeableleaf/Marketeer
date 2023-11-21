@@ -5,6 +5,8 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using static UnityEngine.GraphicsBuffer;
 
 public class Manager : MovingGridObject {
@@ -17,7 +19,11 @@ public class Manager : MovingGridObject {
     [SerializeField] Vector3 OfficeDoorEnterPos; //= new Vector3(7.5f, 0.0f, 4.5f);
     [SerializeField] Vector3 OfficeChairPos; //= new Vector3(9.5f, 0.0f, 7.5f);
 
+    public class StrikerUpdatedEvent : UnityEvent<int> { }
+    public static StrikerUpdatedEvent OnStrikeUpdated = new StrikerUpdatedEvent();
+
     private int actionNum = 0;
+    private int strikeCounter = 0;
 
     // Start is called before the first frame update
     new void Start() {
@@ -164,6 +170,10 @@ public class Manager : MovingGridObject {
             {
                 //TODO
                 //Implement strike/firing System
+                if (strikeCounter >= 3)//reset strike counter
+                {
+                    strikeCounter = 0;
+                }
             }
             //If helping customer
             else
@@ -203,9 +213,19 @@ public class Manager : MovingGridObject {
         //If found an adjacent shelf and its empty
         if (usingShelf && !usingShelf.HasStock(1))
         {
-            state = ManagerState.ChasePlayer;
-            turntimer1 = -5;
-            return;
+            if (strikeCounter >= 3)
+            {
+                state = ManagerState.ChasePlayer;
+                turntimer1 = -5;
+                return;
+            }
+            else
+            {
+                
+                strikeCounter += 1;
+                OnStrikeUpdated.Invoke(strikeCounter);
+            }
+            
         }
 
         // Manage timer for Duration of Patrol
@@ -360,4 +380,24 @@ public class Manager : MovingGridObject {
         ChasePlayer, // Chases after Player
         PatrolStore, // Walks round the store observing
     }
+    
+    //Strike Methods
+    public void SetStrikerCount(int strikes)
+    {
+        strikeCounter = strikes;
+        OnStrikeUpdated.Invoke(strikeCounter);
+    }
+
+    public void AddStrikerCount(int strikes)
+    {
+        strikeCounter += strikes;
+        OnStrikeUpdated.Invoke(strikeCounter);
+    }
+
+    public void RemoveStrikerCount(int strikes)
+    {
+        strikeCounter -= strikes;
+        OnStrikeUpdated.Invoke(strikeCounter);
+    }
+
 }
