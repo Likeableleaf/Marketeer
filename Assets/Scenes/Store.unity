@@ -10253,6 +10253,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5308603580800558985, guid: ca54c147c0a96ae46b3af9b589a04d85, type: 3}
   m_PrefabInstance: {fileID: 1151653136}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1152287078 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7593359946356277089, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
+  m_PrefabInstance: {fileID: 2706782743794338543}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1164511802
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10953,6 +10958,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 5308603580800558985, guid: ca54c147c0a96ae46b3af9b589a04d85, type: 3}
   m_PrefabInstance: {fileID: 1275423626}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1294952599 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 695737432132135953, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
+  m_PrefabInstance: {fileID: 2706782743794338543}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1296427624 stripped
 Transform:
@@ -18568,8 +18578,10 @@ MonoBehaviour:
   - {fileID: 380261509}
   - {fileID: 815962012}
   - {fileID: 2109719175}
-  StrikeCounter: 0
-  strikes: []
+  strikes:
+  - {fileID: 1294952599}
+  - {fileID: 1152287078}
+  - {fileID: 1813349567}
 --- !u!1 &1786993074
 GameObject:
   m_ObjectHideFlags: 0
@@ -18782,6 +18794,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 5308603580800558985, guid: ca54c147c0a96ae46b3af9b589a04d85, type: 3}
   m_PrefabInstance: {fileID: 1804544281}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1813349567 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4674977001779137817, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
+  m_PrefabInstance: {fileID: 2706782743794338543}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1824812405
 PrefabInstance:

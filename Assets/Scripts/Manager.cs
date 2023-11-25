@@ -170,9 +170,10 @@ public class Manager : MovingGridObject {
             {
                 //TODO
                 //Implement strike/firing System
-                if (strikeCounter >= 3)//reset strike counter
+                if (strikeCounter >= 2)//reset strike counter
                 {
                     strikeCounter = 0;
+                    OnStrikeUpdated.Invoke(strikeCounter);
                 }
             }
             //If helping customer
@@ -213,18 +214,16 @@ public class Manager : MovingGridObject {
         //If found an adjacent shelf and its empty
         if (usingShelf && !usingShelf.HasStock(1))
         {
-            if (strikeCounter >= 3)
+            strikeCounter += 1;//increase strike count
+            OnStrikeUpdated.Invoke(strikeCounter); //invoke strike counter event
+
+            if (strikeCounter >= 3) //check if there's 3 strikes
             {
                 state = ManagerState.ChasePlayer;
                 turntimer1 = -5;
                 return;
             }
-            else
-            {
-                
-                strikeCounter += 1;
-                OnStrikeUpdated.Invoke(strikeCounter);
-            }
+            
             
         }
 
