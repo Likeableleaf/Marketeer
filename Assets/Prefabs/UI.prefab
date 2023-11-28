@@ -3164,6 +3164,7 @@ MonoBehaviour:
   inGameUI: {fileID: 1515287174708101654}
   menuUI: {fileID: 4126302541810540408}
   ceiling: {fileID: 0}
+  runnin: 0
 --- !u!1 &2785659331150803140
 GameObject:
   m_ObjectHideFlags: 0
@@ -3595,7 +3596,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &9142456277656683070
 RectTransform:
   m_ObjectHideFlags: 0

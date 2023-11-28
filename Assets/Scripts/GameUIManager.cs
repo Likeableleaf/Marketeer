@@ -17,11 +17,7 @@ public class GameUIManager : MonoBehaviour {
     public bool runnin;
 
     private void Start() {
-        runnin = false;
-        Time.timeScale = 0f;
-        cam.transform.position = menuGameCam.position;
-        cam.transform.rotation = menuGameCam.rotation;
-        ceiling.SetActive(true);
+        MainMenu();
     }
     
     // If esc is pressed pause game or resume based on if it is already or not
@@ -57,16 +53,28 @@ public class GameUIManager : MonoBehaviour {
 
     // Return to Main Menu
     public void QuitGame () {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene("MainMenu");
+        MainMenu();
     }
 
+    // Loads Main Menu
+    public void MainMenu(){
+        obj_pauseMenu.SetActive(false);
+        menuUI.SetActive(true);
+        runnin = false;
+        Camera.main.orthographicSize = 5;
+        Time.timeScale = 0f;
+        cam.transform.position = menuGameCam.position;
+        cam.transform.rotation = menuGameCam.rotation;
+        ceiling.SetActive(true);
+    }
+    
     // Starts game
     public void Play()
     {
         // change main camera + ui to in game, versions
         runnin = true;
         Time.timeScale = 1f;
+        Camera.main.orthographicSize = 10;
         cam.transform.position = inGameCam.position;
         cam.transform.rotation = inGameCam.rotation;
         menuUI.SetActive(false);
