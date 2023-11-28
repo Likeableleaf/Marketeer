@@ -14,10 +14,14 @@ public class GameUIManager : MonoBehaviour {
     [SerializeField] private GameObject inGameUI;
     [SerializeField] private GameObject menuUI;
     [SerializeField] private GameObject ceiling;
+    [SerializeField] private GameObject obj_endGame;
     public bool runnin;
+    private float totalTime;
 
     private void Start() {
-        MainMenu();
+        //MainMenu();
+        EndGame();
+        totalTime = GridManager.GetTime();
     }
     
     // If esc is pressed pause game or resume based on if it is already or not
@@ -54,11 +58,20 @@ public class GameUIManager : MonoBehaviour {
     // Return to Main Menu
     public void QuitGame () {
         MainMenu();
+        
     }
 
     // Loads Main Menu
     public void MainMenu(){
-        obj_pauseMenu.SetActive(false);
+        if (obj_endGame.active)
+        {
+            obj_endGame.SetActive(false);
+        }
+        else
+        {
+            obj_pauseMenu.SetActive(false);
+        }
+        
         menuUI.SetActive(true);
         runnin = false;
         Camera.main.orthographicSize = 5;
@@ -80,8 +93,22 @@ public class GameUIManager : MonoBehaviour {
         menuUI.SetActive(false);
         inGameUI.SetActive(true);
         ceiling.SetActive(false);
+        GridManager.SetTime(0);
         //*/
         //SceneManager.LoadScene("Store");
+    }
+
+    // Ends Game
+
+    public void EndGame()
+    {
+        obj_endGame.SetActive(true);
+        obj_UI.gameObject.SetActive(false);
+        totalTime = GridManager.GetTime();
+        Time.timeScale = 0f;
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     // Exits game

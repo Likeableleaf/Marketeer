@@ -8,7 +8,8 @@ public class GridManager : MonoBehaviour
     [System.Serializable]
     public class CashUpdatedEvent : UnityEvent<float> { }
     public static CashUpdatedEvent OnCashUpdated = new CashUpdatedEvent();
-    
+    public class TimeUpdatedEvent : UnityEvent<float> { }
+    public static TimeUpdatedEvent OnTimeUpdated = new TimeUpdatedEvent();
     //Score Variables
     private static float Cash;
 
@@ -26,6 +27,7 @@ public class GridManager : MonoBehaviour
     private List<Shopper> ActiveShoppers = new();
     private Queue<Shopper> InactiveShoppers = new();
     private float timeSinceLastTurn = 0.0f;
+    public static float totalTime = 0;
 
     //Grocery System Variables
     public Dictionary<GroceryType, List<Shelf>> groceryDictionary = new();
@@ -61,6 +63,7 @@ public class GridManager : MonoBehaviour
         {
             // Call AdvanceTurns and reset the timer
             AdvanceTurns();
+            AddTime(1);
             timeSinceLastTurn -= turnInterval;
         }
     }
@@ -227,6 +230,27 @@ public class GridManager : MonoBehaviour
     public static float GetCash(float amount)
     {
         return Cash;
+    }
+
+    //Get the Total Time
+
+    public static float GetTime()
+    {
+        return totalTime;
+    }
+
+    //Get the Total Time
+
+    public static float SetTime(float Time)
+    {
+        return totalTime = Time;
+    }
+
+    //Add time to Time
+    public static void AddTime(float amount)
+    {
+        totalTime += amount;
+        OnTimeUpdated.Invoke(totalTime);
     }
 }
 
