@@ -6,18 +6,17 @@ using UnityEngine.SceneManagement;
 public class scr_MainMenu : MonoBehaviour
 {
     // Variable Cache
-    [SerializeField] private Camera menuCam;
-    [SerializeField] private Camera inGameCam;
+    [SerializeField] private GameObject cam;
+    [SerializeField] private Transform inGameCam;
+    [SerializeField] private Transform menuGameCam;
     [SerializeField] private GameObject inGameUI;
     [SerializeField] private GameObject menuUI;
     [SerializeField] private GameObject ceiling;
 
     private void Start() {
-        inGameCam = Camera.main;
-        menuCam.enabled = true;
-        inGameCam.enabled = false;
+        cam.transform.position = menuGameCam.position;
+        cam.transform.rotation = menuGameCam.rotation;
         ceiling.SetActive(true);
-        
     }
 
     // Starts game
@@ -25,11 +24,11 @@ public class scr_MainMenu : MonoBehaviour
     {
         // change main camera + ui to in game, versions
         
-        inGameCam.enabled = true;
+        cam.transform.position = inGameCam.position;
+        cam.transform.rotation = inGameCam.rotation;
         menuUI.SetActive(false);
         inGameUI.SetActive(true);
         ceiling.SetActive(false);
-        menuCam.enabled = false;
         //*/
         //SceneManager.LoadScene("Store");
     }
