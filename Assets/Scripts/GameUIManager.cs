@@ -20,8 +20,8 @@ public class GameUIManager : MonoBehaviour {
     private float totalTime;
 
     private void Start() {
-        //MainMenu();
-        EndGame();
+        MainMenu();
+        //EndGame(); // for debug purposes
         Manager.OnEndGameUpdated.AddListener(endTheGame);
         totalTime = GridManager.GetTime();
     }
@@ -66,12 +66,13 @@ public class GameUIManager : MonoBehaviour {
     // Return to Main Menu
     public void QuitGame () {
         MainMenu();
-        
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
     }
 
     // Loads Main Menu
     public void MainMenu(){
-        if (obj_endGame.active)
+        if (obj_endGame.activeInHierarchy)
         {
             obj_endGame.SetActive(false);
             endTheGame(false);
@@ -126,8 +127,8 @@ public class GameUIManager : MonoBehaviour {
         Application.Quit();
     }
 
-    public void endTheGame(bool gameEnded)
+    public void endTheGame(bool gameEnd)
     {
-        gameEnded = gameEnded;
+        gameEnded = gameEnd;
     }
 }

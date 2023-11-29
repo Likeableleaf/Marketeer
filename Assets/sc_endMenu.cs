@@ -25,11 +25,12 @@ public class sc_endMenu : MonoBehaviour
 
     private void FinalCashText(float amount)
     {
+        Debug.Log("Money is increasing! : " + amount);
         cashText.text = $"${amount:F2}";
     }
 
     private void FinalTimeStamp(float amount)
     {
-        timeText.text = $"${amount:F2}";
+        timeText.text = $"{amount:F2}";
     }
 }

@@ -174,9 +174,10 @@ public class Manager : MovingGridObject {
                 //TODO
                 //Implement strike/firing System
 
-                if (strikeCounter > 2)//reset strike counter
+                if (strikeCounter >= 3)//reset strike counter
                 {
                     //end game "you are fired!"
+                    Debug.Log("The game should end!");
                     OnEndGameUpdated.Invoke(true);
                 }
                 else
