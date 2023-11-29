@@ -16,11 +16,13 @@ public class GameUIManager : MonoBehaviour {
     [SerializeField] private GameObject ceiling;
     [SerializeField] private GameObject obj_endGame;
     public bool runnin;
+    public bool gameEnded = false;
     private float totalTime;
 
     private void Start() {
         //MainMenu();
         EndGame();
+        Manager.OnEndGameUpdated.AddListener(endTheGame);
         totalTime = GridManager.GetTime();
     }
     
@@ -33,6 +35,12 @@ public class GameUIManager : MonoBehaviour {
                 Pause();
             }
         }
+
+        if(gameEnded)
+        {
+            EndGame();
+        }
+
     }
 
     // Resume Game
@@ -66,6 +74,7 @@ public class GameUIManager : MonoBehaviour {
         if (obj_endGame.active)
         {
             obj_endGame.SetActive(false);
+            endTheGame(false);
         }
         else
         {
@@ -115,5 +124,10 @@ public class GameUIManager : MonoBehaviour {
     public void Quit()
     {
         Application.Quit();
+    }
+
+    public void endTheGame(bool gameEnded)
+    {
+        gameEnded = gameEnded;
     }
 }

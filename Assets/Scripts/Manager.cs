@@ -22,6 +22,9 @@ public class Manager : MovingGridObject {
     public class StrikerUpdatedEvent : UnityEvent<int> { }
     public static StrikerUpdatedEvent OnStrikeUpdated = new StrikerUpdatedEvent();
 
+    public class EndGameUpdatedEvent : UnityEvent<bool> { }
+    public static EndGameUpdatedEvent OnEndGameUpdated = new EndGameUpdatedEvent();
+
     private int actionNum = 0;
     private int strikeCounter = 0;
 
@@ -170,9 +173,15 @@ public class Manager : MovingGridObject {
             {
                 //TODO
                 //Implement strike/firing System
-                if (strikeCounter >= 2)//reset strike counter
+
+                if (strikeCounter > 2)//reset strike counter
                 {
-                    strikeCounter = 0;
+                    //end game "you are fired!"
+                    OnEndGameUpdated.Invoke(true);
+                }
+                else
+                {
+                    strikeCounter += 1;
                     OnStrikeUpdated.Invoke(strikeCounter);
                 }
             }
@@ -214,15 +223,11 @@ public class Manager : MovingGridObject {
         //If found an adjacent shelf and its empty
         if (usingShelf && !usingShelf.HasStock(1))
         {
-            strikeCounter += 1;//increase strike count
-            OnStrikeUpdated.Invoke(strikeCounter); //invoke strike counter event
-
-            if (strikeCounter >= 3) //check if there's 3 strikes
-            {
+            
                 state = ManagerState.ChasePlayer;
                 turntimer1 = -5;
                 return;
-            }
+            
             
             
         }
