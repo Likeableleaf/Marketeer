@@ -8,6 +8,7 @@ public class GridManager : MonoBehaviour
     [System.Serializable]
     public class CashUpdatedEvent : UnityEvent<float> { }
     public static CashUpdatedEvent OnCashUpdated = new CashUpdatedEvent();
+    [System.Serializable]
     public class TimeUpdatedEvent : UnityEvent<float> { }
     public static TimeUpdatedEvent OnTimeUpdated = new TimeUpdatedEvent();
     //Score Variables
@@ -227,7 +228,7 @@ public class GridManager : MonoBehaviour
         return false;
     }
     //Get the amount of Cash
-    public static float GetCash(float amount)
+    public static float GetCash()
     {
         return Cash;
     }

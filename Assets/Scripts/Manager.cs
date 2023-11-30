@@ -171,8 +171,7 @@ public class Manager : MovingGridObject {
             //If not helping customer....
             if(!gridManager.Player.helpingCustomer)
             {
-                //TODO
-                //Implement strike/firing System
+                strikeCounter += 1;
 
                 if (strikeCounter >= 3)//reset strike counter
                 {
@@ -182,7 +181,6 @@ public class Manager : MovingGridObject {
                 }
                 else
                 {
-                    strikeCounter += 1;
                     OnStrikeUpdated.Invoke(strikeCounter);
                 }
             }
@@ -223,14 +221,10 @@ public class Manager : MovingGridObject {
         Shelf usingShelf = gridManager.CheckForSurroundingShelf(transform.position);
         //If found an adjacent shelf and its empty
         if (usingShelf && !usingShelf.HasStock(1))
-        {
-            
-                state = ManagerState.ChasePlayer;
-                turntimer1 = -5;
-                return;
-            
-            
-            
+        {          
+            state = ManagerState.ChasePlayer;
+            turntimer1 = -5;
+            return;
         }
 
         // Manage timer for Duration of Patrol

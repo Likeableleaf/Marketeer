@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class sc_endMenu : MonoBehaviour
+public class EndMenu : MonoBehaviour
 {
 
     public TextMeshProUGUI cashText;
@@ -25,7 +25,6 @@ public class sc_endMenu : MonoBehaviour
 
     private void FinalCashText(float amount)
     {
-        Debug.Log("Money is increasing! : " + amount);
         cashText.text = $"${amount:F2}";
     }
 

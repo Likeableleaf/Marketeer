@@ -114,7 +114,8 @@ public class GameUIManager : MonoBehaviour {
     {
         obj_endGame.SetActive(true);
         obj_UI.gameObject.SetActive(false);
-        totalTime = GridManager.GetTime();
+        GridManager.OnCashUpdated.Invoke(GridManager.GetCash());
+        GridManager.OnTimeUpdated.Invoke(GridManager.GetTime());
         Time.timeScale = 0f;
 
         Cursor.visible = true;
