@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class GameUIManager : MonoBehaviour {
     // Variables
+    public AudioMixer audioMixer;
+    [SerializeField] private AudioControl Audio;
     [SerializeField] private static bool paused = false;
     [SerializeField] private GameObject obj_pauseMenu;
     [SerializeField] private GameObject cam;
@@ -120,6 +123,11 @@ public class GameUIManager : MonoBehaviour {
 
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+    }
+
+    public void Settings(float Vol)
+    {
+        Audio.setVolume(Vol);
     }
 
     // Exits game

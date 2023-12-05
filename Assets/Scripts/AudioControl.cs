@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AudioControl : MonoBehaviour
 {
+
     [SerializeField] private Manager manager;
     [SerializeField] private float volume = 0.5f;
     [SerializeField] private AudioSource PassiveMusic;
@@ -66,4 +67,11 @@ public class AudioControl : MonoBehaviour
            
         }// end else
     }// end update
+
+
+    public void setVolume(float Vol)
+    {
+        volume = Vol;
+    }
+
 }// end class
