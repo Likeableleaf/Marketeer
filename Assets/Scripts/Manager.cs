@@ -399,4 +399,8 @@ public class Manager : MovingGridObject {
         OnStrikeUpdated.Invoke(strikeCounter);
     }
 
+    public int getStrikerCount()
+    {
+        return strikeCounter;
+    }
 }

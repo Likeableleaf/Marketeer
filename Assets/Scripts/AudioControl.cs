@@ -12,6 +12,7 @@ public class AudioControl : MonoBehaviour
     [SerializeField] private AudioSource ChaseMusic;
     [SerializeField] private AudioClip AngeryNoise;
     [SerializeField] private AudioClip AngeryNoise2;
+    [SerializeField] private GameObject endGame;
     public AudioMixer audio;
     // Start is called before the first frame update
     void Start()
@@ -22,9 +23,9 @@ public class AudioControl : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
-        
+
         //if the manager is in any state other than chasing the player, play mall music
-        if(manager.getState() != Manager.ManagerState.ChasePlayer)
+        if (manager.getState() != Manager.ManagerState.ChasePlayer && endGame.activeSelf == false && (manager.getStrikerCount() < 2))
         {
             //Stop chase music
             if (ChaseMusic.isPlaying)

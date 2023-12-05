@@ -58,13 +58,13 @@ public class GridManager : MonoBehaviour
     {
         // Update the timer
         timeSinceLastTurn += Time.deltaTime;
-
+        AddTime(Time.deltaTime);
         // Check if the interval has passed
         if (timeSinceLastTurn >= turnInterval)
         {
             // Call AdvanceTurns and reset the timer
             AdvanceTurns();
-            AddTime(1);
+           
             timeSinceLastTurn -= turnInterval;
         }
     }
