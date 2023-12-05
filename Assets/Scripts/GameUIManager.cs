@@ -127,6 +127,7 @@ public class GameUIManager : MonoBehaviour {
 
     public void Settings(float Vol)
     {
+        audioMixer.SetFloat("volume", Vol);
         Audio.setVolume(Vol);
     }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioControl : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class AudioControl : MonoBehaviour
     [SerializeField] private AudioSource ChaseMusic;
     [SerializeField] private AudioClip AngeryNoise;
     [SerializeField] private AudioClip AngeryNoise2;
+    public AudioMixer audio;
     // Start is called before the first frame update
     void Start()
     {
