@@ -17,6 +17,7 @@ public class Shopper : MovingGridObject
     public float askHelpChance = 0.2f;
     public float tipAmount = 3.0f;
     private CapsuleCollider capCollider;
+    private int turntimer1 = -5;
 
     //Specifc Grid Locations
     [Header("State Positions")]
@@ -103,6 +104,9 @@ public class Shopper : MovingGridObject
                     break;
                 case ShopperState.GettingHelp:
                     GettingHelpAction();
+                    break;
+                case ShopperState.Frustrated:
+                    FrustratedAction();
                     break;
                 case ShopperState.CheckingOutLine:
                     CheckingOutLineAction();
@@ -212,9 +216,26 @@ public class Shopper : MovingGridObject
         {
             //Set the player's helping customer to true
             gridManager.Player.helpingCustomer = true;
+            turntimer1 = -5;
             //Set the game state to GettinHelp
             state = ShopperState.GettingHelp;
             return;
+        }
+
+        // Manage timer for Duration of guiding (before getting frustrated)
+        if (turntimer1 == -5)
+        {
+            turntimer1 = 180;
+        }
+        else if (turntimer1 <= 0)
+        {
+            turntimer1 = -5;
+            state = ShopperState.Frustrated;
+            return;
+        }
+        else
+        {
+            turntimer1 -= 1;
         }
 
         //Generate list of potential targets
@@ -265,11 +286,71 @@ public class Shopper : MovingGridObject
             return;
         }
 
+        // Manage timer for Duration of guiding (before getting frustrated)
+        if (turntimer1 == -5)
+        {
+            turntimer1 = 120;
+        }
+        else if (turntimer1 <= 0)
+        {
+            turntimer1 = -5;
+            //Re-enable collision
+            capCollider.enabled = true;
+            //Let the player help others
+            gridManager.Player.helpingCustomer = false;
+            state = ShopperState.Frustrated;
+            return;
+        }
+        else
+        {
+            turntimer1 -= 1;
+        }
+
         //Otherwise, follow the player
         //Get the first Step to Player
         GenerateFirstStepToPlayer();
     }
 
+    private void FrustratedAction()
+    {
+        //If 1st Person
+        if (GridManager.dimension == 3)
+        {
+            //Ensure the proper bubble is shown
+            HelpItemRendererSide.sprite = HelpItemArray[6];
+            //Ensure the needed Item bubble is shown
+            HelpItemRendererSide.enabled = true;
+            HelpItemRendererTop.enabled = false;
+        }
+        //If Top-Down
+        else
+        {
+            //Ensure the proper bubble is shown
+            HelpItemRendererTop.sprite = HelpItemArray[6];
+            //Ensure the needed Item bubble is shown
+            HelpItemRendererTop.enabled = true;
+            HelpItemRendererSide.enabled = false;
+        }
+        // Stands still frustrated for a certain amount of time
+        if (turntimer1 == -5)
+        {
+            turntimer1 = 20;
+        }
+        else if (turntimer1 <= 0)
+        {
+            turntimer1 = -5;
+            state = ShopperState.CheckingOut;
+            //Remove the help bubble
+            HelpItemRendererSide.enabled = false;
+            HelpItemRendererTop.enabled = false;
+            return;
+        }
+        else
+        {
+            turntimer1 -= 1;
+        }
+    }
+    
     private void CheckingOutLineAction() {
         if (GetCheckOutLineTargets().Contains(transform.position))
         {
@@ -519,6 +600,7 @@ public enum ShopperState
     Shopping, //Grabbing different items from list
     NeedsHelp, //Needs help from the player
     GettingHelp, //Getting help from the player
+    Frustrated, //Failed to get help in time
     CheckingOutLine, //Heading to registers
     CheckingOut, //Using the register
     Exiting, //Walking to and exiting the building
