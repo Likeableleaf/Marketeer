@@ -35,6 +35,10 @@ public class Shopper : MovingGridObject
     public ShopperState state;
     public Sprite[] HelpItemArray;
 
+    // Model Storage
+    [SerializeField] private GameObject[] characterModels;
+    private GameObject avatar;
+
     // Start is called before the first frame update
     new void Start()
     {
@@ -55,6 +59,12 @@ public class Shopper : MovingGridObject
 
     public void BecomeActive()
     {
+        if (avatar != null) {
+            Destroy(avatar);
+        }
+        // Choose model
+        Instantiate(characterModels[Random.Range(1, 13)], transform.position, transform.rotation, transform); 
+
         // Decide How many Items to Shop for
         ShoppingListSize = Random.Range(minShoppingListSize, maxShoppingListSize + 1);
         // Decide the Items to Shop for
