@@ -18,6 +18,7 @@ public class GameUIManager : MonoBehaviour {
     [SerializeField] private GameObject menuUI;
     [SerializeField] private GameObject ceiling;
     [SerializeField] private GameObject obj_endGame;
+    [SerializeField] private GridManager gridManager;
     public bool runnin;
     public bool gameEnded = false;
     private float totalTime;
@@ -69,6 +70,8 @@ public class GameUIManager : MonoBehaviour {
     // Return to Main Menu
     public void QuitGame () {
         MainMenu();
+        GridManager.SetCash(0f);
+        GridManager.SetTime(0f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
     }
