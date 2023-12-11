@@ -82,6 +82,9 @@ public class GameUIManager : MonoBehaviour {
         {
             obj_endGame.SetActive(false);
             endTheGame(false);
+
+            // Set to Overworld cam if needed
+            gridManager.ShiftDimension(2);
         }
         else
         {
@@ -115,7 +118,6 @@ public class GameUIManager : MonoBehaviour {
     }
 
     // Ends Game
-
     public void EndGame()
     {
         obj_endGame.SetActive(true);
