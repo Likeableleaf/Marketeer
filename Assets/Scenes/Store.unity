@@ -23563,6 +23563,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 1430241373929942205, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1484333903443101975, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 70
@@ -23903,6 +23907,26 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: SetActive
       objectReference: {fileID: 0}
+    - target: {fileID: 5215243989405638902, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 5215243989405638902, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5215243989405638902, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5215243989405638902, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5294450561830695472, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 120
+      objectReference: {fileID: 0}
     - target: {fileID: 5413314459968316843, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
       propertyPath: m_SizeDelta.x
       value: 300
@@ -23982,6 +24006,31 @@ PrefabInstance:
     - target: {fileID: 6877643296959949055, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6906065751867902250, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
+      propertyPath: m_text
+      value: '"Man Hurt Sound Effect" by: Konita Tutorials
+
+        Art by: Jeremie
+        Koehler and Joey Parker
+
+        Music and other sounds by: Zachery Ramirez'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6906065751867902250, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
+      propertyPath: m_fontSize
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6906065751867902250, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6906065751867902250, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
+      propertyPath: m_TextStyleHashCode
+      value: -1183493901
+      objectReference: {fileID: 0}
+    - target: {fileID: 6906065751867902250, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7120844362647870123, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
       propertyPath: m_Sprite
