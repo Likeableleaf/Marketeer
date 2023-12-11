@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3190845242642248627}
   m_Layer: 0
   m_Name: PlayerCharacter
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -85,8 +85,9 @@ MonoBehaviour:
   verticalSpeed: 0.2
   radiusOfSatisfaction: 0
   maxInventorySize: 6
+  inventoryRefillAmount: 4
+  disposalFee: 0.1
   Inventory: 080000000800000008000000080000000800000008000000
-  dimension: 2
   helpingCustomer: 0
   rb: {fileID: 6533158590593922723}
 --- !u!1 &5263495035784261199

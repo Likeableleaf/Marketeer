@@ -111,6 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 7675064921117488054}
+  playerBlocked: 1
 --- !u!1 &1624913072943101288
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,6 +342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 7675064921117488054}
+  playerBlocked: 0
 --- !u!1 &6962828821334632688
 GameObject:
   m_ObjectHideFlags: 0

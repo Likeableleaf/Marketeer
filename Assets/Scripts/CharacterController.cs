@@ -110,12 +110,9 @@ public class CharacterController : GridObject
             }
 
             // Reset velocity to zero if no input is detected or close enough to 
-            if (moveDirection == Vector3.zero)
-            {
+            if (moveDirection == Vector3.zero) {
                 rb.velocity = Vector3.zero;
-            }
-            else
-            {
+            } else {
                 // Normalize moveDirection
                 moveDirection.Normalize();
                 moveDirection *= moveSpeed;
