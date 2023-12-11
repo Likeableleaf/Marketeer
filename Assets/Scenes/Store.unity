@@ -424,6 +424,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4399630189691255240, guid: b67f1aded3e3d1441a49001ad6cb1cf9, type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 1926604153}
+    - target: {fileID: 4399630189691255240, guid: b67f1aded3e3d1441a49001ad6cb1cf9, type: 3}
       propertyPath: DoorOpen
       value: 
       objectReference: {fileID: 8300000, guid: 3ca747acfc31e56408558b593520dfbf, type: 3}
@@ -515,6 +519,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8750991100664157857, guid: b67f1aded3e3d1441a49001ad6cb1cf9, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: 8282d88d9f1bffb46b77bde6f07bc9dc, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b67f1aded3e3d1441a49001ad6cb1cf9, type: 3}
 --- !u!4 &67361681 stripped
@@ -1175,7 +1183,7 @@ AudioSource:
   m_GameObject: {fileID: 131878504}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 8282d88d9f1bffb46b77bde6f07bc9dc, type: 2}
   m_audioClip: {fileID: 8300000, guid: 4c484ce8c0189904fbeabb3903907b6f, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.5
@@ -5166,6 +5174,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7442754657289185512, guid: 5f3941d895ae5304a89759db1c8d89e0, type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 1926604153}
+    - target: {fileID: 7442754657289185512, guid: 5f3941d895ae5304a89759db1c8d89e0, type: 3}
       propertyPath: DoorOpen
       value: 
       objectReference: {fileID: 8300000, guid: 3ca747acfc31e56408558b593520dfbf, type: 3}
@@ -5173,6 +5185,10 @@ PrefabInstance:
       propertyPath: DoorClose
       value: 
       objectReference: {fileID: 8300000, guid: 79aa9e605a5ff3d4f91d47a9595b0737, type: 3}
+    - target: {fileID: 7541744341899334813, guid: 5f3941d895ae5304a89759db1c8d89e0, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: 8282d88d9f1bffb46b77bde6f07bc9dc, type: 2}
     - target: {fileID: 7801892736884849703, guid: 5f3941d895ae5304a89759db1c8d89e0, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
@@ -17036,7 +17052,7 @@ AudioSource:
   m_GameObject: {fileID: 1543393355}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 8282d88d9f1bffb46b77bde6f07bc9dc, type: 2}
   m_audioClip: {fileID: 8300000, guid: 64e75dc99e9dc5345a0d0e8e054e786d, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -17215,6 +17231,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7442754657289185512, guid: 5f3941d895ae5304a89759db1c8d89e0, type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 1926604153}
+    - target: {fileID: 7442754657289185512, guid: 5f3941d895ae5304a89759db1c8d89e0, type: 3}
       propertyPath: DoorOpen
       value: 
       objectReference: {fileID: 8300000, guid: 3ca747acfc31e56408558b593520dfbf, type: 3}
@@ -17222,6 +17242,14 @@ PrefabInstance:
       propertyPath: DoorClose
       value: 
       objectReference: {fileID: 8300000, guid: 79aa9e605a5ff3d4f91d47a9595b0737, type: 3}
+    - target: {fileID: 7541744341899334813, guid: 5f3941d895ae5304a89759db1c8d89e0, type: 3}
+      propertyPath: Loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7541744341899334813, guid: 5f3941d895ae5304a89759db1c8d89e0, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: 8282d88d9f1bffb46b77bde6f07bc9dc, type: 2}
     - target: {fileID: 7801892736884849703, guid: 5f3941d895ae5304a89759db1c8d89e0, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
