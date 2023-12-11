@@ -22,8 +22,8 @@ public class Door : MonoBehaviour
     [SerializeField] private AudioClip DoorClose;
     [SerializeField]private AudioSource DoorAudio;
     [SerializeField] private Manager manager;
-
-
+    private bool doorCanOpen = true;
+    private bool doorCanClose = false;
     private void Update() {
         // If delay is up close door
         if (delay <= 0.0f) {
@@ -42,6 +42,7 @@ public class Door : MonoBehaviour
 
     private void OpenDoor() {
         // Play animation based on door version
+        doorCanClose = true;
         switch(DoorVersion) {
             case DoorStyle.SlidingDoor:
                 // Move door
@@ -58,11 +59,12 @@ public class Door : MonoBehaviour
 
                 // Play Door opening sound
 
-                if (manager.getStrikerCount() < 3)
+                if (manager.getStrikerCount() < 3 && doorCanOpen == true)
                 {
                     DoorAudio.Stop();
                     DoorAudio.Play();
                     DoorAudio.PlayOneShot(DoorOpen, 0.5f);
+                    doorCanOpen = false;
                 }
 
                 break;
@@ -74,11 +76,12 @@ public class Door : MonoBehaviour
 
 
                 // Play Door opening sound
-                if (manager.getStrikerCount() < 3)
+                if (manager.getStrikerCount() < 3 && doorCanOpen == true)
                 {
                     DoorAudio.Stop();
                     DoorAudio.Play();
                     DoorAudio.PlayOneShot(DoorOpen, 0.5f);
+                    doorCanOpen = false;
                 }   
                 break;
             case DoorStyle.HingedDoor:
@@ -90,11 +93,12 @@ public class Door : MonoBehaviour
                 door.transform.rotation = Quaternion.Lerp(startPos.transform.rotation, endPos.transform.rotation, doorProg);
 
                 // Play Door opening sound
-                if (manager.getStrikerCount() < 3)
+                if (manager.getStrikerCount() < 3 && doorCanOpen == true)
                 {
                     DoorAudio.Stop();
                     DoorAudio.Play();
                     DoorAudio.PlayOneShot(DoorOpen, 0.5f);
+                    doorCanOpen = false;
                 }
 
                 break;
@@ -106,6 +110,7 @@ public class Door : MonoBehaviour
 
     private void CloseDoor() {
         open = false;
+        doorCanOpen = true;
         // Play animation based on door version
         switch(DoorVersion) {
             case DoorStyle.SlidingDoor:
@@ -121,11 +126,12 @@ public class Door : MonoBehaviour
                 door2.transform.position = Vector3.Lerp(startPos2.transform.position, endPos2.transform.position, door2Prog);
 
                 // Play Door closing sound
-                if (manager.getStrikerCount() < 3)
+                if (manager.getStrikerCount() < 3 && doorCanClose == true)
                 {
                     DoorAudio.Stop();
                     DoorAudio.Play();
                     DoorAudio.PlayOneShot(DoorClose, 0.5f);
+                    doorCanClose = false;
                 }
 
                 break;
@@ -136,11 +142,12 @@ public class Door : MonoBehaviour
                 // Reflect for door2
 
                 // Play Door closing sound
-                if (manager.getStrikerCount() < 3)
+                if (manager.getStrikerCount() < 3 && doorCanClose == true)
                 {
                     DoorAudio.Stop();
                     DoorAudio.Play();
                     DoorAudio.PlayOneShot(DoorClose, 0.5f);
+                    doorCanClose = false;
                 }
 
                 break;
@@ -153,11 +160,12 @@ public class Door : MonoBehaviour
                 door.transform.rotation = Quaternion.Lerp(startPos.transform.rotation, endPos.transform.rotation, doorProg);
 
                 // Play Door closing sound
-                if (manager.getStrikerCount() < 3)
+                if (manager.getStrikerCount() < 3 && doorCanClose == true)
                 {
                     DoorAudio.Stop();
                     DoorAudio.Play();
                     DoorAudio.PlayOneShot(DoorClose, 0.5f);
+                    doorCanClose = false;
                 }
 
                 break;
