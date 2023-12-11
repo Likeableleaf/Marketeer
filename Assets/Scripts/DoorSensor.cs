@@ -31,7 +31,7 @@ public class DoorSensor : MonoBehaviour
 
     private void PushPlayerBack(Rigidbody playerRb) {
         // Apply force to the player
-        Debug.Log("PushaBit");
+        // Debug.Log("PushaBit");
         playerRb.velocity = -playerRb.velocity;
     }
 }
