@@ -23652,7 +23652,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 990780322503758140, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 80
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 990780322503758140, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -24196,11 +24196,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5133949075009794396, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
       propertyPath: m_text
-      value: "The Goal of the game is to not get fired!\n- 6 grocery shelves have
-        health bars for shelf capacity.\n- Refill them to avoid angering the manager.
-        \n- Customers take from shelves and some come with \n  an inquiry, help them
-        find the right shelf to earn tips. \n- If you don't help customers quick
-        enough, customer \n  get frustrated and leave."
+      value: "The Goal of the game is to not get fired!\n- Each shelf has a capacity
+        of 4 items. The bars on the\n  shelf show the current stock.\n- Refill them
+        to avoid angering the manager. \n- Customers take from shelves and some come
+        with \n  an inquiry, help them find the right shelf to earn tips. \n- If
+        you don't help a customer quick enough, they\n  get frustrated and leave."
       objectReference: {fileID: 0}
     - target: {fileID: 5133949075009794396, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
       propertyPath: m_fontSize
@@ -24220,11 +24220,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5159166857766875730, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
       propertyPath: m_text
-      value: 'To move around the market, use the W, A, S, D keys, and to interact
-        with shelves, press Space.
+      value: 'To move: W, A, S, D keys.
 
-        Interact with customers: by running in
-        to them'
+        To interact with shelves: Space
+        key.
+
+        To Interact with customers: Walk into them!'
       objectReference: {fileID: 0}
     - target: {fileID: 5159166857766875730, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
       propertyPath: m_fontSize
@@ -24240,7 +24241,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5159166857766875730, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
       propertyPath: m_HorizontalAlignment
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5170107363926759198, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
       propertyPath: m_AnchorMax.x
