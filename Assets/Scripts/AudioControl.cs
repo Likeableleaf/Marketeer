@@ -68,6 +68,15 @@ public class AudioControl : MonoBehaviour
             } //end if
            
         }// end else
+
+
+        if (!ChaseMusic.isPlaying && !PassiveMusic.isPlaying)
+        {
+
+            PassiveMusic.Play();
+
+        }
+
     }// end update
 
 

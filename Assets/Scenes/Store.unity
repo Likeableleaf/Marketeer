@@ -18371,7 +18371,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1670434323}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.4223377, y: 7.3728004, z: -3.8224897}
+  m_LocalPosition: {x: 1.4223377, y: 6.16, z: -3.8224897}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -18399,7 +18399,6 @@ MonoBehaviour:
   AngeryNoise: {fileID: 8300000, guid: f698002df0b4dd244b617bace324d172, type: 3}
   AngeryNoise2: {fileID: 8300000, guid: 9fd0c8470ec961947aa72e2dd77ced5b, type: 3}
   endGame: {fileID: 1704080731}
-  audio: {fileID: 24100000, guid: 8282d88d9f1bffb46b77bde6f07bc9dc, type: 2}
 --- !u!1 &1674455970 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1179347755528773913, guid: eb417502b3624534481880fd7a133552, type: 3}
