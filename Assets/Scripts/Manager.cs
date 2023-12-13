@@ -99,7 +99,7 @@ public class Manager : MovingGridObject {
     // Goto Office
     private void EnteringOfficeAction() {
         // Change to angry skin if needed
-        if (!skins[0].active) {
+        if (!skins[0].activeSelf) {
             skins[1].SetActive(false);
             skins[0].SetActive(true);
         }
@@ -172,7 +172,7 @@ public class Manager : MovingGridObject {
     // Chase Player
     private void ChasePlayerAction() {
         // Change to angry skin if needed
-        if (!skins[1].active) {
+        if (!skins[1].activeSelf) {
             skins[0].SetActive(false);
             skins[1].SetActive(true);
         }
