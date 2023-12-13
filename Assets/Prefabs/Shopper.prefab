@@ -132,8 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec40fa4c85fc1264c9c82143c61d47d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentTarget: {fileID: 0}
-  Player: {fileID: 0}
+  Manager: {fileID: 0}
   HelpItemRendererSide: {fileID: 6478038906254066481}
   HelpItemRendererTop: {fileID: 5758149640916931558}
   askHelpChance: 0.2
@@ -215,6 +214,7 @@ MonoBehaviour:
   - {fileID: 919132149155446097, guid: ff4e1a48ef32fa049b453dbed00f596c, type: 3}
   - {fileID: 919132149155446097, guid: e0151010cad1ab84dbe45c83972a01e7, type: 3}
   - {fileID: 919132149155446097, guid: 93450082a5dda444dbabbae0abe4dd73, type: 3}
+  - {fileID: 919132149155446097, guid: 06ffc24a3dab96941bce17d876f6f490, type: 3}
 --- !u!136 &1368548225551954157
 CapsuleCollider:
   m_ObjectHideFlags: 0

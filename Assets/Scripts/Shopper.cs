@@ -62,7 +62,7 @@ public class Shopper : MovingGridObject
             Destroy(avatar);
         }
         // Choose model
-        avatar = Instantiate(characterModels[Random.Range(1, 13)], transform.position, transform.rotation, transform); 
+        avatar = Instantiate(characterModels[Random.Range(1, characterModels.Length)], transform.position, transform.rotation, transform); 
 
         // Decide How many Items to Shop for
         ShoppingListSize = Random.Range(minShoppingListSize, maxShoppingListSize + 1);
