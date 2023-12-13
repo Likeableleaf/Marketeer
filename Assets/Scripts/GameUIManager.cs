@@ -132,7 +132,7 @@ public class GameUIManager : MonoBehaviour {
 
     public void Settings(float Vol)
     {
-        audioMixer.SetFloat("volume", Vol);
+        audioMixer.SetFloat("volume", Mathf.Log10(Vol) * 20);
     }
 
     // Exits game
