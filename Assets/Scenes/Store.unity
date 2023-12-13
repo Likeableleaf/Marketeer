@@ -3140,6 +3140,8 @@ MonoBehaviour:
   MainCamera: {fileID: 963194227}
   PlayerCamera: {fileID: 472578783}
   Player: {fileID: 1296427625}
+  salaryInterval: 600
+  salaryProgress: 0
   Registers:
   - {fileID: 1985185495}
   - {fileID: 526118268}

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -29,6 +30,8 @@ public class GridManager : MonoBehaviour
     private Queue<Shopper> InactiveShoppers = new();
     private float timeSinceLastTurn = 0.0f;
     public static float totalTime = 0;
+    public int salaryInterval = 600;
+    public int salaryProgress = 0;
 
     //Grocery System Variables
     public Dictionary<GroceryType, List<Shelf>> groceryDictionary = new();
@@ -64,7 +67,12 @@ public class GridManager : MonoBehaviour
         {
             // Call AdvanceTurns and reset the timer
             AdvanceTurns();
-           
+            salaryProgress++;
+            if (salaryProgress >= salaryInterval)
+            {
+                AddCash(7.25f);
+                salaryProgress -= salaryInterval;
+            }
             timeSinceLastTurn -= turnInterval;
         }
     }
