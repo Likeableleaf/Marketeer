@@ -34,7 +34,6 @@ public class AudioControl : MonoBehaviour
             //start passive music
             if (!PassiveMusic.isPlaying)
             {
-                PassiveMusic.volume = volume;
                 PassiveMusic.Play();
                 
             }
@@ -47,11 +46,9 @@ public class AudioControl : MonoBehaviour
             {
                 PassiveMusic.Stop();
             }
-            //start passive music
+            //start chase music
             if (!ChaseMusic.isPlaying)
             {
-                
-                ChaseMusic.volume = volume;
                 //generate a random number for which angrynoise to play
                 float number = Random.Range(0, 1);
                 if (number > 0.5f)
@@ -78,11 +75,5 @@ public class AudioControl : MonoBehaviour
         }
 
     }// end update
-
-
-    public void setVolume(float Vol)
-    {
-        volume = Vol;
-    }
 
 }// end class
