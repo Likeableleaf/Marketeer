@@ -12,9 +12,9 @@ using static UnityEngine.GraphicsBuffer;
 public class Manager : MovingGridObject {
     // Variable Cache
     public GameObject CurrentTarget;
-    [SerializeField] private ManagerState state;
-    [SerializeField] private int turntimer1 = -5;
-    [SerializeField] private int turntimer2 = -5;
+    public ManagerState state;
+    public int turntimer1 = -5;
+    public int turntimer2 = -5;
     [SerializeField] Vector3 OfficeDoorExitPos; //= new Vector3(7.5f, 0.0f, 5.5f);
     [SerializeField] Vector3 OfficeDoorEnterPos; //= new Vector3(7.5f, 0.0f, 4.5f);
     [SerializeField] Vector3 OfficeChairPos; //= new Vector3(9.5f, 0.0f, 7.5f);
@@ -167,7 +167,6 @@ public class Manager : MovingGridObject {
     private void ChasePlayerAction() {
         if(transform.position == ClosestGridPos(gridManager.Player.transform.position))
         {
-            Debug.Log("Got the Player");
             //If not helping customer....
             if(!gridManager.Player.helpingCustomer)
             {
@@ -176,7 +175,6 @@ public class Manager : MovingGridObject {
                 if (strikeCounter >= 3)//reset strike counter
                 {
                     //end game "you are fired!"
-                    Debug.Log("The game should end!");
                     OnEndGameUpdated.Invoke(true);
                 }
                 else

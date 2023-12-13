@@ -990,6 +990,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shopper (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 6195307430182808763, guid: d0764114148522346a00dc60dbcd1691, type: 3}
+      propertyPath: Manager
+      value: 
+      objectReference: {fileID: 1926604153}
     - target: {fileID: 9166577552811081232, guid: d0764114148522346a00dc60dbcd1691, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -4589,6 +4593,10 @@ PrefabInstance:
       propertyPath: state
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6195307430182808763, guid: d0764114148522346a00dc60dbcd1691, type: 3}
+      propertyPath: Manager
+      value: 
+      objectReference: {fileID: 1926604153}
     - target: {fileID: 9166577552811081232, guid: d0764114148522346a00dc60dbcd1691, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -6014,6 +6022,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shopper (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 6195307430182808763, guid: d0764114148522346a00dc60dbcd1691, type: 3}
+      propertyPath: Manager
+      value: 
+      objectReference: {fileID: 1926604153}
     - target: {fileID: 9166577552811081232, guid: d0764114148522346a00dc60dbcd1691, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -9879,6 +9891,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shopper (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 6195307430182808763, guid: d0764114148522346a00dc60dbcd1691, type: 3}
+      propertyPath: Manager
+      value: 
+      objectReference: {fileID: 1926604153}
     - target: {fileID: 9166577552811081232, guid: d0764114148522346a00dc60dbcd1691, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -11967,6 +11983,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shopper (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 6195307430182808763, guid: d0764114148522346a00dc60dbcd1691, type: 3}
+      propertyPath: Manager
+      value: 
+      objectReference: {fileID: 1926604153}
     - target: {fileID: 9166577552811081232, guid: d0764114148522346a00dc60dbcd1691, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -21730,6 +21750,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shopper (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 6195307430182808763, guid: d0764114148522346a00dc60dbcd1691, type: 3}
+      propertyPath: Manager
+      value: 
+      objectReference: {fileID: 1926604153}
     - target: {fileID: 9166577552811081232, guid: d0764114148522346a00dc60dbcd1691, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -22158,6 +22182,10 @@ PrefabInstance:
       value: Shopper (2)
       objectReference: {fileID: 0}
     - target: {fileID: 6195307430182808763, guid: d0764114148522346a00dc60dbcd1691, type: 3}
+      propertyPath: Manager
+      value: 
+      objectReference: {fileID: 1926604153}
+    - target: {fileID: 6195307430182808763, guid: d0764114148522346a00dc60dbcd1691, type: 3}
       propertyPath: askHelpChance
       value: 0.2
       objectReference: {fileID: 0}
@@ -22521,6 +22549,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shopper (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6195307430182808763, guid: d0764114148522346a00dc60dbcd1691, type: 3}
+      propertyPath: Manager
+      value: 
+      objectReference: {fileID: 1926604153}
     - target: {fileID: 9166577552811081232, guid: d0764114148522346a00dc60dbcd1691, type: 3}
       propertyPath: m_RootOrder
       value: 3

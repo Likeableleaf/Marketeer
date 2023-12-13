@@ -8,8 +8,7 @@ using UnityEngine.UIElements;
 public class Shopper : MovingGridObject
 {
     // Variable Cache
-    public GameObject CurrentTarget;
-    public CharacterController Player;
+    public Manager Manager;
     public SpriteRenderer HelpItemRendererSide;
     public SpriteRenderer HelpItemRendererTop;
     public static int minShoppingListSize = 1;
@@ -348,6 +347,12 @@ public class Shopper : MovingGridObject
         }
         else if (turntimer1 <= 0)
         {
+            if(Manager.state != Manager.ManagerState.ChasePlayer)
+            {
+                Manager.state = Manager.ManagerState.ChasePlayer;
+                Manager.turntimer1 = -5;
+            }
+
             turntimer1 = -5;
             state = ShopperState.CheckingOut;
             //Remove the help bubble
@@ -499,7 +504,6 @@ public class Shopper : MovingGridObject
                 break;
             case ShopperState.GettingHelp:
                 //Should never reach this
-                Debug.Log("Reached GettingHelp in GeneratePotentialTargets");
                 break;
             case ShopperState.CheckingOutLine:
                 potTargets.AddRange(GetCheckOutLineTargets());

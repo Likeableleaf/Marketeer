@@ -43,7 +43,6 @@ public class InGameUI : MonoBehaviour
 
     private void UpdateStrikeDisplay(int count)
     {
-        Debug.Log("Counter just went up!: " + count);
 
         if(count == 0)
         {
