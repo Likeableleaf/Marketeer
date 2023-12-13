@@ -25,11 +25,14 @@ public class EndMenu : MonoBehaviour
 
     private void FinalCashText(float amount)
     {
+
         cashText.text = $"${amount:F2}";
     }
 
     private void FinalTimeStamp(float amount)
     {
-        timeText.text = $"{amount:F2}";
+        int minutes = (int)(amount / 60);
+
+        timeText.text = minutes + " minutes and " + $"{amount%60:F2}";
     }
 }
