@@ -18,6 +18,7 @@ public class Manager : MovingGridObject {
     [SerializeField] Vector3 OfficeDoorExitPos; //= new Vector3(7.5f, 0.0f, 5.5f);
     [SerializeField] Vector3 OfficeDoorEnterPos; //= new Vector3(7.5f, 0.0f, 4.5f);
     [SerializeField] Vector3 OfficeChairPos; //= new Vector3(9.5f, 0.0f, 7.5f);
+    [SerializeField] GameObject[] skins;
 
     public class StrikerUpdatedEvent : UnityEvent<int> { }
     public static StrikerUpdatedEvent OnStrikeUpdated = new StrikerUpdatedEvent();
@@ -97,6 +98,11 @@ public class Manager : MovingGridObject {
 
     // Goto Office
     private void EnteringOfficeAction() {
+        // Change to angry skin if needed
+        if (!skins[0].active) {
+            skins[1].SetActive(false);
+            skins[0].SetActive(true);
+        }
 
         // If path finished 
         if (transform.position == OfficeDoorEnterPos) {
@@ -165,6 +171,12 @@ public class Manager : MovingGridObject {
 
     // Chase Player
     private void ChasePlayerAction() {
+        // Change to angry skin if needed
+        if (!skins[1].active) {
+            skins[0].SetActive(false);
+            skins[1].SetActive(true);
+        }
+
         if(transform.position == ClosestGridPos(gridManager.Player.transform.position))
         {
             //If not helping customer....
