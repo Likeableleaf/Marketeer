@@ -17736,6 +17736,10 @@ PrefabInstance:
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3190845242642248627, guid: 20e7d3140766bdd42b0aea6af9244069, type: 3}
+      propertyPath: maxInventorySize
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3190845242642248627, guid: 20e7d3140766bdd42b0aea6af9244069, type: 3}
       propertyPath: radiusOfSatisfaction
       value: 2
       objectReference: {fileID: 0}
