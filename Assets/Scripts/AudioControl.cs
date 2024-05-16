@@ -13,9 +13,14 @@ public class AudioControl : MonoBehaviour
     [SerializeField] private AudioClip AngeryNoise;
     [SerializeField] private AudioClip AngeryNoise2;
     [SerializeField] private GameObject endGame;
+    public AudioMixer audioMasterMixer;
+    private GameManager GameManager;
     // Start is called before the first frame update
     void Start()
     {
+        GameManager = GameManager.instance;
+
+        GameManager.setAudioMixerMaster(audioMasterMixer);
         
     }
 

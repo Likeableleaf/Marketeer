@@ -9390,6 +9390,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6678426528588311074, guid: 9180ba22d9f44e349b93389172f7c0dc, type: 3}
   m_PrefabInstance: {fileID: 957094092}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &958453308 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1845573524237181706, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
+  m_PrefabInstance: {fileID: 2706782743794338543}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -18583,6 +18594,7 @@ MonoBehaviour:
   AngeryNoise: {fileID: 8300000, guid: f698002df0b4dd244b617bace324d172, type: 3}
   AngeryNoise2: {fileID: 8300000, guid: 9fd0c8470ec961947aa72e2dd77ced5b, type: 3}
   endGame: {fileID: 1704080731}
+  audioMasterMixer: {fileID: 24100000, guid: 8282d88d9f1bffb46b77bde6f07bc9dc, type: 2}
 --- !u!1 &1674455970 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1179347755528773913, guid: eb417502b3624534481880fd7a133552, type: 3}
@@ -23157,6 +23169,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3508375861905526430, guid: e48bb94f5ffc97648a3134312fc3d648, type: 3}
   m_PrefabInstance: {fileID: 2026074254}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2031681921 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6442295566896478998, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
+  m_PrefabInstance: {fileID: 2706782743794338543}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2064896414 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3755664236842543169, guid: 5821a2832049f554fbcce14819cb4bab, type: 3}
@@ -24130,6 +24153,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 24100000, guid: 8282d88d9f1bffb46b77bde6f07bc9dc, type: 2}
     - target: {fileID: 2706782743900438922, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
+      propertyPath: SliderJoint
+      value: 
+      objectReference: {fileID: 2031681921}
+    - target: {fileID: 2706782743900438922, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
       propertyPath: gridManager
       value: 
       objectReference: {fileID: 312332130}
@@ -24137,6 +24164,14 @@ PrefabInstance:
       propertyPath: menuGameCam
       value: 
       objectReference: {fileID: 1154904836}
+    - target: {fileID: 2706782743900438922, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
+      propertyPath: SliderJointMainMenu
+      value: 
+      objectReference: {fileID: 2031681921}
+    - target: {fileID: 2706782743900438922, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
+      propertyPath: SliderJointPauseMenu
+      value: 
+      objectReference: {fileID: 958453308}
     - target: {fileID: 2706782743900438923, guid: f82e43da74d77cb499b6aebddc859526, type: 3}
       propertyPath: m_Pivot.x
       value: 0

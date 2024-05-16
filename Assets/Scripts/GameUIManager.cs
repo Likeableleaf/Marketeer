@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class GameUIManager : MonoBehaviour {
     // Variables
@@ -19,15 +20,21 @@ public class GameUIManager : MonoBehaviour {
     [SerializeField] private GameObject ceiling;
     [SerializeField] private GameObject obj_endGame;
     [SerializeField] private GridManager gridManager;
+    public Slider SliderJointMainMenu;
+    public Slider SliderJointPauseMenu;
+    private GameManager GameManager;
     public bool runnin;
     public bool gameEnded = false;
     private float totalTime;
 
     private void Start() {
+        GameManager = GameManager.instance;
         MainMenu();
         //EndGame(); // for debug purposes
         Manager.OnEndGameUpdated.AddListener(endTheGame);
         totalTime = GridManager.GetTime();
+        SliderJointMainMenu.value = GameManager.getAudioSlider();
+        SliderJointPauseMenu.value = GameManager.getAudioSlider();
     }
     
     // If esc is pressed pause game or resume based on if it is already or not
@@ -65,6 +72,8 @@ public class GameUIManager : MonoBehaviour {
         paused = true;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        SliderJointPauseMenu.value = GameManager.getAudioSlider();
+        Debug.Log("After Pause, the GameManager.getAudioSetting is: " + GameManager.getAudioSlider());
     }
 
     // Return to Main Menu
@@ -98,6 +107,7 @@ public class GameUIManager : MonoBehaviour {
         cam.transform.position = menuGameCam.position;
         cam.transform.rotation = menuGameCam.rotation;
         ceiling.SetActive(true);
+        SliderJointMainMenu.value = GameManager.getAudioSlider();
     }
     
     // Starts game
@@ -132,7 +142,10 @@ public class GameUIManager : MonoBehaviour {
 
     public void Settings(float Vol)
     {
-        audioMixer.SetFloat("volume", Mathf.Log10(Vol) * 20);
+        float volume = Mathf.Log10(Vol) * 20;
+        //audioMixer.SetFloat("volume", volume);
+        GameManager.setAudioSlider(Vol);
+        GameManager.setAudioSetting(volume);
     }
 
     // Exits game
